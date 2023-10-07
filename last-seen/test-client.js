@@ -1,11 +1,16 @@
 const { io } = require("socket.io-client");
 
-const client = io("http://localhost:3000");
+const socket = io("http://localhost:3000");
+const lastSeenSocket = io("http://localhost:3000/last-seen")
 
-client.on("connect", () => {
-    console.log(client.id);
+socket.on("connect", () => {
+    console.log(socket.id);
 
 });
 
-client.emit("message", "hello there!");
+lastSeenSocket.on("connect", () => {
+    console.log(lastSeenSocket.id);
+    
+    lastSeenSocket.emit("last-seen", "at a given time");
+});
 

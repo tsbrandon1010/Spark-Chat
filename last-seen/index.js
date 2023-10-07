@@ -2,13 +2,20 @@
 
 const { io } = require("socket.io-client");
 
-const listener = io("http://localhost:3000");
+const socket = io("http://localhost:3000");
+const lastSeenSocket = io("http://localhost:3000/last-seen")
 
-listener.on("connect", () => {
-    console.log(listener.id);
+socket.on("connect", () => {
+    console.log(socket.id);
+
 });
 
-listener.onAny("*", (data) => {
-    console.log(data);
-    console.log("saw someone!")
+lastSeenSocket.on("connect", () => {
+    console.log(lastSeenSocket.id);
+
+});
+
+lastSeenSocket.on("last-seen-subscribe", (args) => {
+    console.log(args, " written to the database!")
+
 });
