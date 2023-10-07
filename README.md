@@ -12,6 +12,15 @@ Senior Project - Semester 1
 
 ### Last Seen Service:
 
+Will keep a record in a Redis DB. Everytime a user connects to the application, or does an action like send a message, their last seen status will be updated.
+
+How it works:
+- Client connects/does a qualifying action.
+- Client (with an already established connection in the ```/last-seen``` namespace) emits a ``last-seen`` message over the namespace.
+- The socket receives the ```last-seen``` message in the ```/last-seen``` namespace.
+- The message is then routed by the socket to the last-seen service. This is done by the socket emitting a ```last-seen-subscribe``` message over the ```/last-seen``` namespace.
+- The last-seen service receives the ```last-seen-subscribe``` message on the ```/last-seen``` namespace and makes an insertion into Redis.
+
 ![last-seen-service](https://github.com/tsbrandon1010/Spark-Chat/assets/15933213/5ff3d2fc-9087-4057-a3a1-7c1f7868f96a)
 
 ### Group Chat Architecture:
