@@ -45,7 +45,16 @@ io.of("/sessions").on("connection", (socket) => {
 
 });
 
-io.of("/group").on("connection", (socket) => {
+io.of("/groups").on("connection", (socket) => {
+    console.log(socket.id);
+
+    socket.on("groups-query", (payload) => {
+        socket.emit("groups-subscribe", payload);
+    });
+
+    socket.on("groups-result", (payload) => {
+        socket.emit("groups-response", payload);
+    });
 
 });
 
