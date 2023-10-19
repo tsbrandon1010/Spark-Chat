@@ -1,57 +1,83 @@
 // sessions service will determine where a user is and route a message to the user
 const { io } = require("socket.io-client");
+const { createClient } = require("redis");
+const { v4: uuidv4 } = require("uuid");
+
 const socket = io("http://localhost:3000");
 const sessionSocket = io("http://localhost:3000/sessions");
 // Route back to the main socket, which will then hand off to the group service client
 const groupsSocket = io("http://localhost:8000/groups");
 
-function sendMessage(payload) {
+const redisClient = createClient({
+    url: 'redis://:ydvzSWmuDNPy@localhost:6379'
+});
+redisClient.on('error', err => console.log('Redis Client Error', err));
+
+// responsible for generating a GUID and caching the message
+async function cacheMessage(payload) {
+
+    const key = `message-cache:id:${uuidv4()}`
+    const value = JSON.stringify(payload);
+
+    await redisClient.set(key, value);
+}
+
+async function sendMessage(payload) {
     // query the database to determine where the user is connected
     // send the message to the user
 
-    sessionSocket.emit("message-out", payload);
+    await cacheMessage(payload);
+    //sessionSocket.emit("message-out", payload);
 }
 
-
-socket.on("connect", () => {
-    console.log(socket.id);
-});
-
-sessionSocket.on("connect", () => {
-    console.log(sessionSocket.id);
-});
-
-groupsSocket.on("connect", () => {
-    console.log(groupsSocket.id);
-});
-
-sessionSocket.on("connection-subscribe", (args) => {
-    // When a user first connects, we write to Redis what socket they are connected to
-
-});
-
-sessionSocket.on("message-subscribe", (args) => {
-    // write message to message DB
-    // if the message is for a group, get the ids of the group members
+async function main() {
+    await redisClient.connect();
     
-    if (args["type"] == "group") {
-        groupsSocket.emit("groups-query", args['group_id']);
-    }
-    else {
-        sendMessage(args);
-    }
-});
+    socket.on("connect", () => {
+        console.log(socket.id);
+    });
 
-groupsSocket.on("groups-response", (response) => {
-    // then we send the messages to to each member in the group
+    sessionSocket.on("connect", () => {
+        console.log(sessionSocket.id);
+    });
 
-    // if that group exists
-    if (response["response-code"] == "200") {
-        for (let i = 0; i < response['group-members'].length; i++) {
-            sendMessage(/* Need to include message payload format */);
+    groupsSocket.on("connect", () => {
+        console.log(groupsSocket.id);
+    });
+
+    sessionSocket.on("connection-subscribe", (args) => {
+        // When a user first connects, we write to Redis what socket they are connected to
+
+    });
+
+    sessionSocket.on("message-subscribe", async (args) => {
+        // write message to message DB
+        // if the message is for a group, get the ids of the group members
+       
+        await sendMessage(args);
+        /*
+        if (args["type"] == "group") {
+            groupsSocket.emit("groups-query", args['group_id']);
         }
-    }
+        else {
+            sendMessage(args);
+        }
+        */
+    });
 
-    // if the group doesn't exist
-    // ???
-});
+    groupsSocket.on("groups-response", (response) => {
+        // then we send the messages to to each member in the group
+
+        // if that group exists
+        if (response["response-code"] == "200") {
+            for (let i = 0; i < response['group-members'].length; i++) {
+                sendMessage(/* Need to include message payload format */);
+            }
+        }
+
+        // if the group doesn't exist
+        // ???
+    });
+}
+
+main()

@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "node": "^21.0.0",
+    "redis": "^4.6.10",
     "socket.io-client": "^4.7.2"
   }
 }

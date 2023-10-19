@@ -25,7 +25,7 @@ io.of("/last-seen").on("connection", (socket) => {
     console.log(socket.id + " on last-seen namespace");
 
     socket.on("last-seen", (arg) => {
-        socket.emit("last-seen-subscribe", (arg))
+        socket.broadcast.emit("last-seen-subscribe", (arg))
     });
 
 });
@@ -34,7 +34,7 @@ io.of("/sessions").on("connection", (socket) => {
 
     // user -> socket -> session. Route the message to the session's service
     socket.on("message-in", (payload) => {
-        socket.emit("message-subscribe", payload);
+        socket.broadcast.emit("message-subscribe", payload);
     });
 
     // session -> socket -> user. Route the payload to the user
@@ -49,11 +49,11 @@ io.of("/groups").on("connection", (socket) => {
     console.log(socket.id);
 
     socket.on("groups-query", (payload) => {
-        socket.emit("groups-subscribe", payload);
+        socket.broadcast.emit("groups-subscribe", payload);
     });
 
     socket.on("groups-result", (payload) => {
-        socket.emit("groups-response", payload);
+        socket.broadcast.emit("groups-response", payload);
     });
 
 });
