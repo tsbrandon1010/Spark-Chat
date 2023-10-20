@@ -26,6 +26,13 @@ sessionsSocket.on("connect", () => {
 
     console.log("Session socket-id: ", sessionsSocket.id);
     sessionsSocket.emit("connect-event", payload);
+
+
+});
+
+sessionsSocket.on("message-response", (message) => {
+    console.log("got message");
+    console.log(message["content"]);
 });
 
 function sendMessage(recipientUserId, message) {
@@ -39,3 +46,5 @@ function sendMessage(recipientUserId, message) {
     // good idea to eventually add callbacks to confirm message reception
     sessionsSocket.emit("message-in", payload);
 }
+
+sendMessage("tsbrandon1010", "testing");

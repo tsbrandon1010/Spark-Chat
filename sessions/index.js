@@ -14,6 +14,21 @@ const redisClient = createClient({
 });
 redisClient.on('error', err => console.log('Redis Client Error', err));
 
+async function associateUser(payload) {
+
+    const key = `connection:user:id:${payload['user-id']}`;
+    const value = JSON.stringify(payload);
+
+    await redisClient.set(key, value);
+}
+
+async function retrieveConnection(userId) {
+    const key = `connection:user:id:${userId}`;
+    const userConnection = await redisClient.get(key);
+
+    return JSON.parse(userConnection);
+}
+
 // responsible for generating a GUID and caching the message
 async function cacheMessage(payload) {
 
@@ -28,15 +43,8 @@ async function sendMessage(payload) {
     // send the message to the user
 
     await cacheMessage(payload);
-    //sessionSocket.emit("message-out", payload);
-}
-
-async function associateUser(payload) {
-
-    const key = `connection:user:id:${payload['user-id']}`;
-    const value = JSON.stringify(payload);
-
-    await redisClient.set(key, value);
+    console.log(await retrieveConnection(payload['recipient-user-id']));
+    sessionSocket.emit("message-out", payload);
 }
 
 async function main() {
