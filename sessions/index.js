@@ -2,6 +2,7 @@
 const { io } = require("socket.io-client");
 const { createClient } = require("redis");
 const { v4: uuidv4 } = require("uuid");
+const { platform } = require("os");
 
 const socket = io("http://localhost:3000");
 const sessionSocket = io("http://localhost:3000/sessions");
@@ -30,37 +31,43 @@ async function sendMessage(payload) {
     //sessionSocket.emit("message-out", payload);
 }
 
+async function associateUser(payload) {
+
+    const key = `connection:user:id:${payload['user-id']}`;
+    const value = JSON.stringify(payload);
+
+    await redisClient.set(key, value);
+}
+
 async function main() {
     await redisClient.connect();
     
     socket.on("connect", () => {
-        console.log(socket.id);
     });
 
     sessionSocket.on("connect", () => {
-        console.log(sessionSocket.id);
     });
 
     groupsSocket.on("connect", () => {
-        console.log(groupsSocket.id);
     });
 
-    sessionSocket.on("connection-subscribe", (args) => {
-        // When a user first connects, we write to Redis what socket they are connected to
+    sessionSocket.on("connection-subscribe", async (payload) => {
+        // When a user first connects, we write to Redis what socket they are connected to        
+        await associateUser(payload);
 
     });
 
-    sessionSocket.on("message-subscribe", async (args) => {
+    sessionSocket.on("message-subscribe", async (payload) => {
         // write message to message DB
         // if the message is for a group, get the ids of the group members
        
-        await sendMessage(args);
+        await sendMessage(payload);
         /*
-        if (args["type"] == "group") {
-            groupsSocket.emit("groups-query", args['group_id']);
+        if (payload["type"] == "group") {
+            groupsSocket.emit("groups-query", payload['group_id']);
         }
         else {
-            sendMessage(args);
+            sendMessage(payload);
         }
         */
     });
