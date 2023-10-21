@@ -24,14 +24,10 @@ sessionsSocket.on("connect", () => {
         "socket-id": sessionsSocket.id
     }
 
-    console.log("Session socket-id: ", sessionsSocket.id);
     sessionsSocket.emit("connect-event", payload);
-
-
 });
 
 sessionsSocket.on("message-response", (message) => {
-    console.log("got message");
     console.log(message["content"]);
 });
 
@@ -47,4 +43,4 @@ function sendMessage(recipientUserId, message) {
     sessionsSocket.emit("message-in", payload);
 }
 
-sendMessage("tsbrandon1010", "testing");
+sendMessage("tsbrandon1010", "hello, from jenson!");

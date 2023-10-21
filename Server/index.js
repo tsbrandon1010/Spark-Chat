@@ -34,10 +34,8 @@ io.of("/sessions").on("connection", (socket) => {
     // session -> socket -> user. Route the payload to the user
     // have to figure out how to target a specific user on the socket
     socket.on("message-out", (payload) => {
-        
-        socket.broadcast.emit("message-response", payload);
-        io.to(payload['socket-id']).emit("message-response", payload);
-        //io.of("/sessions").to([payload['socket-id']]).emit("message-response", payload['content']);
+        const socketId = payload['recipient-socket-id'];
+        io.of("/sessions").to(socketId).emit("message-response", payload);
     });
 
 });

@@ -43,7 +43,14 @@ async function sendMessage(payload) {
     // send the message to the user
 
     await cacheMessage(payload);
-    console.log(await retrieveConnection(payload['recipient-user-id']));
+    
+    const recipientConnection = await retrieveConnection(payload['recipient-user-id']);
+    
+    // will need this to route to the proper socket, but for now we ignore
+    const recipientSocketUrl = recipientConnection["socket-url"];
+    const recipientSocketId = recipientConnection["socket-id"];
+
+    payload["recipient-socket-id"] = recipientSocketId;
     sessionSocket.emit("message-out", payload);
 }
 
