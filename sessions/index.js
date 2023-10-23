@@ -14,7 +14,7 @@ const redisClient = createClient({
 });
 redisClient.on('error', err => console.log('Redis Client Error', err));
 
-async function associateUser(payload) {
+async function establishUserConnection(payload) {
 
     const key = `connection:user:id:${payload['user-id']}`;
     const value = JSON.stringify(payload);
@@ -68,7 +68,7 @@ async function main() {
 
     sessionSocket.on("connection-subscribe", async (payload) => {
         // When a user first connects, we write to Redis what socket they are connected to        
-        await associateUser(payload);
+        await establishUserConnection(payload);
 
     });
 
