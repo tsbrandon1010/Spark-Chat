@@ -47,7 +47,7 @@ async function sendMessage(payload) {
     const recipientConnection = await retrieveConnection(payload['recipient-user-id']);
     
     // will need this to route to the proper socket, but for now we ignore
-    const recipientSocketUrl = recipientConnection["socket-url"];
+    //const recipientSocketUrl = recipientConnection["socket-url"];
     const recipientSocketId = recipientConnection["socket-id"];
 
     payload["recipient-socket-id"] = recipientSocketId;
