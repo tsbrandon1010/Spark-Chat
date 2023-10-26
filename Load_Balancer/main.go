@@ -1,41 +1,109 @@
 package main
 
 import (
-	"errors"
-	"fmt"
+	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
-	"os"
+	"sync"
+	"time"
 )
+
+type Server struct {
+	URL               *url.URL
+	Alive             bool
+	Mux               sync.RWMutex
+	ActiveConnections int
+}
+
+type Config struct {
+	HealthCheckInterval string   `json:"healthCheckInterval"`
+	Servers             []string `json:"servers"`
+	Port                string   `json:"port"`
+}
+
+func loadConfig(file string) (Config, error) {
+	var config Config
+
+	bytes, err := ioutil.ReadFile(file)
+	if err != nil {
+		return config, err
+	}
+
+	err = json.Unmarshal(bytes, &config)
+	if err != nil {
+		return config, err
+	}
+
+	return config, nil
+}
+
+func nextServer(servers []*Server) *Server {
+	leastActiveConnections := -1
+	leastActiveServer := servers[0]
+
+	for _, server := range servers {
+		server.Mux.Lock()
+		if (server.ActiveConnections < leastActiveConnections || leastActiveConnections == -1) && server.Alive {
+			leastActiveServer = server
+		}
+		server.Mux.Unlock()
+	}
+	return leastActiveServer
+}
+
+func (s *Server) Proxy() *httputil.ReverseProxy {
+	return httputil.NewSingleHostReverseProxy(s.URL)
+}
 
 func main() {
 
-	backend, _ := url.Parse("http://localhost:3333")
-
-	handler := func(p *httputil.ReverseProxy) func(http.ResponseWriter, *http.Request) {
-		return func(w http.ResponseWriter, r *http.Request) {
-			log.Println(r.URL)
-			r.Host = backend.Host
-			w.Header().Set("X-Ben", "Rad")
-			p.ServeHTTP(w, r)
-		}
-
+	config, err := loadConfig("config.json")
+	if err != nil {
+		log.Fatalf("Error loading the config file: %s", err.Error())
 	}
 
-	proxy := httputil.NewSingleHostReverseProxy(backend)
-	http.HandleFunc("/", handler(proxy))
+	healthCheckInterval, err := time.ParseDuration(config.HealthCheckInterval)
+	if err != nil {
+		log.Fatalf("Invalid health check interval: %s", err.Error())
+	}
 
-	//err := http.ListenAndServeTLS(":10443", "certs/cert.pem", "certs/key.unencrypted.pem", nil)
+	var servers []*Server
+	for _, serverUrl := range config.Servers {
+		u, _ := url.Parse(serverUrl)
+		servers = append(servers, &Server{URL: u})
+	}
 
-	err := http.ListenAndServe(":3030", nil)
+	for _, server := range servers {
+		go func(s *Server) {
+			for range time.Tick(healthCheckInterval) {
+				res, err := http.Get(s.URL.String())
+				if err != nil || res.StatusCode >= 500 {
+					s.Alive = false
+				} else {
+					s.Alive = true
+				}
+			}
+		}(server)
+	}
 
-	if errors.Is(err, http.ErrServerClosed) {
-		fmt.Printf("server closed\n")
-	} else if err != nil {
-		fmt.Printf("error while starting the server: %s\n", err)
-		os.Exit(1)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		server := nextServer(servers)
+		server.Mux.Lock()
+		server.ActiveConnections++
+		server.Mux.Unlock()
+		server.Proxy().ServeHTTP(w, r)
+		server.Mux.Lock()
+		server.ActiveConnections--
+		server.Mux.Unlock()
+	})
+
+	log.Println("Starting the load balancer on port ", config.Port)
+	err = http.ListenAndServe(config.Port, nil)
+	if err != nil {
+		log.Fatalf("Error while starting the load balancer: %s\n", err)
 	}
 
 }
