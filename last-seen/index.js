@@ -25,6 +25,8 @@ async function writeLastSeen(payload) {
 }
 
 async function main() {
+    console.log("Started Last-seen Service.")
+    
     await redisClient.connect();
 
     socket.on("connect", () => {

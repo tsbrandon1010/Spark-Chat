@@ -1,10 +1,10 @@
 const { io } = require("socket.io-client");
 
 // socketUrl will eventually be assigned to the user by the load balancer
-const socketUrl = "http://localhost:3000";
+const socketUrl = "http://localhost:3030";
 const socket = io(socketUrl);
-const lastSeenSocket = io("http://localhost:3000/last-seen")
-const sessionsSocket = io("http://localhost:3000/sessions")
+const lastSeenSocket = io(`${socketUrl}/last-seen`)
+const sessionsSocket = io(`${socketUrl}/sessions`)
 
 const userId = "tsbrandon1010";
 
@@ -42,5 +42,6 @@ function sendMessage(recipientUserId, message) {
     // good idea to eventually add callbacks to confirm message reception
     sessionsSocket.emit("message-in", payload);
 }
+
 
 sendMessage("tsbrandon1010", "hello, from jenson!");

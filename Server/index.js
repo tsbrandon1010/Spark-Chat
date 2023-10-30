@@ -2,7 +2,7 @@ const httpServer = require("http").createServer()
 const io = require("socket.io")(httpServer, {
 
 });
-
+const socketPort = 3000;
 
 io.on("connection", (socket) => {
 
@@ -22,6 +22,7 @@ io.of("/last-seen").on("connection", (socket) => {
 io.of("/sessions").on("connection", (socket) => {
 
     socket.on("connect-event", (payload) => {
+        payload["socket-url"] = `http://localhost:${socketPort}`;
         socket.broadcast.emit("connection-subscribe", payload);
     });
 
@@ -32,7 +33,6 @@ io.of("/sessions").on("connection", (socket) => {
     });
 
     // session -> socket -> user. Route the payload to the user
-    // have to figure out how to target a specific user on the socket
     socket.on("message-out", (payload) => {
         const socketId = payload['recipient-socket-id'];
         io.of("/sessions").to(socketId).emit("message-response", payload);
@@ -53,6 +53,6 @@ io.of("/groups").on("connection", (socket) => {
 });
 
 
-httpServer.listen(3000, () =>
-  console.log(`server listening at http://localhost:3000`)
+httpServer.listen(socketPort, () =>
+  console.log(`server listening at http://localhost:${socketPort}`)
 );

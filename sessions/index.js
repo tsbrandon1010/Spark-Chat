@@ -2,7 +2,6 @@
 const { io } = require("socket.io-client");
 const { createClient } = require("redis");
 const { v4: uuidv4 } = require("uuid");
-const { platform } = require("os");
 
 const socket = io("http://localhost:3000");
 const sessionSocket = io("http://localhost:3000/sessions");
@@ -55,6 +54,7 @@ async function sendMessage(payload) {
 }
 
 async function main() {
+    console.log("Started Sessions Service.");
     await redisClient.connect();
     
     socket.on("connect", () => {

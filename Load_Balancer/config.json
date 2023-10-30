@@ -2,8 +2,7 @@
     "port": ":3030",
     "healthCheckInterval": "5s",
     "servers": [
-        "http://localhost:8081", 
-        "http://localhost:8082", 
-        "http://localhost:8083"
+        "http://localhost:3000",
+        "http://localhost:3001"
     ]
 }
