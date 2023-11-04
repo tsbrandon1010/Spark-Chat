@@ -3,10 +3,26 @@ const { io } = require("socket.io-client");
 const { createClient } = require("redis");
 const { v4: uuidv4 } = require("uuid");
 
-const socket = io("http://localhost:3000");
-const sessionSocket = io("http://localhost:3000/sessions");
-// Route back to the main socket, which will then hand off to the group service client
 const groupsSocket = io("http://localhost:8000/groups");
+const sockets = {
+    3000: {
+        socket: io("http://localhost:3000", {
+            autoConnect: false
+        }),
+        sessionSocket: io("http://localhost:3000/sessions", {
+            autoConnect: false
+        })
+    },
+    3001 : {
+        socket: io("http://localhost:3001", {
+            autoConnect: false
+        }),
+        sessionSocket: io("http://localhost:3001/sessions", {
+            autoConnect: false
+        })
+    }
+};
+
 
 const redisClient = createClient({
     url: 'redis://:ydvzSWmuDNPy@localhost:6379'
@@ -53,8 +69,14 @@ async function sendMessage(payload) {
     sessionSocket.emit("message-out", payload);
 }
 
-async function main() {
-    console.log("Started Sessions Service.");
+async function createConnection(socketId, socketConfig) {
+    const socket = socketConfig[socketId]["socket"];
+    const sessionSocket = socketConfig[socketId]["sessionSocket"];
+
+    socket.connect();
+    sessionSocket.connect();
+    
+    console.log(`Started sessions service on port: ${socketId}`);
     await redisClient.connect();
     
     socket.on("connect", () => {
@@ -102,4 +124,4 @@ async function main() {
     });
 }
 
-main()
+createConnection("3000");

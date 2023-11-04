@@ -95,6 +95,7 @@ func main() {
 		server.ActiveConnections++
 		server.Mux.Unlock()
 		server.Proxy().ServeHTTP(w, r)
+		log.Println("Sending User to: ", server.URL)
 		server.Mux.Lock()
 		server.ActiveConnections--
 		server.Mux.Unlock()
