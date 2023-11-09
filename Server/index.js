@@ -2,7 +2,7 @@ const httpServer = require("http").createServer()
 const io = require("socket.io")(httpServer, {
 
 });
-const socketPort = 3000;
+const socketPort = 3001;
 
 io.on("connection", (socket) => {
 

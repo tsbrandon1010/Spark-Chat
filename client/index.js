@@ -2,6 +2,7 @@ const { io } = require("socket.io-client");
 
 // socketUrl will eventually be assigned to the user by the load balancer
 const socketUrl = "http://localhost:3030";
+console.log(socketUrl);
 const socket = io(socketUrl);
 const lastSeenSocket = io(`${socketUrl}/last-seen`)
 const sessionsSocket = io(`${socketUrl}/sessions`)
@@ -43,5 +44,4 @@ function sendMessage(recipientUserId, message) {
     sessionsSocket.emit("message-in", payload);
 }
 
-
-sendMessage("tsbrandon1010", "hello, from jenson!");
+sendMessage("tsbrandon1010", "hello");

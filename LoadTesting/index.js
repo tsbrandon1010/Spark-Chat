@@ -1,32 +1,53 @@
 const { io } = require("socket.io-client");
 
-const URL = "http://localhost:3030";
+const URL = "http://localhost:3000";
 const MAX_CLIENTS = 1000;
-const POLLING_PERCENTAGE = 0.05;
-const CLIENT_CREATION_INTERVAL_IN_MS = 10;
+const CLIENT_CREATION_INTERVAL_IN_MS = 100;
 const EMIT_INTERVAL_IN_MS = 1000;
 
 let clientCount = 0;
+let disconnectCount = 0;
 let lastReport = new Date().getTime();
 let packetsSinceLastReport = 0;
 
-const createClient = () => {
-    const transports = Math.random() < POLLING_PERCENTAGE ? ["polling"] : ["polling", "websocket"];
+function sendMessage(userId, recipientUserId, message, sessionsSocket) {
+    const payload = {
+        "sender-user-id" : userId,
+        "recipient-user-id" : recipientUserId,
+        "content" : message,
+        "timestamp" : Date.now()
+    };
 
-    const socket = io(URL, {
-        transports,
+    // good idea to eventually add callbacks to confirm message reception
+    sessionsSocket.emit("message-in", payload);
+}
+
+
+const createClient = () => {
+    const socket = io(URL);
+
+    const sessionsSocket = io(`${URL}/sessions`);
+
+    sessionsSocket.on("connect", () => {
+        const payload = {
+            "user-id": socket.id, 
+            "socket-url": "http://localhost:3000", 
+            "socket-id": sessionsSocket.id
+        }
+    
+        sessionsSocket.emit("connect-event", payload);
     });
 
     setInterval(() => {
-        socket.emit("message");
-    }, EMIT_INTERVAL_IN_MS);
+        sendMessage(socket.id, socket.id, "hello", sessionsSocket);
+    },  EMIT_INTERVAL_IN_MS);
 
-    socket.on("message-response", (message) => {
+    sessionsSocket.on("message-response", (message) => {
         packetsSinceLastReport++;
     });
 
     socket.on("disconnect", (reason) => {
-        console.log(`disconnect due to ${reason}`);
+        disconnectCount++;
     });
 
     if (++clientCount < MAX_CLIENTS) {
@@ -48,9 +69,10 @@ const printReport = () => {
     console.log(
         `client count: ${clientCount} ; average packets received per second: ${packetsPerSeconds}`
     );
+    console.log(disconnectCount);
 
     packetsSinceLastReport = 0;
     lastReport = now;
 };
 
-setInterval(printReport, 5000);
+setInterval(printReport, 0);

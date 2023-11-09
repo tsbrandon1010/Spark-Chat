@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require("uuid");
 
 const groupsSocket = io("http://localhost:8000/groups");
 const sockets = {
-    3000: {
+    "http://localhost:3000": {
         socket: io("http://localhost:3000", {
             autoConnect: false
         }),
@@ -13,7 +13,7 @@ const sockets = {
             autoConnect: false
         })
     },
-    3001 : {
+    "http://localhost:3001" : {
         socket: io("http://localhost:3001", {
             autoConnect: false
         }),
@@ -53,20 +53,25 @@ async function cacheMessage(payload) {
     await redisClient.set(key, value);
 }
 
-async function sendMessage(payload) {
+async function sendMessage(payload, sockets) {
     // query the database to determine where the user is connected
     // send the message to the user
 
     await cacheMessage(payload);
     
-    const recipientConnection = await retrieveConnection(payload['recipient-user-id']);
+    try {
+        const recipientConnection = await retrieveConnection(payload['recipient-user-id']);
     
-    // will need this to route to the proper socket, but for now we ignore
-    const recipientSocketUrl = recipientConnection["socket-url"];
-    const recipientSocketId = recipientConnection["socket-id"];
-
-    payload["recipient-socket-id"] = recipientSocketId;
-    sessionSocket.emit("message-out", payload);
+        // will need this to route to the proper socket, but for now we ignore
+        const recipientSocketUrl = recipientConnection["socket-url"];
+        const recipientSocketId = recipientConnection["socket-id"];
+    
+        payload["recipient-socket-id"] = recipientSocketId;
+        sockets[recipientSocketUrl]["sessionSocket"].emit("message-out", payload);
+    }
+    catch (error) {
+        
+    }
 }
 
 async function createConnection(socketId, socketConfig) {
@@ -77,7 +82,11 @@ async function createConnection(socketId, socketConfig) {
     sessionSocket.connect();
     
     console.log(`Started sessions service on port: ${socketId}`);
-    await redisClient.connect();
+    try {
+        await redisClient.connect();
+    } catch (error) {
+        
+    }
     
     socket.on("connect", () => {
     });
@@ -98,7 +107,7 @@ async function createConnection(socketId, socketConfig) {
         // write message to message DB
         // if the message is for a group, get the ids of the group members
        
-        await sendMessage(payload);
+        await sendMessage(payload, socketConfig);
         /*
         if (payload["type"] == "group") {
             groupsSocket.emit("groups-query", payload['group_id']);
@@ -124,4 +133,5 @@ async function createConnection(socketId, socketConfig) {
     });
 }
 
-createConnection("3000");
+createConnection("http://localhost:3000", sockets);
+createConnection("http://localhost:3001", sockets);
