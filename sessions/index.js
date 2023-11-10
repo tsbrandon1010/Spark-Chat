@@ -53,7 +53,7 @@ async function sendMessage(payload, sockets) {
     
     try {
         const recipientConnection = await retrieveConnection(payload['recipient-user-id']);
-    
+
         // will need this to route to the proper socket, but for now we ignore
         const recipientSocketUrl = recipientConnection["socket-url"];
         const recipientSocketId = recipientConnection["socket-id"];
@@ -62,7 +62,7 @@ async function sendMessage(payload, sockets) {
         sockets[recipientSocketUrl]["sessionSocket"].emit("message-out", payload);
     }
     catch (error) {
-        
+       console.log(error); 
     }
 }
 

@@ -1,7 +1,13 @@
 const { io } = require("socket.io-client");
+const fs = require("fs");
+
+
+const writeStream = fs.createWriteStream("messageRTT.csv");
+writeStream.write(`user-count, latency\n`);
+
 
 const URL = "http://localhost:3000";
-const MAX_CLIENTS = 1000;
+const MAX_CLIENTS = 1;
 const CLIENT_CREATION_INTERVAL_IN_MS = 100;
 const EMIT_INTERVAL_IN_MS = 1000;
 
@@ -23,16 +29,17 @@ function sendMessage(userId, recipientUserId, message, sessionsSocket) {
 }
 
 
-const createClient = () => {
+const createClient = (id) => {
     const socket = io(URL);
-
+    const userId = `user_${id}`
     const sessionsSocket = io(`${URL}/sessions`);
-
     const lastSeenSocket = io(`${URL}/last-seen`);
+
+    let messageOutTime = null;
 
     lastSeenSocket.on("connect", () => {
         const payload = {
-            "user-id": sessionsSocket.id, 
+            "user-id": userId, 
             "socket-url": URL, 
             "socket-id": sessionsSocket.id
         }
@@ -40,31 +47,31 @@ const createClient = () => {
         lastSeenSocket.emit("connect-event", payload);
     });
 
-
-    setInterval(() => {
-    
-        if (clientCount >= MAX_CLIENTS) {
-            //sendMessage(socket.id, socket.id, "hello", sessionsSocket);
-        }
-    
-    },  EMIT_INTERVAL_IN_MS);
-
     sessionsSocket.on("message-response", (message) => {
-        packetsSinceLastReport++;
+        let messageInTime = new Date().getTime();
+        writeStream.write(`${clientCount}, ${(messageInTime - messageOutTime)}\n`)
     });
 
+
+    setInterval(() => {
+        console.log("here");
+        messageOutTime = new Date().getTime();
+        sendMessage(userId, userId, "hello", sessionsSocket);  
+    
+    },  EMIT_INTERVAL_IN_MS);
+    
     socket.on("disconnect", (reason) => {
         disconnectCount++;
     });
 
     if (++clientCount < MAX_CLIENTS) {
-        setTimeout(createClient, CLIENT_CREATION_INTERVAL_IN_MS);
+        setTimeout(createClient, CLIENT_CREATION_INTERVAL_IN_MS, clientCount);
     }
 
 };
 
 
-createClient();
+createClient(clientCount);
 
 const printReport = () => {
     const now = new Date().getTime();
@@ -73,13 +80,9 @@ const printReport = () => {
         packetsSinceLastReport / durationSinceLastReport
     ).toFixed(2);
 
-    console.log(
-        `client count: ${clientCount} ; average packets received per second: ${packetsPerSeconds}`
-    );
-    console.log(disconnectCount);
 
     packetsSinceLastReport = 0;
     lastReport = now;
 };
 
-setInterval(printReport, 0);
+setInterval(printReport, 1);
