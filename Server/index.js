@@ -2,7 +2,7 @@ const httpServer = require("http").createServer()
 const io = require("socket.io")(httpServer, {
 
 });
-const socketPort = 3001;
+const socketPort = 3000;
 
 io.on("connection", (socket) => {
 
@@ -13,19 +13,14 @@ io.on("connection", (socket) => {
 // server receives that update, and sends it outbound on a "last-seen-subscribe" namespace
 io.of("/last-seen").on("connection", (socket) => {
 
-    socket.on("last-seen", (arg) => {
-        socket.broadcast.emit("last-seen-subscribe", (arg))
-    });
-
-});
-
-io.of("/sessions").on("connection", (socket) => {
-
     socket.on("connect-event", (payload) => {
         payload["socket-url"] = `http://localhost:${socketPort}`;
         socket.broadcast.emit("connection-subscribe", payload);
     });
 
+});
+
+io.of("/sessions").on("connection", (socket) => {
 
     // user -> socket -> session. Route the message to the session's service
     socket.on("message-in", (payload) => {

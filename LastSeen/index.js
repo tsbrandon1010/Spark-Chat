@@ -7,42 +7,61 @@ const redisClient = createClient({
 });
 redisClient.on('error', err => console.log('Redis Client Error', err));
 
-const socket = io("http://localhost:3000");
-const lastSeenSocket = io("http://localhost:3000/last-seen");
+const sockets = {
+    "http://localhost:3000": {
+        socket: io("http://localhost:3000", {
+            autoConnect: false
+        }),
+        lastSeenSocket: io("http://localhost:3000/last-seen", {
+            autoConnect: false
+        })
+    },
+    "http://localhost:3001" : {
+        socket: io("http://localhost:3001", {
+            autoConnect: false
+        }),
+        lastSeenSocket: io("http://localhost:3001/last-seen", {
+            autoConnect: false
+        })
+    }
+};
 
-async function getLastSeen(payload) {
-    const key = `last-seen:user:${payload['user-id']}`;
-    const value = await redisClient.get(key);
+async function establishUserConnection(payload) {
 
-    return value;
+    const key = `connection:user:id:${payload['user-id']}`;
+    const value = JSON.stringify(payload);
+
+    await redisClient.set(key, value);
 }
 
-async function writeLastSeen(payload) {
-    const key = `last-seen:user:${payload['user-id']}`;
-    const value = payload['timestamp'];
-    
-    redisClient.set(key, value);
-}
 
-async function main() {
-    console.log("Started Last-seen Service.")
+
+async function createConnection(socketId, socketConfig) {
+    const socket = socketConfig[socketId]["socket"];
+    const lastSeenSocket = socketConfig[socketId]["lastSeenSocket"];
     
-    await redisClient.connect();
+    socket.connect();
+    lastSeenSocket.connect()
+    
+    console.log(`Started last-seen service on port: ${socketId}`)
+    
+    try {
+        await redisClient.connect();
+    } catch (error) {
+    }
 
     socket.on("connect", () => {
-        console.log(socket.id);
-    
     });
     
     lastSeenSocket.on("connect", () => {
-        console.log(lastSeenSocket.id);
-    
     });
     
-    lastSeenSocket.on("last-seen-subscribe", async (args) => {
-        await writeLastSeen(args);
+    lastSeenSocket.on("connection-subscribe", async (payload) => {
+        // When a user first connects, we write to Redis what socket they are connected to        
+        await establishUserConnection(payload);
+
     });
 
 }
 
-main()
+createConnection("http://localhost:3000", sockets);

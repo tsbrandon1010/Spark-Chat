@@ -28,18 +28,25 @@ const createClient = () => {
 
     const sessionsSocket = io(`${URL}/sessions`);
 
-    sessionsSocket.on("connect", () => {
+    const lastSeenSocket = io(`${URL}/last-seen`);
+
+    lastSeenSocket.on("connect", () => {
         const payload = {
-            "user-id": socket.id, 
-            "socket-url": "http://localhost:3000", 
+            "user-id": sessionsSocket.id, 
+            "socket-url": URL, 
             "socket-id": sessionsSocket.id
         }
     
-        sessionsSocket.emit("connect-event", payload);
+        lastSeenSocket.emit("connect-event", payload);
     });
 
+
     setInterval(() => {
-        sendMessage(socket.id, socket.id, "hello", sessionsSocket);
+    
+        if (clientCount >= MAX_CLIENTS) {
+            //sendMessage(socket.id, socket.id, "hello", sessionsSocket);
+        }
+    
     },  EMIT_INTERVAL_IN_MS);
 
     sessionsSocket.on("message-response", (message) => {
