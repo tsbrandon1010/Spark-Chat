@@ -24,12 +24,16 @@ io.of("/sessions").on("connection", (socket) => {
 
     // user -> socket -> session. Route the message to the session's service
     socket.on("message-in", (payload) => {
+        
+        payload['content'].push(["server:message-in", Date.now()]);
         socket.broadcast.emit("message-subscribe", payload);
     });
 
     // session -> socket -> user. Route the payload to the user
     socket.on("message-out", (payload) => {
         const socketId = payload['recipient-socket-id'];
+        
+        payload['content'].push(["server:message-out", Date.now()]);
         io.of("/sessions").to(socketId).emit("message-response", payload);
     });
 

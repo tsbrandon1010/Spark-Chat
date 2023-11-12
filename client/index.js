@@ -23,21 +23,22 @@ lastSeenSocket.on("connect", () => {
         "socket-id": sessionsSocket.id
     }
 
+    console.log(payload);
     lastSeenSocket.emit("connect-event", payload);
 });
 
 
 sessionsSocket.on("message-response", (message) => {
+    message['content'].push(["client:message-response", Date.now()]);
     console.log(message["content"]);
 });
 
-function sendMessage(recipientUserId, message) {
+function sendMessage(recipientUserId) {
     const payload = {
         "sender-user-id" : userId,
         "recipient-user-id" : recipientUserId,
-        "content" : message,
-        "timestamp" : Date.now()
-    };
+        "content" : [["client:message-in", Date.now()]]
+        };
 
     // good idea to eventually add callbacks to confirm message reception
     sessionsSocket.emit("message-in", payload);
