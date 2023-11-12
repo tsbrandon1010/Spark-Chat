@@ -2,12 +2,11 @@ const { io } = require("socket.io-client");
 const fs = require("fs");
 
 
-const writeStream = fs.createWriteStream("messageRTT.csv");
-writeStream.write(`user-count, latency\n`);
-
+const writeStream = fs.createWriteStream("500_messageRTT.csv", {"flags" : "a"});
+writeStream.write("\n");
 
 const URL = "http://localhost:3000";
-const MAX_CLIENTS = 1;
+const MAX_CLIENTS = process.argv[2];
 const CLIENT_CREATION_INTERVAL_IN_MS = 100;
 const EMIT_INTERVAL_IN_MS = 1000;
 
@@ -49,15 +48,15 @@ const createClient = (id) => {
 
     sessionsSocket.on("message-response", (message) => {
         let messageInTime = new Date().getTime();
-        writeStream.write(`${clientCount}, ${(messageInTime - messageOutTime)}\n`)
+        writeStream.write(`${process.argv[3]}, ${(messageInTime - messageOutTime)}\n`)
     });
 
 
     setInterval(() => {
-        console.log("here");
-        messageOutTime = new Date().getTime();
-        sendMessage(userId, userId, "hello", sessionsSocket);  
-    
+        if (clientCount >= MAX_CLIENTS) {
+            messageOutTime = new Date().getTime();
+            sendMessage(userId, userId, "hello", sessionsSocket);  
+        }
     },  EMIT_INTERVAL_IN_MS);
     
     socket.on("disconnect", (reason) => {

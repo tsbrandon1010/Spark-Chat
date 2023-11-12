@@ -89,18 +89,7 @@ async function createConnection(socketId, socketConfig) {
     });
 
     sessionSocket.on("message-subscribe", async (payload) => {
-        // write message to message DB
-        // if the message is for a group, get the ids of the group members
-       
         await sendMessage(payload, socketConfig);
-        /*
-        if (payload["type"] == "group") {
-            groupsSocket.emit("groups-query", payload['group_id']);
-        }
-        else {
-            sendMessage(payload);
-        }
-        */
     });
 
     groupsSocket.on("groups-response", (response) => {
