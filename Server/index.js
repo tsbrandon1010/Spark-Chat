@@ -1,6 +1,10 @@
-const httpServer = require("http").createServer()
-const io = require("socket.io")(httpServer, {
+const httpServer = require("http").createServer();
+const { Server } = require("socket.io");
+const customParse = require("socket.io-msgpack-parser");
 
+const io = new Server(httpServer, {
+    wsEngine: require("eiows").Server,
+    parser: customParse
 });
 const socketPort = 3000;
 

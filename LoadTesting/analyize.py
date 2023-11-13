@@ -19,7 +19,10 @@ def main(csv_file):
     
 
     
-    for j in range(len(rows[:2180])):
+    for j in range(len(rows)):
+        
+        if len(rows[j]) == 0:
+            continue
         print(f"Total latency: {int(rows[j][11]) - int(rows[j][1])}")
 
         for i in range(0, len(rows[j]), 2):

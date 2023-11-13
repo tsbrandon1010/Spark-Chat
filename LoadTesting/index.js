@@ -1,14 +1,14 @@
 const { io } = require("socket.io-client");
 const fs = require("fs");
+const customParse = require("socket.io-msgpack-parser");
 
-
-const writeStream = fs.createWriteStream("500_messageRTT.csv", {"flags" : "a"});
+const writeStream = fs.createWriteStream("new_engine_messageRTT.csv", {"flags" : "a"});
 writeStream.write("\n");
 
 const URL = "http://localhost:3000";
 const MAX_CLIENTS = process.argv[2];
 const CLIENT_CREATION_INTERVAL_IN_MS = 100;
-const EMIT_INTERVAL_IN_MS = 1000;
+const EMIT_INTERVAL_IN_MS = 2000;
 
 let clientCount = 0;
 let disconnectCount = 0;
@@ -24,10 +24,10 @@ function sendMessage(userId, recipientUserId, sessionsSocket) {
 
 
 const createClient = (id) => {
-    const socket = io(URL);
+    const socket = io(URL, {parser: customParse});
     const userId = `user_${id}`
-    const sessionsSocket = io(`${URL}/sessions`);
-    const lastSeenSocket = io(`${URL}/last-seen`);
+    const sessionsSocket = io(`${URL}/sessions`, {parser: customParse});
+    const lastSeenSocket = io(`${URL}/last-seen`, {parser: customParse});
 
     lastSeenSocket.on("connect", () => {
         const payload = {
@@ -50,7 +50,7 @@ const createClient = (id) => {
             messageOutTime = new Date().getTime();
             sendMessage(userId, userId, sessionsSocket);  
         }
-    },  EMIT_INTERVAL_IN_MS);
+    }, EMIT_INTERVAL_IN_MS );
     
     socket.on("disconnect", (reason) => {
         disconnectCount++;

@@ -2,23 +2,28 @@
 const { io } = require("socket.io-client");
 const { createClient } = require("redis");
 const { v4: uuidv4 } = require("uuid");
+const customParse = require("socket.io-msgpack-parser");
 
 const groupsSocket = io("http://localhost:8000/groups");
 const sockets = {
     "http://localhost:3000": {
         socket: io("http://localhost:3000", {
-            autoConnect: false
+            autoConnect: false,
+            parser: customParse
         }),
         sessionSocket: io("http://localhost:3000/sessions", {
-            autoConnect: false
+            autoConnect: false,
+            parser: customParse
         })
     },
     "http://localhost:3001" : {
         socket: io("http://localhost:3001", {
-            autoConnect: false
+            autoConnect: false,
+            parser: customParse
         }),
         sessionSocket: io("http://localhost:3001/sessions", {
-            autoConnect: false
+            autoConnect: false,
+            parser: customParse
         })
     }
 };
