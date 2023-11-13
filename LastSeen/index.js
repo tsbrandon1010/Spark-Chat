@@ -70,3 +70,4 @@ async function createConnection(socketId, socketConfig) {
 }
 
 createConnection("http://localhost:3000", sockets);
+createConnection("http://localhost:3001", sockets);

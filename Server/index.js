@@ -6,7 +6,7 @@ const io = new Server(httpServer, {
     wsEngine: require("eiows").Server,
     parser: customParse
 });
-const socketPort = 3000;
+const socketPort = 3001;
 
 io.on("connection", (socket) => {
 
