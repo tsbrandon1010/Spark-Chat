@@ -2,50 +2,51 @@ package main
 
 import (
 	"log"
-	"strconv"
-
-	socketio "github.com/zhouhui8915/go-socket.io-client"
+	"net/http"
+	"sync"
 )
 
 type Server struct {
 	URL string
 	Connections int
+	Mux sync.RWMutex
 }
 
-func createClient(server *Server) {	
-	client, err := socketio.NewClient(server.URL, &socketio.Options{})
-	if err != nil {
-		log.Printf("Error while creating a client: %v", err)
-		return
+
+// Return the server with the least amount of users connected
+func getNextServer(servers []*Server) (*Server) {
+
+	minServer := servers[0]
+	for _, server := range servers {
+		if server.Connections < minServer.Connections {
+			minServer = server
+		}
 	}
 
-	client.On("connection", func()  {
-		client.Emit("client-count-request")
-	})
-
-	client.On("client-count", func(msg string) {
-		clientCount, err := strconv.Atoi(msg)
-		if err != nil {
-			clientCount = server.Connections
-		}
-		server.Connections = clientCount
-	})
-
+	return minServer
 }
 
+func redirectToSocket(w http.ResponseWriter, r *http.Request) {
+	log.Println("here my bro")
+	http.Redirect(w, r, "http://localhost:3000", http.StatusSeeOther)
+}
+
+
+// check every server's client count based on a set period
+// - at a given time interval
+// first, we update the client count
+// next, if the client count reaches a certain number, we "spin" up an additional server
 func main() {
 
+	/*
 	mainServer := &Server{
 		URL: "http://localhost:3000",
 		Connections: 0,
-	}
+	} */
 
-	servers := [] *Server{mainServer}
+	//servers := [] *Server{mainServer}
 
-	// check every server's client count based on a set period
-	// - at a given time interval
-	// first, we update the client count
-	// next, if the client count reaches a certain number, we "spin" up an additional server
-
-	
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", redirectToSocket)
+	http.ListenAndServe(":3030", mux)
 }

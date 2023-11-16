@@ -6,9 +6,17 @@ const io = new Server(httpServer, {
     wsEngine: require("eiows").Server,
     parser: customParse
 });
-const socketPort = 3001;
+const socketPort = 3000;
 
 io.on("connection", (socket) => {
+
+    console.log("someone here");
+
+    socket.on("client-count-request", () => {
+        
+        console.log("got message");
+        socket.emit("client-count", "hello, world!");
+    });
 
 });
 
