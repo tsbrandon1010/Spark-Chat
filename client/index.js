@@ -20,7 +20,7 @@ sessionsSocket.on("connect", () => {
 lastSeenSocket.on("connect", () => {
     const payload = {
         "user-id": userId, 
-        "socket-url": "http://localhost:3000", 
+        "socket-url": "", 
         "socket-id": sessionsSocket.id
     }
 
