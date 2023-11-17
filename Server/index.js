@@ -8,13 +8,17 @@ const io = new Server(httpServer, {
 });
 const socketPort = 3000;
 
-io.on("connection", (socket) => {
+var connectionCount = 0;
 
-    console.log("someone here");
+io.on("connection", (socket) => {
+    connectionCount++;
 
     socket.on("client-count-request", () => { 
-        console.log("got message");
-        socket.emit("client-count", "hello, world!");
+        socket.emit("client-count", connectionCount);
+    });
+
+    socket.on("disconnect", () => {
+        connectionCount--;
     });
 
 });

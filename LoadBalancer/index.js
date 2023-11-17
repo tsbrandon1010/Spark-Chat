@@ -23,7 +23,8 @@ const startCountUpdater = (socket) => {
     socket['socket'].connect();
 
     socket['socket'].on("client-count", (count) => {
-        console.log("client-count");
+        console.log(socket['URL'], count);
+        
         try {
             socket['userCount'] = parseInt(count);
         } catch (error) {
@@ -32,7 +33,6 @@ const startCountUpdater = (socket) => {
     });
 
     setInterval(() => {
-        console.log("client-count-request");
         socket['socket'].emit("client-count-request");
     }, 5000);
 
@@ -52,11 +52,11 @@ const customRouter = (req) => {
         }
     }
     
-    return sockets[minIndex][URL];
+    return sockets[minIndex]['URL'];
 }
 
 const options = {
-    target: 'http://localhost:3000',
+    target: 'http://localhost:3001',
     router: customRouter
 };
 
