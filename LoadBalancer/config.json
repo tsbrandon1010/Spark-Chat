@@ -1,8 +1,0 @@
-{
-    "port": ":3030",
-    "healthCheckInterval": "5s",
-    "servers": [
-        "http://localhost:3000",
-        "http://localhost:3001"
-    ]
-}
