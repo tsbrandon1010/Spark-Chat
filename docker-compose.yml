@@ -1,0 +1,28 @@
+services:
+  load-balancer:
+    build: ./LoadBalancer
+    links:
+      - "redis:db"
+
+  last-seen:
+    build: ./LastSeen
+    links:
+      - "redis:db"
+ 
+  sessions:
+    build: ./Sessions
+    links:
+      - "redis:db"
+
+
+  redis:
+    image: redis:7.2
+    container_name: redis
+    restart: "no"
+    command: /bin/sh -c "redis-server --appendonly yes --requirepass $$REDIS_PASSWORD"
+    volumes:
+      - ./Redis/redis-volume:/data
+    env_file:
+      - ./Redis/redis.env
+    ports:
+      - 6379:6379
