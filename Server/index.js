@@ -3,7 +3,6 @@ const { Server } = require("socket.io");
 const customParse = require("socket.io-msgpack-parser");
 
 const io = new Server(httpServer, {
-    wsEngine: require("eiows").Server,
     parser: customParse
 });
 const socketPort = 3000;
@@ -11,6 +10,7 @@ const socketPort = 3000;
 var connectionCount = 0;
 
 io.on("connection", (socket) => {
+    console.log("someone here");
     connectionCount++;
 
     socket.on("client-count-request", () => { 

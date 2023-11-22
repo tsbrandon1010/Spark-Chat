@@ -7,13 +7,13 @@ const customParse = require("socket.io-msgpack-parser");
 
 const sockets = [
     {
-        URL: "http://localhost:3000",
-        socket: io("http://localhost:3000", { autoConnect: false, parser: customParse }),
+        URL: "http://172.19.0.2:3000",
+        socket: io("http://172.19.0.2:3000", { autoConnect: false, parser: customParse }),
         userCount: 0
     },
     {
-        URL: "http://localhost:3001",
-        socket: io("http://localhost:3001", { autoConnect: false, parser: customParse }),
+        URL: "http://172.19.0.2:3001",
+        socket: io("http://172.19.0.2:3001", { autoConnect: false, parser: customParse }),
         userCount: 0
     }
 ];

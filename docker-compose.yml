@@ -10,6 +10,8 @@ services:
       - ./Redis/redis.env
     ports:
       - 6379:6379
+    networks:
+      - spark-chat
     
   load-balancer:
     build: ./LoadBalancer
@@ -17,6 +19,8 @@ services:
       - "redis:db"
     ports:
       - 3030:3030
+    networks:
+      - spark-chat
 
   last-seen:
     build: ./LastSeen
@@ -24,6 +28,8 @@ services:
       - redis
     links:
       - "redis:db"
+    networks:
+      - spark-chat
  
   sessions:
     build: ./Sessions
@@ -31,3 +37,9 @@ services:
       - redis
     links:
       - "redis:db"
+    networks:
+      - spark-chat
+
+networks:
+  spark-chat:
+    name: spark-chat

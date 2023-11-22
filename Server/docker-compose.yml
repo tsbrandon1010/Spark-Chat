@@ -1,5 +1,12 @@
 services:
-  server:
+  websocket-server:
     build: .
     ports: 
       - 3000:3000
+    networks:
+      - spark-chat
+
+networks:
+  spark-chat:
+    name: spark-chat
+    external: true
