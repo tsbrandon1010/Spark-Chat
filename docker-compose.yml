@@ -1,20 +1,4 @@
 services:
-  load-balancer:
-    build: ./LoadBalancer
-    links:
-      - "redis:db"
-
-  last-seen:
-    build: ./LastSeen
-    links:
-      - "redis:db"
- 
-  sessions:
-    build: ./Sessions
-    links:
-      - "redis:db"
-
-
   redis:
     image: redis:7.2
     container_name: redis
@@ -26,3 +10,24 @@ services:
       - ./Redis/redis.env
     ports:
       - 6379:6379
+    
+  load-balancer:
+    build: ./LoadBalancer
+    links:
+      - "redis:db"
+    ports:
+      - 3030:3030
+
+  last-seen:
+    build: ./LastSeen
+    depends_on:
+      - redis
+    links:
+      - "redis:db"
+ 
+  sessions:
+    build: ./Sessions
+    depends_on:
+      - redis
+    links:
+      - "redis:db"

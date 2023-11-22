@@ -30,7 +30,7 @@ const sockets = {
 
 
 const redisClient = createClient({
-    url: 'redis://:ydvzSWmuDNPy@localhost:6379'
+    url: 'redis://:ydvzSWmuDNPy@redis:6379'
 });
 redisClient.on('error', err => console.log('Redis Client Error', err));
 
