@@ -7,21 +7,22 @@ const customParse = require("socket.io-msgpack-parser");
 
 const sockets = [
     {
-        URL: "http://172.19.0.2:3000",
-        socket: io("http://172.19.0.2:3000", { autoConnect: false, parser: customParse }),
+        URL: "http://172.20.0.6:3000",
+        socket: io("http://172.20.0.6:3000", { autoConnect: false, parser: customParse }),
         userCount: 0
     },
+    /*
     {
         URL: "http://172.19.0.2:3001",
         socket: io("http://172.19.0.2:3001", { autoConnect: false, parser: customParse }),
         userCount: 0
-    }
+    } */
 ];
 
 
 const startCountUpdater = (socket) => {
     socket['socket'].connect();
-
+    console.log(socket["URL"]);
     socket['socket'].on("client-count", (count) => {
         console.log(socket['URL'], count);
         
@@ -52,6 +53,7 @@ const customRouter = (req) => {
         }
     }
     
+    console.log("client connection");
     return sockets[minIndex]['URL'];
 }
 
