@@ -8,62 +8,135 @@ import (
 	"os"
 
 	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 	"github.com/jhoonb/archivex"
 )
 
-func generateTar() *archivex.TarFile {
+func generateBuildContext(dependencies *[]string) (*os.File, error) {
 	tar := new(archivex.TarFile)
 	tar.Create("dockerfile.tar")
 	tar.AddAll(".", true)
 
-	// loop through the passed array
-	// os.openfile
-	// os.stat
+	for _, d := range *dependencies {
+		file, err := os.OpenFile(d, os.O_RDONLY, os.ModePerm)
+		if err != nil {
+			return nil, err
+		}
 
-	// os. add
+		fileInfo, err := os.Stat(d)
+		if err != nil {
+			return nil, err
+		}
 
-	return tar
+		tar.Add(d, file, fileInfo)
+	}
+	tar.Close()
+
+	dockerBuildContext, err := os.Open("dockerfile.tar")
+	if err != nil {
+		return nil, err
+	}
+
+	return dockerBuildContext, nil
 }
 
-func main() {
-
-	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv)
-	if err != nil {
-		panic(err)
-	}
-
-	containers, err := cli.ContainerList(ctx, types.ContainerListOptions{})
-	if err != nil {
-		panic(err)
-	}
-
-	//fin := nil
-	for _, container := range containers {
-		fmt.Printf("%s %s %s\n", container.ID[:10], container.Image, container.Names[0])
-	}
-
+func buildImage(cli *client.Client) error {
 	dependencies := []string{"index.js", "package.json", "package-lock.json"}
+	buildContext, err := generateBuildContext(&dependencies)
+	if err != nil {
+		return err
+	}
+	defer buildContext.Close()
 
+	imageName := [1]string{"websocket"}
 	opts := types.ImageBuildOptions{
-		Context:    dockerFileReader,
-		Dockerfile: dockerFile,
-		Remove:     true,
+		Tags:        imageName[:],
+		Dockerfile:  "Dockerfile",
+		Remove:      true,
+		NetworkMode: "spark-chat",
 	}
 
 	imageBuildResponse, err := cli.ImageBuild(
-		ctx,
-		dockerFileTarReader,
+		context.Background(),
+		buildContext,
 		opts,
 	)
 	if err != nil {
-		log.Println("Unable to build docker image", err)
+		return err
 	}
 
 	defer imageBuildResponse.Body.Close()
 	_, err = io.Copy(os.Stdout, imageBuildResponse.Body)
 	if err != nil {
-		log.Println("Unable to read image build response", err)
+		return err
+	}
+
+	return nil
+}
+
+func getContainers(cli *client.Client) (*[]types.Container, error) {
+	containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{})
+	if err != nil {
+		return nil, err
+	}
+
+	return &containers, nil
+}
+
+func runContainer(cli *client.Client) error {
+
+	opts := container.Config{
+		Image: "websocket",
+	}
+
+	containerCreateResponse, err := cli.ContainerCreate(
+		context.Background(),
+		&opts,
+		&container.HostConfig{
+			NetworkMode: "spark-chat",
+		},
+		nil,
+		nil,
+		"",
+	)
+	if err != nil {
+		return err
+	}
+
+	err = cli.ContainerStart(context.Background(), containerCreateResponse.ID, types.ContainerStartOptions{})
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(opts, containerCreateResponse)
+
+	return nil
+}
+
+func main() {
+
+	cli, err := client.NewClientWithOpts(client.FromEnv)
+	if err != nil {
+		panic(err)
+	}
+
+	err = buildImage(cli)
+	if err != nil {
+		log.Println(err)
+	}
+
+	err = runContainer(cli)
+	if err != nil {
+		log.Println(err)
+	}
+
+	containers, err := getContainers(cli)
+	if err != nil {
+		log.Println("Unable to get containers: ", err)
+	}
+
+	for _, container := range *containers {
+		fmt.Printf("%s %s %s\n", container.ID[:10], container.Image, container.Names[0])
 	}
 }
