@@ -1,11 +1,16 @@
 const httpServer = require("http").createServer();
 const { Server } = require("socket.io");
 const customParse = require("socket.io-msgpack-parser");
+const fs = require("fs");
 
 const io = new Server(httpServer, {
     parser: customParse
 });
-const socketPort = 3000;
+
+const socketPort = process.argv.slice(2)[0];
+if (socketPort == null) {
+    process.exit(1);
+}
 
 var connectionCount = 0;
 

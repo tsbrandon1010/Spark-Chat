@@ -42,7 +42,7 @@ func generateBuildContext(dependencies *[]string) (*os.File, error) {
 }
 
 func buildImage(cli *client.Client) error {
-	dependencies := []string{"index.js", "package.json", "package-lock.json"}
+	dependencies := []string{"../Server/index.js", "../Server/package.json", "../Server/package-lock.json"}
 	buildContext, err := generateBuildContext(&dependencies)
 	if err != nil {
 		return err
@@ -84,10 +84,11 @@ func getContainers(cli *client.Client) (*[]types.Container, error) {
 	return &containers, nil
 }
 
-func runContainer(cli *client.Client) error {
+func runContainer(cli *client.Client, port string) error {
 
 	opts := container.Config{
 		Image: "websocket",
+		Cmd:   []string{"node", "index.js", port},
 	}
 
 	containerCreateResponse, err := cli.ContainerCreate(
@@ -126,7 +127,7 @@ func main() {
 		log.Println(err)
 	}
 
-	err = runContainer(cli)
+	err = runContainer(cli, "port from load balancer")
 	if err != nil {
 		log.Println(err)
 	}
