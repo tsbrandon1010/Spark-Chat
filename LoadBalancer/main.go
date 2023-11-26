@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
+	"github.com/gorilla/websocket"
 	"github.com/jhoonb/archivex"
 )
 
@@ -84,7 +86,19 @@ func getContainers(cli *client.Client) (*[]types.Container, error) {
 	return &containers, nil
 }
 
-func runContainer(cli *client.Client, port string) error {
+func getContainerIPv4(cli *client.Client, containerId string) (string, error) {
+
+	containerInfo, err := cli.ContainerInspect(context.Background(), containerId)
+	if err != nil {
+		return "", err
+	}
+
+	IPv4 := containerInfo.NetworkSettings.Networks["spark-chat"].IPAddress
+
+	return IPv4, nil
+}
+
+func runContainer(cli *client.Client, port string) (string, error) {
 
 	opts := container.Config{
 		Image: "websocket",
@@ -102,17 +116,21 @@ func runContainer(cli *client.Client, port string) error {
 		"",
 	)
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	err = cli.ContainerStart(context.Background(), containerCreateResponse.ID, types.ContainerStartOptions{})
 	if err != nil {
-		return err
+		return "", err
 	}
 
-	fmt.Println(opts, containerCreateResponse)
+	log.Println("Created Container: ", port)
+	return containerCreateResponse.ID, nil
+}
 
-	return nil
+type socketData struct {
+	Port string `json:"Port"`
+	Type string `json:"Type"`
 }
 
 func main() {
@@ -127,17 +145,74 @@ func main() {
 		log.Println(err)
 	}
 
-	err = runContainer(cli, "port from load balancer")
-	if err != nil {
-		log.Println(err)
+	wsUpgrader := websocket.Upgrader{
+		ReadBufferSize:  1024,
+		WriteBufferSize: 1024,
 	}
 
-	containers, err := getContainers(cli)
-	if err != nil {
-		log.Println("Unable to get containers: ", err)
-	}
+	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
+		conn, err := wsUpgrader.Upgrade(w, r, nil)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		for {
 
-	for _, container := range *containers {
-		fmt.Printf("%s %s %s\n", container.ID[:10], container.Image, container.Names[0])
-	}
+			data := &socketData{}
+			err = conn.ReadJSON(data)
+			if err != nil {
+				fmt.Println("Unable to read data to JSON", err)
+				return
+			}
+
+			if data.Type == "create" {
+				containerId, err := runContainer(cli, data.Port)
+				if err != nil {
+					packet := fmt.Sprintf(`{"Type": "create", "Code": "400", "Port": {%s}}`, data.Port)
+					conn.WriteMessage(1, []byte(packet))
+					log.Println("Unable to create a container: ", err)
+				}
+
+				containerIp, err := getContainerIPv4(cli, containerId)
+				if err != nil {
+					log.Println(err)
+				}
+
+				packet := fmt.Sprintf(`"Type": "create", "Code": "200", "URL": {%s}`, containerIp)
+				err = conn.WriteMessage(1, []byte(packet))
+				if err != nil {
+					fmt.Println(err)
+					return
+				}
+			}
+		}
+	})
+	http.ListenAndServe(":3031", nil)
+
+	/*
+		cli, err := client.NewClientWithOpts(client.FromEnv)
+		if err != nil {
+			panic(err)
+		}
+
+		err = buildImage(cli)
+		if err != nil {
+			log.Println(err)
+		}
+
+		err = runContainer(cli, "port from load balancer")
+		if err != nil {
+			log.Println(err)
+		}
+
+		containers, err := getContainers(cli)
+		if err != nil {
+			log.Println("Unable to get containers: ", err)
+		}
+
+		for _, container := range *containers {
+			fmt.Printf("%s %s %s\n", container.ID[:10], container.Image, container.Names[0])
+		}
+
+	*/
 }

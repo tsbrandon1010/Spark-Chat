@@ -4,21 +4,19 @@ const express = require("express");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 const { io } = require("socket.io-client");
 const customParse = require("socket.io-msgpack-parser");
+import { WebSocket } from "ws";
 
-const sockets = [
-    {
+
+const ws = new WebSocket("ws://localhost:3031/ws");
+ws.on("error", console.error);
+
+var sockets = {
+    "http://172.20.0.6:3000" : {
         URL: "http://172.20.0.6:3000",
         socket: io("http://172.20.0.6:3000", { autoConnect: false, parser: customParse }),
-        userCount: 0
-    },
-    /*
-    {
-        URL: "http://172.19.0.2:3001",
-        socket: io("http://172.19.0.2:3001", { autoConnect: false, parser: customParse }),
-        userCount: 0
-    } */
-];
-
+        userCount: 0 
+    }
+}
 
 const startCountUpdater = (socket) => {
     socket['socket'].connect();
@@ -28,9 +26,30 @@ const startCountUpdater = (socket) => {
         
         try {
             socket['userCount'] = parseInt(count);
-        } catch (error) {
 
-        }
+            if (socket['userCount'] >= 250) {
+                ws.send(`{"Port": "${sockets.length + 3000}"}`);
+            }
+        } catch (error) {}
+
+
+        ws.on("response", (data) => {
+            if (data.Code == 200) {
+                if (data.Type == "create") {
+                    sockets[data.URL] = {
+                        URL: data.URL,
+                        socket: io(data.URL, { autoConnect: false, parser: customParse }),
+                        userCount: 0
+                    }
+                    startCountUpdater(sockets[data.URL]);
+                }
+                if (data.Type == "delete") {
+                    // remove the socket
+                }
+            } else {
+                // then there was a failure creating the new websocket server
+            }
+        });
     });
 
     setInterval(() => {
@@ -67,8 +86,8 @@ const wsProxy = createProxyMiddleware(options);
 app.use(wsProxy);
 
 
-for (let i = 0; i < sockets.length; i++) {
-    startCountUpdater(sockets[i]);
+for (const [key, value] of Object.entries(sockets)) {
+    startCountUpdater(value);
 }
 
 
