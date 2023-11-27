@@ -10,6 +10,15 @@ const WebSocket = require("ws");
 const ws = new WebSocket("ws://host.docker.internal:3031/ws");
 ws.on("error", console.error);
 
+class ContainerLock {
+    constructor(lock, url) {
+        this.lock = lock;
+        this.url = url;
+    }
+}
+
+const containerLock = new ContainerLock(false, "");
+const MAX_USERS = 10;
 var sockets = {
     "http://172.20.0.6:3000" : {
         URL: "http://172.20.0.6:3000",
@@ -17,6 +26,8 @@ var sockets = {
         userCount: 0 
     }
 }
+const COMMAND_SOCKET = sockets['http://172.20.0.6:3000'];
+
 
 const startCountUpdater = (socket) => {
     socket['socket'].connect();
@@ -27,39 +38,58 @@ const startCountUpdater = (socket) => {
         try {
             socket['userCount'] = parseInt(count);
 
-            if (socket['userCount'] >= 10) {
+            if (socket['userCount'] >= MAX_USERS && containerLock.lock == false) {
                 console.log("LB - creating new container");
                 ws.send(`{"Type": "create", "Port": "${sockets.length + 3000}"}`);
+                containerLock.lock = true;
+                containerLock.url = socket['URL'];
             }
         } catch (error) {}
 
-
-        ws.on("response", (data) => {
-            if (data.Code == 200) {
-                if (data.Type == "create") {
-                    sockets[data.URL] = {
-                        URL: data.URL,
-                        socket: io(data.URL, { autoConnect: false, parser: customParse }),
-                        userCount: 0
-                    }
-                    startCountUpdater(sockets[data.URL]);
-                    sockets["http://172.20.0.6:3000"].socket.emit("new-socket", {"socket-url": data.URL});
-
-                }
-                if (data.Type == "delete") {
-                    // remove the socket
-                }
-            } else {
-                // then there was a failure creating the new websocket server
-            }
-        });
     });
 
     setInterval(() => {
         socket['socket'].emit("client-count-request");
     }, 5000);
 
+
+    socket['socket'].on("disconnect-complete", (payload) => {
+        try {
+            socket['userCount'] = parseInt(payload);
+            containerLock.url = "";
+            containerLock.lock = false;
+
+        } catch (error) {}
+    });
 };
+
+
+
+ws.on("response", (data) => {
+    console.log(data);
+    if (data.Code == 200) {
+        if (data.Type == "create") {
+            sockets[data.URL] = {
+                URL: data.URL,
+                socket: io(data.URL, { autoConnect: false, parser: customParse }),
+                userCount: 0
+            }
+            startCountUpdater(sockets[data.URL]);
+            COMMAND_SOCKET.socket.emit("new-socket", {"socket-url": data.URL});
+            
+            // disconnect users that are over the allowed amount
+            // when the server is in a healthy state, unlock the containerLock
+            sockets[containerLock.url].socket.emit("disconnect-clients", MAX_USERS);
+            
+        }
+        if (data.Type == "delete") {
+            // remove the socket
+        }
+    } else {
+        // then there was a failure creating the new websocket server
+    }
+});
+
 
 const app = express()
 

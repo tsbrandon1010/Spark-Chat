@@ -25,6 +25,7 @@ const createClient = (id) => {
     const socket = io(socketUrl, {parser: customParse});
     const sessionsSocket = io(`${socketUrl}/sessions`, {autoConnect: false, parser: customParse});
     const lastSeenSocket = io(`${socketUrl}/last-seen`, {autoConnect: false, parser: customParse});
+    const userNamespace = io(`${socketUrl}/user`, {parser: customParse});
 
  
     const userId = `user_${id}`

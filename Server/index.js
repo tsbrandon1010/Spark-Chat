@@ -28,6 +28,15 @@ io.on("connection", (socket) => {
         socket.broadcast.emit("new-socket-broadcast", payload);
     });
 
+    socket.on("disconnect-clients", async (payload) => {
+        disconnectCount = parseInt(payload);
+        while (connectionCount >= disconnectCount) {
+            var client = await io.of("/user").fetchSockets()[0];
+            client.disconnect(true);
+        }
+        socket.emit("disconnect-complete", connectionCount);
+    });
+
     socket.on("disconnect", () => {
         connectionCount--;
     });

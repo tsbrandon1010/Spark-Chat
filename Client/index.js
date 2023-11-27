@@ -7,6 +7,7 @@ console.log(socketUrl);
 const socket = io(socketUrl, {parser: customParse});
 const sessionsSocket = io(`${socketUrl}/sessions`, {parser: customParse});
 const lastSeenSocket = io(`${socketUrl}/last-seen`, {parser: customParse});
+const userNamespace = io(`${socketUrl}/user`, {parser: customParse});
 
 const userId = "tsbrandon1010";
 
@@ -14,7 +15,8 @@ socket.on("connect", () => {
 });
 sessionsSocket.on("connect", () => {
 });
-
+userNamespace.on("connect", () => {
+});
 
 
 lastSeenSocket.on("connect", () => {
