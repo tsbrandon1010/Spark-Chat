@@ -4,27 +4,10 @@ const { createClient } = require("redis");
 const { v4: uuidv4 } = require("uuid");
 const customParse = require("socket.io-msgpack-parser");
 
-const groupsSocket = io("http://localhost:8000/groups");
-const sockets = {
-    "http://localhost:3000": {
-        socket: io("http://localhost:3000", {
-            autoConnect: false,
-            parser: customParse
-        }),
-        sessionSocket: io("http://localhost:3000/sessions", {
-            autoConnect: false,
-            parser: customParse
-        })
-    },
-    "http://localhost:3001" : {
-        socket: io("http://localhost:3001", {
-            autoConnect: false,
-            parser: customParse
-        }),
-        sessionSocket: io("http://localhost:3001/sessions", {
-            autoConnect: false,
-            parser: customParse
-        })
+var sockets = {
+    "http://172.20.0.6:3000": {
+        socket: io("http://172.20.0.6:3000", { autoConnect: false,parser: customParse }),
+        sessionSocket: io("http://172.20.0.6:3000/sessions", {autoConnect: false, parser: customParse})
     }
 };
 
@@ -50,7 +33,7 @@ async function cacheMessage(payload) {
     await redisClient.set(key, value);
 }
 
-async function sendMessage(payload, sockets) {
+async function sendMessage(payload) {
     // query the database to determine where the user is connected
     // send the message to the user
 
@@ -72,9 +55,9 @@ async function sendMessage(payload, sockets) {
     }
 }
 
-async function createConnection(socketId, socketConfig) {
-    const socket = socketConfig[socketId]["socket"];
-    const sessionSocket = socketConfig[socketId]["sessionSocket"];
+async function createConnection(socketId) {
+    const socket = sockets[socketId]["socket"];
+    const sessionSocket = sockets[socketId]["sessionSocket"];
 
     socket.connect();
     sessionSocket.connect();
@@ -88,31 +71,24 @@ async function createConnection(socketId, socketConfig) {
     socket.on("connect", () => {
     });
 
-    sessionSocket.on("connect", () => {
+    socket.on("new-socket-broadcast", (payload) => {
+        sockets[payload['socket-url']] = {
+            socket: io(payload['socket-url'], { autoConnect: false, parser: customParse}),
+            sessionSocket: io(`${payload['socket-url']}/sessions`, { autoConnect: false, parser: customParse})
+        };
+
+        createConnection(payload['socket-url']);
     });
 
-    groupsSocket.on("connect", () => {
+    sessionSocket.on("connect", () => {
     });
 
     sessionSocket.on("message-subscribe", async (payload) => {
         payload['content'].push(['session:message-subscribe', Date.now()]);
-        await sendMessage(payload, socketConfig);
-    });
-
-    groupsSocket.on("groups-response", (response) => {
-        // then we send the messages to to each member in the group
-
-        // if that group exists
-        if (response["response-code"] == "200") {
-            for (let i = 0; i < response['group-members'].length; i++) {
-                sendMessage(/* Need to include message payload format */);
-            }
-        }
-
-        // if the group doesn't exist
-        // ???
+        await sendMessage(payload, sockets);
     });
 }
 
-createConnection("http://localhost:3000", sockets);
-createConnection("http://localhost:3001", sockets);
+for (const [key, value] of Object.entries(sockets)) {
+    createConnection(key);
+}

@@ -14,13 +14,24 @@ services:
       spark-chat:
         ipv4_address: 172.20.0.2
 
+  websocket-server:
+    build: ./Server
+    ports:
+      - 3000:3000
+    networks:
+      spark-chat:
+        ipv4_address: 172.20.0.6
+    command: ["node", "index.js", "3000"]
     
   load-balancer:
     build: ./LoadBalancer
+    depends_on:
+      - websocket-server
     links:
       - "redis:db"
     ports:
       - 3030:3030
+      - 8082:8080
     networks:
       spark-chat:
         ipv4_address: 172.20.0.3
@@ -29,6 +40,7 @@ services:
     build: ./LastSeen
     depends_on:
       - redis
+      - websocket-server
     links:
       - "redis:db"
     networks:
@@ -38,6 +50,7 @@ services:
   sessions:
     build: ./Sessions
     depends_on:
+      - websocket-server
       - redis
     links:
       - "redis:db"

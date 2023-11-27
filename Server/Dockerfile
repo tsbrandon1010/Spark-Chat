@@ -4,4 +4,4 @@ WORKDIR /app/
 COPY index.js package.json package-lock.json /app/
 RUN npm install
 EXPOSE 80
-EXPOSE 3000-3049
+EXPOSE 3000-3009

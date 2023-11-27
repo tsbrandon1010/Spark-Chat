@@ -1,7 +1,9 @@
 const httpServer = require("http").createServer();
 const { Server } = require("socket.io");
 const customParse = require("socket.io-msgpack-parser");
-const fs = require("fs");
+const os = require('os');
+const serverAddress = os.networkInterfaces()['eth0'][0]['address'];
+
 
 const io = new Server(httpServer, {
     parser: customParse
@@ -9,17 +11,21 @@ const io = new Server(httpServer, {
 
 const socketPort = process.argv.slice(2)[0];
 if (socketPort == null) {
+    console.log("A port was not given");
     process.exit(1);
 }
 
 var connectionCount = 0;
 
 io.on("connection", (socket) => {
-    console.log("someone here");
     connectionCount++;
 
     socket.on("client-count-request", () => { 
         socket.emit("client-count", connectionCount);
+    });
+
+    socket.on("new-socket", (payload) => {
+        socket.broadcast.emit("new-socket-broadcast", payload);
     });
 
     socket.on("disconnect", () => {
@@ -34,7 +40,7 @@ io.on("connection", (socket) => {
 io.of("/last-seen").on("connection", (socket) => {
 
     socket.on("connect-event", (payload) => {
-        payload["socket-url"] = `http://localhost:${socketPort}`;
+        payload["socket-url"] = `http://${serverAddress}:${socketPort}`;
         socket.broadcast.emit("connection-subscribe", payload);
     });
 

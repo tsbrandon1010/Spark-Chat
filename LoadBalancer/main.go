@@ -77,15 +77,6 @@ func buildImage(cli *client.Client) error {
 	return nil
 }
 
-func getContainers(cli *client.Client) (*[]types.Container, error) {
-	containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{})
-	if err != nil {
-		return nil, err
-	}
-
-	return &containers, nil
-}
-
 func getContainerIPv4(cli *client.Client, containerId string) (string, error) {
 
 	containerInfo, err := cli.ContainerInspect(context.Background(), containerId)
@@ -135,14 +126,17 @@ type socketData struct {
 
 func main() {
 
+	log.Println("Started container service")
+
 	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
+		log.Println("Unable to create Docker SDK client")
 		panic(err)
 	}
 
 	err = buildImage(cli)
 	if err != nil {
-		log.Println(err)
+		log.Println("Unable to build the Docker image: ", err)
 	}
 
 	wsUpgrader := websocket.Upgrader{
@@ -156,6 +150,7 @@ func main() {
 			fmt.Println(err)
 			return
 		}
+		log.Println("load balancer connected")
 		for {
 
 			data := &socketData{}
@@ -166,6 +161,7 @@ func main() {
 			}
 
 			if data.Type == "create" {
+				log.Println("GO - creating new container")
 				containerId, err := runContainer(cli, data.Port)
 				if err != nil {
 					packet := fmt.Sprintf(`{"Type": "create", "Code": "400", "Port": {%s}}`, data.Port)
@@ -188,31 +184,4 @@ func main() {
 		}
 	})
 	http.ListenAndServe(":3031", nil)
-
-	/*
-		cli, err := client.NewClientWithOpts(client.FromEnv)
-		if err != nil {
-			panic(err)
-		}
-
-		err = buildImage(cli)
-		if err != nil {
-			log.Println(err)
-		}
-
-		err = runContainer(cli, "port from load balancer")
-		if err != nil {
-			log.Println(err)
-		}
-
-		containers, err := getContainers(cli)
-		if err != nil {
-			log.Println("Unable to get containers: ", err)
-		}
-
-		for _, container := range *containers {
-			fmt.Printf("%s %s %s\n", container.ID[:10], container.Image, container.Names[0])
-		}
-
-	*/
 }

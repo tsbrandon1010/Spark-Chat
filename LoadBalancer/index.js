@@ -4,10 +4,10 @@ const express = require("express");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 const { io } = require("socket.io-client");
 const customParse = require("socket.io-msgpack-parser");
-import { WebSocket } from "ws";
+const WebSocket = require("ws");
 
 
-const ws = new WebSocket("ws://localhost:3031/ws");
+const ws = new WebSocket("ws://host.docker.internal:3031/ws");
 ws.on("error", console.error);
 
 var sockets = {
@@ -27,8 +27,9 @@ const startCountUpdater = (socket) => {
         try {
             socket['userCount'] = parseInt(count);
 
-            if (socket['userCount'] >= 250) {
-                ws.send(`{"Port": "${sockets.length + 3000}"}`);
+            if (socket['userCount'] >= 10) {
+                console.log("LB - creating new container");
+                ws.send(`{"Type": "create", "Port": "${sockets.length + 3000}"}`);
             }
         } catch (error) {}
 
@@ -42,6 +43,8 @@ const startCountUpdater = (socket) => {
                         userCount: 0
                     }
                     startCountUpdater(sockets[data.URL]);
+                    sockets["http://172.20.0.6:3000"].socket.emit("new-socket", {"socket-url": data.URL});
+
                 }
                 if (data.Type == "delete") {
                     // remove the socket
@@ -63,21 +66,21 @@ const app = express()
 // route to the server with the least number of users
 const customRouter = (req) => {
 
-    let min = sockets[0]['userCount'];
-    let minIndex = 0;
-    for (let i = 1; i < sockets.length; i++) {
-        if (sockets[i]['userCount'] < min) {
-            min = sockets[i]['userCount'];
-            minIndex = i;
+    let min = sockets["http://172.20.0.6:3000"]['userCount'];
+    let minAddress = "http://172.20.0.6:3000";
+
+    for (const [key, value] of Object.entries(sockets)) {
+        if (sockets[key]['userCount'] < min) {
+            min = sockets[key]['userCount'];
+            minAddress = key;
         }
     }
-    
     console.log("client connection");
-    return sockets[minIndex]['URL'];
+    return minAddress;
 }
 
 const options = {
-    target: 'http://localhost:3001',
+    target: 'http://172.20.0.6:3000',
     router: customRouter
 };
 

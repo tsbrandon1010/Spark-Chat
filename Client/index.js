@@ -2,11 +2,11 @@ const { io } = require("socket.io-client");
 const customParse = require("socket.io-msgpack-parser");
 
 // socketUrl will eventually be assigned to the user by the load balancer
-const socketUrl = "http://localhost:3000";
+const socketUrl = "http://localhost:3030";
 console.log(socketUrl);
 const socket = io(socketUrl, {parser: customParse});
-const sessionsSocket = io(`${socketUrl}/sessions`, {parser: customParse})
-const lastSeenSocket = io(`${socketUrl}/last-seen`, {parser: customParse})
+const sessionsSocket = io(`${socketUrl}/sessions`, {parser: customParse});
+const lastSeenSocket = io(`${socketUrl}/last-seen`, {parser: customParse});
 
 const userId = "tsbrandon1010";
 

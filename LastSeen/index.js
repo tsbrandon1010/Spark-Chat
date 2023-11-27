@@ -8,26 +8,10 @@ const redisClient = createClient({
 });
 redisClient.on('error', err => console.log('Redis Client Error', err));
 
-const sockets = {
-    "http://localhost:3000": {
-        socket: io("http://localhost:3000", {
-            autoConnect: false,
-            parser: customParse
-        }),
-        lastSeenSocket: io("http://localhost:3000/last-seen", {
-            autoConnect: false,
-            parser: customParse
-        })
-    },
-    "http://localhost:3001" : {
-        socket: io("http://localhost:3001", {
-            autoConnect: false,
-            parser: customParse
-        }),
-        lastSeenSocket: io("http://localhost:3001/last-seen", {
-            autoConnect: false,
-            parser: customParse
-        })
+var sockets = {
+    "http://172.20.0.6:3000" : {
+        socket: io("http://172.20.0.6:3000", { autoConnect: false, parser: customParse}), 
+        lastSeenSocket: io("http://172.20.0.6:3000/last-seen", { autoConnect: false, parser: customParse})
     }
 };
 
@@ -41,14 +25,14 @@ async function establishUserConnection(payload) {
 
 
 
-async function createConnection(socketId, socketConfig) {
-    const socket = socketConfig[socketId]["socket"];
-    const lastSeenSocket = socketConfig[socketId]["lastSeenSocket"];
+async function createConnection(socketURL) {
+    const socket = sockets[socketURL]["socket"];
+    const lastSeenSocket = sockets[socketURL]["lastSeenSocket"];
     
     socket.connect();
     lastSeenSocket.connect()
     
-    console.log(`Started last-seen service on port: ${socketId}`)
+    console.log(`Started last-seen service on port: ${socketURL}`)
     
     try {
         await redisClient.connect();
@@ -58,6 +42,16 @@ async function createConnection(socketId, socketConfig) {
     socket.on("connect", () => {
     });
     
+
+    socket.on("new-socket-broadcast", (payload) => {
+        sockets[payload['socket-url']] = {
+            socket: io(payload['socket-url'], { autoConnect: false, parser: customParse}),
+            lastSeenSocket: io(`${payload['socket-url']}/last-seen`, { autoConnect: false, parser: customParse})
+        };
+
+        createConnection(payload['socket-url']);
+    });
+
     lastSeenSocket.on("connect", () => {
     });
     
@@ -69,5 +63,7 @@ async function createConnection(socketId, socketConfig) {
 
 }
 
-createConnection("http://localhost:3000", sockets);
-createConnection("http://localhost:3001", sockets);
+
+for (const [key, value] of Object.entries(sockets)) {
+    createConnection(key);
+}

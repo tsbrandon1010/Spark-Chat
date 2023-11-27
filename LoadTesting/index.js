@@ -2,8 +2,8 @@ const { io } = require("socket.io-client");
 const fs = require("fs");
 const customParse = require("socket.io-msgpack-parser");
 
-const writeStream = fs.createWriteStream("split_server_messageRTT.csv", {"flags" : "a"});
-writeStream.write("\n");
+//const writeStream = fs.createWriteStream("split_server_messageRTT.csv", {"flags" : "a"});
+//writeStream.write("\n");
 
 const MAX_CLIENTS = parseInt(process.argv[2]);
 const CLIENT_CREATION_INTERVAL_IN_MS = 100;
@@ -89,7 +89,7 @@ const createClient = (id) => {
 
     sessionsSocket.on("message-response", (message) => {
         message['content'].push(["client:message-response", Date.now()]);
-        writeStream.write(`${message['content']}\n`);
+        //writeStream.write(`${message['content']}\n`);
     });
 
 
