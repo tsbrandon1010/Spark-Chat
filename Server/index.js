@@ -17,10 +17,20 @@ if (socketPort == null) {
 
 var connectionCount = 0;
 
-io.on("connection", (socket) => {
+io.of("/user").on("connection", (socket) => {
     connectionCount++;
+    io.emit("client-count", connectionCount);
+
+    socket.on("disconnect", () => {
+        connectionCount--;
+    });
+});
+
+io.on("connection", (socket) => {
+    console.log(socket.id);
 
     socket.on("client-count-request", () => { 
+        console.log("client-count-request");
         socket.emit("client-count", connectionCount);
     });
 
@@ -29,19 +39,18 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnect-clients", async (payload) => {
-        disconnectCount = parseInt(payload);
+        var disconnectCount = parseInt(payload);
+        var clients = await io.of("/user").fetchSockets();
+
         while (connectionCount >= disconnectCount) {
-            var client = await io.of("/user").fetchSockets()[0];
-            client.disconnect(true);
+            clients[0].disconnect(true);
+            clients = await io.of("/user").fetchSockets();
         }
         socket.emit("disconnect-complete", connectionCount);
     });
-
-    socket.on("disconnect", () => {
-        connectionCount--;
-    });
-
 });
+
+
 
 // last-seen
 // client sends update to "last-seen"
@@ -73,19 +82,6 @@ io.of("/sessions").on("connection", (socket) => {
     });
 
 });
-
-io.of("/groups").on("connection", (socket) => {
-
-    socket.on("groups-query", (payload) => {
-        socket.broadcast.emit("groups-subscribe", payload);
-    });
-
-    socket.on("groups-result", (payload) => {
-        socket.broadcast.emit("groups-response", payload);
-    });
-
-});
-
 
 httpServer.listen(socketPort, () =>
   console.log(`server listening at http://localhost:${socketPort}`)

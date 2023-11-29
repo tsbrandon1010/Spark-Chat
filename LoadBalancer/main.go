@@ -164,7 +164,7 @@ func main() {
 				log.Println("GO - creating new container")
 				containerId, err := runContainer(cli, data.Port)
 				if err != nil {
-					packet := fmt.Sprintf(`{"Type": "create", "Code": "400", "Port": {%s}}`, data.Port)
+					packet := fmt.Sprintf(`{"Type": "create", "Code": "400", "Port": "%s"}`, data.Port)
 					conn.WriteMessage(1, []byte(packet))
 					log.Println("Unable to create a container: ", err)
 				}
@@ -174,7 +174,8 @@ func main() {
 					log.Println(err)
 				}
 
-				packet := fmt.Sprintf(`"Type": "create", "Code": "200", "URL": {%s}`, containerIp)
+				containerURL := fmt.Sprintf(`http://%s:%s`, containerIp, data.Port)
+				packet := fmt.Sprintf(`{"Type": "create", "Code": "200", "URL": "%s"}`, containerURL)
 				err = conn.WriteMessage(1, []byte(packet))
 				if err != nil {
 					fmt.Println(err)

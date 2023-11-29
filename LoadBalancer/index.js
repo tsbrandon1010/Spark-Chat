@@ -18,7 +18,7 @@ class ContainerLock {
 }
 
 const containerLock = new ContainerLock(false, "");
-const MAX_USERS = 10;
+const MAX_USERS = 9;
 var sockets = {
     "http://172.20.0.6:3000" : {
         URL: "http://172.20.0.6:3000",
@@ -29,9 +29,10 @@ var sockets = {
 const COMMAND_SOCKET = sockets['http://172.20.0.6:3000'];
 
 
-const startCountUpdater = (socket) => {
+const startCountUpdater = (socket) => {    
     socket['socket'].connect();
     console.log(socket["URL"]);
+    
     socket['socket'].on("client-count", (count) => {
         console.log(socket['URL'], count);
         
@@ -39,12 +40,14 @@ const startCountUpdater = (socket) => {
             socket['userCount'] = parseInt(count);
 
             if (socket['userCount'] >= MAX_USERS && containerLock.lock == false) {
+                console.log(Object.keys(sockets).length);
                 console.log("LB - creating new container");
-                ws.send(`{"Type": "create", "Port": "${sockets.length + 3000}"}`);
+                ws.send(`{"Type": "create", "Port": "${Object.keys(sockets).length + 3000}"}`);
                 containerLock.lock = true;
                 containerLock.url = socket['URL'];
+                console.log(containerLock.url);
             }
-        } catch (error) {}
+        } catch (error) { console.log(error); }
 
     });
 
@@ -54,6 +57,7 @@ const startCountUpdater = (socket) => {
 
 
     socket['socket'].on("disconnect-complete", (payload) => {
+        console.log("disconnect complete");
         try {
             socket['userCount'] = parseInt(payload);
             containerLock.url = "";
@@ -65,8 +69,9 @@ const startCountUpdater = (socket) => {
 
 
 
-ws.on("response", (data) => {
-    console.log(data);
+ws.on("message", (data) => {
+    data = data.toString();
+    data = JSON.parse(data);
     if (data.Code == 200) {
         if (data.Type == "create") {
             sockets[data.URL] = {
@@ -105,7 +110,6 @@ const customRouter = (req) => {
             minAddress = key;
         }
     }
-    console.log("client connection");
     return minAddress;
 }
 

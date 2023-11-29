@@ -3,7 +3,7 @@ const fs = require("fs");
 const customParse = require("socket.io-msgpack-parser");
 
 const MAX_CLIENTS = parseInt(process.argv[2]);
-const CLIENT_CREATION_INTERVAL_IN_MS = 100;
+const CLIENT_CREATION_INTERVAL_IN_MS = 500;
 const EMIT_INTERVAL_IN_MS = 1000;
 
 let clientCount = 0;
@@ -25,15 +25,19 @@ const createClient = (id) => {
     const socket = io(socketUrl, {parser: customParse});
     const sessionsSocket = io(`${socketUrl}/sessions`, {autoConnect: false, parser: customParse});
     const lastSeenSocket = io(`${socketUrl}/last-seen`, {autoConnect: false, parser: customParse});
-    const userNamespace = io(`${socketUrl}/user`, {parser: customParse});
+    const userNamespace = io(`${socketUrl}/user`, {autoConnect: false, parser: customParse});
 
  
     const userId = `user_${id}`
     console.log(userId);
     socket.connect();
+    userNamespace.connect();
     sessionsSocket.connect();
     lastSeenSocket.connect();
 
+    userNamespace.on("connect", () => {
+    console.log(userNamespace.id);
+    });
 
     lastSeenSocket.on("connect", () => {
         const payload = {
@@ -58,7 +62,10 @@ const createClient = (id) => {
     }, EMIT_INTERVAL_IN_MS );
     
     socket.on("disconnect", (reason) => {
+        console.log("disconnected", reason);
         disconnectCount++;
+
+        //socket.connect();
     });
 
     if (++clientCount < MAX_CLIENTS) {
