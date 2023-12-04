@@ -2,11 +2,8 @@ const { io } = require("socket.io-client");
 const fs = require("fs");
 const customParse = require("socket.io-msgpack-parser");
 
-//const writeStream = fs.createWriteStream("split_server_messageRTT.csv", {"flags" : "a"});
-//writeStream.write("\n");
-
 const MAX_CLIENTS = parseInt(process.argv[2]);
-const CLIENT_CREATION_INTERVAL_IN_MS = 100;
+const CLIENT_CREATION_INTERVAL_IN_MS = 500;
 const EMIT_INTERVAL_IN_MS = 1000;
 
 let clientCount = 0;
@@ -23,64 +20,29 @@ function sendMessage(userId, recipientUserId, sessionsSocket) {
 
 const createClient = (id) => {
 
-    // if the id is odd, we go to 3001
-    // if the id is even, we go to 3000
+    const socketUrl = "http://localhost:3030";
+    console.log(socketUrl);
+    const socket = io(socketUrl, {parser: customParse});
+    const sessionsSocket = io(`${socketUrl}/sessions`, {autoConnect: false, parser: customParse});
+    const lastSeenSocket = io(`${socketUrl}/last-seen`, {autoConnect: false, parser: customParse});
+    const userNamespace = io(`${socketUrl}/user`, {autoConnect: false, parser: customParse});
 
-    let URL = "";
-    if (id % 2 == 0) {
-        URL = "http://localhost:3000";
-    }
-    else {
-        URL = "http://localhost:3001";
-    }
-
-    const sockets = {
-        "http://localhost:3000": {
-            socket: io("http://localhost:3000", {
-                autoConnect: false,
-                parser: customParse
-            }),
-            lastSeenSocket: io("http://localhost:3000/last-seen", {
-                autoConnect: false,
-                parser: customParse
-            }),
-            sessionsSocket: io("http://localhost:3000/sessions", {
-                autoConnect: false,
-                parser: customParse
-            })
-        },
-        "http://localhost:3001" : {
-            socket: io("http://localhost:3001", {
-                autoConnect: false,
-                parser: customParse
-            }),
-            lastSeenSocket: io("http://localhost:3001/last-seen", {
-                autoConnect: false,
-                parser: customParse
-            }),
-            sessionsSocket: io("http://localhost:3001/sessions", {
-                autoConnect: false,
-                parser: customParse
-            })
-        }
-    };
-
-    console.log(URL);
-
-    const socket = sockets[URL]['socket'];
-    const sessionsSocket = sockets[URL]['sessionsSocket'];
-    const lastSeenSocket = sockets[URL]['lastSeenSocket'];
+ 
     const userId = `user_${id}`
-
+    console.log(userId);
     socket.connect();
+    userNamespace.connect();
     sessionsSocket.connect();
     lastSeenSocket.connect();
 
+    userNamespace.on("connect", () => {
+    console.log(userNamespace.id);
+    });
 
     lastSeenSocket.on("connect", () => {
         const payload = {
             "user-id": userId, 
-            "socket-url": URL, 
+            "socket-url": socketUrl, 
             "socket-id": sessionsSocket.id
         }
     
@@ -88,8 +50,7 @@ const createClient = (id) => {
     });
 
     sessionsSocket.on("message-response", (message) => {
-        message['content'].push(["client:message-response", Date.now()]);
-        //writeStream.write(`${message['content']}\n`);
+        message['RTT'].push(["client:message-response", Date.now()]);
     });
 
 
@@ -101,7 +62,15 @@ const createClient = (id) => {
     }, EMIT_INTERVAL_IN_MS );
     
     socket.on("disconnect", (reason) => {
+        console.log("disconnected", reason);
         disconnectCount++;
+
+        setTimeout(() => {
+            socket.connect();
+            userNamespace.connect();
+            sessionsSocket.connect();
+            lastSeenSocket.connect();
+        }, 2000);
     });
 
     if (++clientCount < MAX_CLIENTS) {

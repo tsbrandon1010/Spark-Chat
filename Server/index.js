@@ -69,7 +69,7 @@ io.of("/sessions").on("connection", (socket) => {
     // user -> socket -> session. Route the message to the session's service
     socket.on("message-in", (payload) => {
         
-        payload['content'].push(["server:message-in", Date.now()]);
+        payload['RTT'].push(["server:message-in", Date.now()]);
         socket.broadcast.emit("message-subscribe", payload);
     });
 
@@ -77,7 +77,7 @@ io.of("/sessions").on("connection", (socket) => {
     socket.on("message-out", (payload) => {
         const socketId = payload['recipient-socket-id'];
         
-        payload['content'].push(["server:message-out", Date.now()]);
+        payload['RTT'].push(["server:message-out", Date.now()]);
         io.of("/sessions").to(socketId).emit("message-response", payload);
     });
 

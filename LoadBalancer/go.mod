@@ -3,16 +3,19 @@ module main.go
 go 1.21.4
 
 require (
+	github.com/docker/docker v24.0.7+incompatible
+	github.com/gorilla/websocket v1.5.1
+	github.com/jhoonb/archivex v0.0.0-20201016144719-6a343cdae81d
+)
+
+require (
 	github.com/Microsoft/go-winio v0.6.1 // indirect
 	github.com/containerd/containerd v1.7.9 // indirect
 	github.com/distribution/reference v0.5.0 // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
-	github.com/docker/docker v24.0.7+incompatible // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/gorilla/websocket v1.5.1 // indirect
-	github.com/jhoonb/archivex v0.0.0-20201016144719-6a343cdae81d // indirect
 	github.com/klauspost/compress v1.17.3 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/moby/patternmatcher v0.6.0 // indirect

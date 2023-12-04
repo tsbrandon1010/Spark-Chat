@@ -47,7 +47,7 @@ async function sendMessage(payload) {
         const recipientSocketId = recipientConnection["socket-id"];
     
         payload["recipient-socket-id"] = recipientSocketId;
-        payload['content'].push(['session:message-out', Date.now()]);
+        payload['RTT'].push(['session:message-out', Date.now()]);
         sockets[recipientSocketUrl]["sessionSocket"].emit("message-out", payload);
     }
     catch (error) {
@@ -84,7 +84,7 @@ async function createConnection(socketId) {
     });
 
     sessionSocket.on("message-subscribe", async (payload) => {
-        payload['content'].push(['session:message-subscribe', Date.now()]);
+        payload['RTT'].push(['session:message-subscribe', Date.now()]);
         await sendMessage(payload, sockets);
     });
 }
