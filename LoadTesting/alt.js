@@ -3,7 +3,7 @@ const fs = require("fs");
 const customParse = require("socket.io-msgpack-parser");
 
 const MAX_CLIENTS = parseInt(process.argv[2]);
-const CLIENT_CREATION_INTERVAL_IN_MS = 500;
+const CLIENT_CREATION_INTERVAL_IN_MS = 100;
 const EMIT_INTERVAL_IN_MS = 1000;
 
 let clientCount = 0;
@@ -20,7 +20,7 @@ function sendMessage(userId, recipientUserId, sessionsSocket) {
 
 const createClient = (id) => {
 
-    const socketUrl = "http://localhost:3030";
+    const socketUrl = "http://localhost:3000";
     console.log(socketUrl);
     const socket = io(socketUrl, {parser: customParse});
     const sessionsSocket = io(`${socketUrl}/sessions`, {autoConnect: false, parser: customParse});

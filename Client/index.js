@@ -8,6 +8,7 @@ const socket = io(socketUrl, {parser: customParse});
 const sessionsSocket = io(`${socketUrl}/sessions`, {parser: customParse});
 const lastSeenSocket = io(`${socketUrl}/last-seen`, {parser: customParse});
 const userNamespace = io(`${socketUrl}/user`, {parser: customParse});
+const messageQueueNamespace = io(`${socketUrl}/message-queue`, {parser: customParse});
 
 const userId = "tsbrandon1010";
 
@@ -44,7 +45,7 @@ function sendMessage(recipientUserId) {
         };
 
     // good idea to eventually add callbacks to confirm message reception
-    sessionsSocket.emit("message-in", payload);
+    messageQueueNamespace.emit("message-in", payload);
 }
 
 sendMessage("tsbrandon1010", "hello");

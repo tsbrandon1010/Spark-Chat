@@ -17,6 +17,9 @@ const redisClient = createClient({
 });
 redisClient.on('error', err => console.log('Redis Client Error', err));
 
+const subscriber = redisClient.duplicate();
+subscriber.on('error', err => console.log('Redis Subscriber Error', err));
+
 async function retrieveConnection(userId) {
     const key = `connection:user:id:${userId}`;
     const userConnection = await redisClient.get(key);
@@ -24,20 +27,9 @@ async function retrieveConnection(userId) {
     return JSON.parse(userConnection);
 }
 
-// responsible for generating a GUID and caching the message
-async function cacheMessage(payload) {
-
-    const key = `message-cache:id:${uuidv4()}`
-    const value = JSON.stringify(payload);
-
-    await redisClient.set(key, value);
-}
-
 async function sendMessage(payload) {
     // query the database to determine where the user is connected
     // send the message to the user
-
-    await cacheMessage(payload);
     
     try {
         const recipientConnection = await retrieveConnection(payload['recipient-user-id']);
@@ -87,6 +79,9 @@ async function createConnection(socketId) {
         payload['content'].push(['session:message-subscribe', Date.now()]);
         await sendMessage(payload, sockets);
     });
+
+    const listener = (message, channel) => console.log(message, channel);
+    await subscriber.subscribe("test", listener);
 }
 
 for (const [key, value] of Object.entries(sockets)) {
