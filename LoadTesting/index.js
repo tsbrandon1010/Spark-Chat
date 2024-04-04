@@ -2,6 +2,10 @@ const { io } = require("socket.io-client");
 const fs = require("fs");
 const customParse = require("socket.io-msgpack-parser");
 
+
+const writeStream = fs.createWriteStream("test_200.csv", {"flags" : "a"});
+writeStream.write("\n");
+
 const MAX_CLIENTS = parseInt(process.argv[2]);
 const CLIENT_CREATION_INTERVAL_IN_MS = 500;
 const EMIT_INTERVAL_IN_MS = 1000;
@@ -9,11 +13,14 @@ const EMIT_INTERVAL_IN_MS = 1000;
 let clientCount = 0;
 let disconnectCount = 0;
 
+let messages = [];
+
 function sendMessage(userId, recipientUserId, sessionsSocket) {
     const payload = {
         "sender-user-id" : userId,
         "recipient-user-id" : recipientUserId,
-        "content" : [['client:message-in', Date.now()]]
+        "content" : "",
+        "RTT": [['client:message-in', Date.now()]]
     };
     sessionsSocket.emit("message-in", payload);
 }
@@ -51,6 +58,14 @@ const createClient = (id) => {
 
     sessionsSocket.on("message-response", (message) => {
         message['RTT'].push(["client:message-response", Date.now()]);
+        
+        messages.push(`${message['RTT']}, ${userId}\n`);
+        
+        console.log(messages.length);
+        if (messages.length >= 5000) {
+            writeStream.write(messages.join(''));
+            process.exit();
+        }
     });
 
 
