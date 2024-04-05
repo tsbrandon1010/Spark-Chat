@@ -9,7 +9,7 @@ const readline = require("readline").createInterface({
 readline.question("What is your user id? ", input => {
 
     userId = input;
-    const socketUrl = "http://localhost:3030";
+    const socketUrl = "http://localhost:3000";
     console.log(socketUrl);
     const socket = io(socketUrl, {parser: customParse});
     const sessionsSocket = io(`${socketUrl}/sessions`, {parser: customParse});

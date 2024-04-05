@@ -1,0 +1,440 @@
+
+20_Mar_2024_19_37_00:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.00%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     18.5MiB / 7.556GiB    0.24%     107kB / 97.7kB    0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      0.00%     21.83MiB / 7.556GiB   0.28%     359MB / 330MB     0B / 0B     14
+dd382cdd5b21   redis                           0.16%     63.49MiB / 7.556GiB   0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   0.00%     57.05MiB / 7.556GiB   0.74%     68.7MB / 321MB    0B / 0B     14
+
+20_Mar_2024_19_37_03:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.05%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     18.5MiB / 7.556GiB    0.24%     107kB / 97.8kB    0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      5.71%     21.95MiB / 7.556GiB   0.28%     359MB / 330MB     0B / 0B     14
+dd382cdd5b21   redis                           0.17%     63.49MiB / 7.556GiB   0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   1.90%     57.07MiB / 7.556GiB   0.74%     68.7MB / 321MB    0B / 0B     14
+
+20_Mar_2024_19_37_07:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.04%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.26%     18.5MiB / 7.556GiB    0.24%     111kB / 101kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      8.85%     25.27MiB / 7.556GiB   0.33%     359MB / 330MB     0B / 0B     14
+dd382cdd5b21   redis                           0.23%     63.49MiB / 7.556GiB   0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   2.51%     57.12MiB / 7.556GiB   0.74%     68.8MB / 321MB    0B / 0B     14
+
+20_Mar_2024_19_37_11:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.05%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.19%     18.5MiB / 7.556GiB    0.24%     113kB / 103kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      11.35%    27.77MiB / 7.556GiB   0.36%     360MB / 330MB     0B / 0B     14
+dd382cdd5b21   redis                           0.17%     63.49MiB / 7.556GiB   0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   3.78%     29.5MiB / 7.556GiB    0.38%     68.9MB / 321MB    0B / 0B     14
+
+20_Mar_2024_19_37_14:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.04%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.19%     17.58MiB / 7.556GiB   0.23%     116kB / 105kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      12.95%    30.78MiB / 7.556GiB   0.40%     360MB / 330MB     0B / 0B     14
+dd382cdd5b21   redis                           0.24%     63.5MiB / 7.556GiB    0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   3.35%     29.28MiB / 7.556GiB   0.38%     69MB / 322MB      0B / 0B     14
+
+20_Mar_2024_19_37_17:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.04%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.19%     17.67MiB / 7.556GiB   0.23%     118kB / 107kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      6.61%     33.44MiB / 7.556GiB   0.43%     360MB / 330MB     0B / 0B     14
+dd382cdd5b21   redis                           0.18%     63.74MiB / 7.556GiB   0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   3.17%     29.77MiB / 7.556GiB   0.38%     69.1MB / 322MB    0B / 0B     14
+
+20_Mar_2024_19_37_20:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.04%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.24%     17.77MiB / 7.556GiB   0.23%     120kB / 110kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      21.16%    34.54MiB / 7.556GiB   0.45%     360MB / 331MB     0B / 0B     14
+dd382cdd5b21   redis                           0.22%     63.49MiB / 7.556GiB   0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   15.39%    31.53MiB / 7.556GiB   0.41%     69.2MB / 322MB    0B / 0B     14
+
+20_Mar_2024_19_37_23:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.15%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.23%     17.9MiB / 7.556GiB    0.23%     122kB / 113kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      14.87%    39.69MiB / 7.556GiB   0.51%     360MB / 331MB     0B / 0B     14
+dd382cdd5b21   redis                           0.21%     63.49MiB / 7.556GiB   0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   2.70%     32.57MiB / 7.556GiB   0.42%     69.3MB / 322MB    0B / 0B     14
+
+20_Mar_2024_19_37_26:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.04%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.20%     18.02MiB / 7.556GiB   0.23%     125kB / 115kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      6.02%     42.8MiB / 7.556GiB    0.55%     361MB / 331MB     0B / 0B     14
+dd382cdd5b21   redis                           0.26%     63.75MiB / 7.556GiB   0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   2.51%     32.93MiB / 7.556GiB   0.43%     69.4MB / 322MB    0B / 0B     14
+
+20_Mar_2024_19_37_30:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.04%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.20%     18.12MiB / 7.556GiB   0.23%     127kB / 118kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      7.81%     42.96MiB / 7.556GiB   0.56%     361MB / 331MB     0B / 0B     14
+dd382cdd5b21   redis                           0.20%     63.5MiB / 7.556GiB    0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   9.68%     32.44MiB / 7.556GiB   0.42%     69.5MB / 322MB    0B / 0B     14
+
+20_Mar_2024_19_37_33:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.05%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.29%     18.24MiB / 7.556GiB   0.24%     130kB / 120kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      7.45%     43.09MiB / 7.556GiB   0.56%     361MB / 332MB     0B / 0B     14
+dd382cdd5b21   redis                           0.15%     63.5MiB / 7.556GiB    0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   3.09%     32.5MiB / 7.556GiB    0.42%     69.7MB / 322MB    0B / 0B     14
+
+20_Mar_2024_19_37_37:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.05%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.26%     18.32MiB / 7.556GiB   0.24%     131kB / 122kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      6.65%     43.31MiB / 7.556GiB   0.56%     362MB / 332MB     0B / 0B     14
+dd382cdd5b21   redis                           0.16%     63.5MiB / 7.556GiB    0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   2.90%     33.18MiB / 7.556GiB   0.43%     69.8MB / 323MB    0B / 0B     14
+
+20_Mar_2024_19_37_40:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.04%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.32%     18.46MiB / 7.556GiB   0.24%     134kB / 125kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      9.29%     43.46MiB / 7.556GiB   0.56%     362MB / 332MB     0B / 0B     14
+dd382cdd5b21   redis                           0.19%     63.5MiB / 7.556GiB    0.82%     12.3MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   13.93%    23.78MiB / 7.556GiB   0.31%     70MB / 323MB      0B / 0B     14
+
+20_Mar_2024_19_37_43:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.06%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.20%     17.62MiB / 7.556GiB   0.23%     136kB / 126kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      11.70%    45.06MiB / 7.556GiB   0.58%     362MB / 333MB     0B / 0B     14
+dd382cdd5b21   redis                           0.15%     63.5MiB / 7.556GiB    0.82%     12.4MB / 5.74MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   6.36%     25.08MiB / 7.556GiB   0.32%     70.1MB / 323MB    0B / 0B     14
+
+20_Mar_2024_19_37_47:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.07%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.21%     17.73MiB / 7.556GiB   0.23%     139kB / 129kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      9.13%     50.88MiB / 7.556GiB   0.66%     363MB / 333MB     0B / 0B     14
+dd382cdd5b21   redis                           0.17%     63.51MiB / 7.556GiB   0.82%     12.4MB / 5.75MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   6.89%     27.59MiB / 7.556GiB   0.36%     70.3MB / 323MB    0B / 0B     14
+
+20_Mar_2024_19_37_50:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           0.04%     21.71MiB / 7.556GiB   0.28%     12.2MB / 21.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.17%     17.86MiB / 7.556GiB   0.23%     142kB / 132kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      8.46%     53.9MiB / 7.556GiB    0.70%     363MB / 334MB     0B / 0B     14
+dd382cdd5b21   redis                           0.18%     63.51MiB / 7.556GiB   0.82%     12.4MB / 5.75MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   4.80%     29.98MiB / 7.556GiB   0.39%     70.5MB / 324MB    0B / 0B     14
+
+20_Mar_2024_19_37_53:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           9.97%     18.8MiB / 7.556GiB    0.24%     12.3MB / 21.7MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.45%     17.95MiB / 7.556GiB   0.23%     144kB / 134kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      50.47%    59.43MiB / 7.556GiB   0.77%     366MB / 336MB     0B / 0B     14
+dd382cdd5b21   redis                           73.85%    65.52MiB / 7.556GiB   0.85%     12.4MB / 5.77MB   0B / 0B     8
+da403a36a8e5   spark-chat-websocket-server-1   54.47%    32.17MiB / 7.556GiB   0.42%     71MB / 326MB      0B / 0B     14
+
+20_Mar_2024_19_37_57:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           8.61%     19.13MiB / 7.556GiB   0.25%     12.4MB / 22MB     0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.95MiB / 7.556GiB   0.23%     144kB / 134kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      46.69%    58.28MiB / 7.556GiB   0.75%     373MB / 342MB     0B / 0B     14
+dd382cdd5b21   redis                           3.12%     63.65MiB / 7.556GiB   0.82%     12.6MB / 5.84MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   46.29%    40.12MiB / 7.556GiB   0.52%     72.4MB / 334MB    0B / 0B     14
+
+20_Mar_2024_19_38_00:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.79%     20.04MiB / 7.556GiB   0.26%     12.6MB / 22.2MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.95MiB / 7.556GiB   0.23%     144kB / 134kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      50.84%    57.83MiB / 7.556GiB   0.75%     383MB / 352MB     0B / 0B     14
+dd382cdd5b21   redis                           3.40%     63.75MiB / 7.556GiB   0.82%     12.7MB / 5.91MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   47.07%    41.18MiB / 7.556GiB   0.53%     74.1MB / 342MB    0B / 0B     14
+
+20_Mar_2024_19_38_04:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           8.15%     20.26MiB / 7.556GiB   0.26%     12.7MB / 22.5MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.95MiB / 7.556GiB   0.23%     144kB / 134kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      42.93%    64.82MiB / 7.556GiB   0.84%     390MB / 359MB     0B / 0B     14
+dd382cdd5b21   redis                           3.21%     63.87MiB / 7.556GiB   0.83%     12.9MB / 5.99MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   43.28%    41.3MiB / 7.556GiB    0.53%     75.7MB / 351MB    0B / 0B     14
+
+20_Mar_2024_19_38_07:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.55%     20.04MiB / 7.556GiB   0.26%     12.9MB / 22.8MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.95MiB / 7.556GiB   0.23%     144kB / 134kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      41.86%    64.82MiB / 7.556GiB   0.84%     402MB / 370MB     0B / 0B     14
+dd382cdd5b21   redis                           2.92%     63.98MiB / 7.556GiB   0.83%     13MB / 6.07MB     0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   40.66%    41.36MiB / 7.556GiB   0.53%     76.7MB / 357MB    0B / 0B     14
+
+20_Mar_2024_19_38_11:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.40%     20.04MiB / 7.556GiB   0.26%     13MB / 23.1MB     0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.95MiB / 7.556GiB   0.23%     144kB / 134kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      40.33%    60.65MiB / 7.556GiB   0.78%     410MB / 377MB     0B / 0B     14
+dd382cdd5b21   redis                           2.51%     64.09MiB / 7.556GiB   0.83%     13.2MB / 6.13MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   35.96%    56.05MiB / 7.556GiB   0.72%     78.2MB / 366MB    0B / 0B     14
+
+20_Mar_2024_19_38_14:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.22%     20.04MiB / 7.556GiB   0.26%     13.2MB / 23.4MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.95MiB / 7.556GiB   0.23%     144kB / 134kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      39.68%    67.31MiB / 7.556GiB   0.87%     416MB / 382MB     0B / 0B     14
+dd382cdd5b21   redis                           2.54%     64.45MiB / 7.556GiB   0.83%     13.3MB / 6.21MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   38.37%    56.79MiB / 7.556GiB   0.73%     79.5MB / 375MB    0B / 0B     14
+
+20_Mar_2024_19_38_17:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.81%     20.04MiB / 7.556GiB   0.26%     13.3MB / 23.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.95MiB / 7.556GiB   0.23%     144kB / 134kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      42.36%    66.39MiB / 7.556GiB   0.86%     428MB / 393MB     0B / 0B     14
+dd382cdd5b21   redis                           3.30%     64.3MiB / 7.556GiB    0.83%     13.5MB / 6.28MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   37.13%    57.15MiB / 7.556GiB   0.74%     80.5MB / 381MB    0B / 0B     14
+
+20_Mar_2024_19_38_21:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.30%     20.04MiB / 7.556GiB   0.26%     13.5MB / 23.9MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.95MiB / 7.556GiB   0.23%     144kB / 134kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      44.01%    61.76MiB / 7.556GiB   0.80%     436MB / 400MB     0B / 0B     14
+dd382cdd5b21   redis                           2.74%     64.4MiB / 7.556GiB    0.83%     13.6MB / 6.35MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   42.14%    58.43MiB / 7.556GiB   0.76%     82MB / 390MB      0B / 0B     14
+
+20_Mar_2024_19_38_24:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.32%     20.05MiB / 7.556GiB   0.26%     13.6MB / 24.1MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.96MiB / 7.556GiB   0.23%     144kB / 134kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      42.17%    59.46MiB / 7.556GiB   0.77%     445MB / 408MB     0B / 0B     14
+dd382cdd5b21   redis                           2.75%     64.52MiB / 7.556GiB   0.83%     13.8MB / 6.43MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   38.11%    58.99MiB / 7.556GiB   0.76%     83.4MB / 399MB    0B / 0B     14
+
+20_Mar_2024_19_38_28:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.72%     20.29MiB / 7.556GiB   0.26%     13.8MB / 24.5MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.96MiB / 7.556GiB   0.23%     144kB / 134kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      45.73%    57.07MiB / 7.556GiB   0.74%     455MB / 417MB     0B / 0B     14
+dd382cdd5b21   redis                           2.97%     64.64MiB / 7.556GiB   0.84%     14MB / 6.51MB     0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   40.47%    58.82MiB / 7.556GiB   0.76%     84.5MB / 406MB    0B / 0B     14
+
+20_Mar_2024_19_38_31:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.15%     20.04MiB / 7.556GiB   0.26%     14MB / 24.7MB     0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.96MiB / 7.556GiB   0.23%     145kB / 134kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      41.80%    63.88MiB / 7.556GiB   0.83%     463MB / 424MB     0B / 0B     14
+dd382cdd5b21   redis                           2.82%     64.73MiB / 7.556GiB   0.84%     14.1MB / 6.58MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   38.74%    59.21MiB / 7.556GiB   0.77%     85.9MB / 415MB    0B / 0B     14
+
+20_Mar_2024_19_38_34:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.20%     20.04MiB / 7.556GiB   0.26%     14.1MB / 25MB     0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.96MiB / 7.556GiB   0.23%     145kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      43.48%    60.55MiB / 7.556GiB   0.78%     472MB / 432MB     0B / 0B     14
+dd382cdd5b21   redis                           2.86%     64.84MiB / 7.556GiB   0.84%     14.3MB / 6.65MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   41.49%    59.66MiB / 7.556GiB   0.77%     86.9MB / 421MB    0B / 0B     14
+
+20_Mar_2024_19_38_38:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.81%     20.04MiB / 7.556GiB   0.26%     14.3MB / 25.3MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.96MiB / 7.556GiB   0.23%     145kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      48.59%    58.07MiB / 7.556GiB   0.75%     481MB / 440MB     0B / 0B     14
+dd382cdd5b21   redis                           3.04%     64.95MiB / 7.556GiB   0.84%     14.4MB / 6.73MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   37.51%    60.12MiB / 7.556GiB   0.78%     88.2MB / 429MB    0B / 0B     14
+
+20_Mar_2024_19_38_41:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           6.96%     20.04MiB / 7.556GiB   0.26%     14.4MB / 25.5MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.96MiB / 7.556GiB   0.23%     145kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      41.29%    64.11MiB / 7.556GiB   0.83%     487MB / 445MB     0B / 0B     14
+dd382cdd5b21   redis                           2.65%     65.04MiB / 7.556GiB   0.84%     14.5MB / 6.78MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   37.54%    60.72MiB / 7.556GiB   0.78%     89.4MB / 437MB    0B / 0B     14
+
+20_Mar_2024_19_38_45:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.36%     20.29MiB / 7.556GiB   0.26%     14.6MB / 25.9MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.96MiB / 7.556GiB   0.23%     145kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      43.11%    62.27MiB / 7.556GiB   0.80%     497MB / 454MB     0B / 0B     14
+dd382cdd5b21   redis                           3.15%     65.19MiB / 7.556GiB   0.84%     14.8MB / 6.88MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   38.21%    62.12MiB / 7.556GiB   0.80%     91.2MB / 449MB    0B / 0B     14
+
+20_Mar_2024_19_38_49:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           8.21%     20.05MiB / 7.556GiB   0.26%     14.7MB / 26.1MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.96MiB / 7.556GiB   0.23%     145kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      41.68%    61.06MiB / 7.556GiB   0.79%     509MB / 465MB     0B / 0B     14
+dd382cdd5b21   redis                           2.64%     65.3MiB / 7.556GiB    0.84%     14.9MB / 6.96MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   37.46%    61.88MiB / 7.556GiB   0.80%     92.2MB / 455MB    0B / 0B     14
+
+20_Mar_2024_19_38_52:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           8.76%     20.04MiB / 7.556GiB   0.26%     14.9MB / 26.5MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.97MiB / 7.556GiB   0.23%     145kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      47.28%    57.98MiB / 7.556GiB   0.75%     518MB / 473MB     0B / 0B     14
+dd382cdd5b21   redis                           3.78%     65.41MiB / 7.556GiB   0.85%     15.1MB / 7.04MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   41.11%    62.95MiB / 7.556GiB   0.81%     93.6MB / 464MB    0B / 0B     14
+
+20_Mar_2024_19_38_56:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.56%     20.04MiB / 7.556GiB   0.26%     15.1MB / 26.7MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.97MiB / 7.556GiB   0.23%     145kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      41.30%    66.92MiB / 7.556GiB   0.86%     527MB / 481MB     0B / 0B     14
+dd382cdd5b21   redis                           2.56%     65.49MiB / 7.556GiB   0.85%     15.2MB / 7.09MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   35.13%    63.28MiB / 7.556GiB   0.82%     94.9MB / 472MB    0B / 0B     14
+
+20_Mar_2024_19_38_59:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.36%     20.04MiB / 7.556GiB   0.26%     15.2MB / 27MB     0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.97MiB / 7.556GiB   0.23%     145kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      45.20%    60.53MiB / 7.556GiB   0.78%     534MB / 488MB     0B / 0B     14
+dd382cdd5b21   redis                           4.25%     65.62MiB / 7.556GiB   0.85%     15.4MB / 7.18MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   39.64%    64.12MiB / 7.556GiB   0.83%     96.4MB / 481MB    0B / 0B     14
+
+20_Mar_2024_19_39_02:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.91%     20.05MiB / 7.556GiB   0.26%     15.4MB / 27.3MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.97MiB / 7.556GiB   0.23%     145kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      46.90%    56.86MiB / 7.556GiB   0.73%     544MB / 496MB     0B / 0B     14
+dd382cdd5b21   redis                           3.17%     65.73MiB / 7.556GiB   0.85%     15.6MB / 7.26MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   36.89%    64.64MiB / 7.556GiB   0.84%     97.3MB / 487MB    0B / 0B     14
+
+20_Mar_2024_19_39_06:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.21%     20.05MiB / 7.556GiB   0.26%     15.6MB / 27.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.97MiB / 7.556GiB   0.23%     145kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      43.29%    66.16MiB / 7.556GiB   0.86%     553MB / 504MB     0B / 0B     14
+dd382cdd5b21   redis                           2.66%     65.87MiB / 7.556GiB   0.85%     15.7MB / 7.34MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   44.85%    63.16MiB / 7.556GiB   0.82%     98.6MB / 496MB    0B / 0B     14
+
+20_Mar_2024_19_39_10:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.74%     20.05MiB / 7.556GiB   0.26%     15.7MB / 27.8MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.97MiB / 7.556GiB   0.23%     145kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      45.42%    60.88MiB / 7.556GiB   0.79%     561MB / 511MB     0B / 0B     14
+dd382cdd5b21   redis                           2.95%     65.96MiB / 7.556GiB   0.85%     15.9MB / 7.4MB    0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   44.19%    63.08MiB / 7.556GiB   0.82%     100MB / 506MB     0B / 0B     14
+
+20_Mar_2024_19_39_13:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           6.73%     20.04MiB / 7.556GiB   0.26%     15.9MB / 28.1MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.04%     18.21MiB / 7.556GiB   0.24%     146kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      45.17%    57.37MiB / 7.556GiB   0.74%     570MB / 519MB     0B / 0B     14
+dd382cdd5b21   redis                           2.66%     66.06MiB / 7.556GiB   0.85%     16MB / 7.48MB     0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   39.16%    62.78MiB / 7.556GiB   0.81%     101MB / 512MB     0B / 0B     14
+
+20_Mar_2024_19_39_16:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           8.50%     20.04MiB / 7.556GiB   0.26%     16MB / 28.4MB     0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     146kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      42.29%    66.28MiB / 7.556GiB   0.86%     579MB / 528MB     0B / 0B     14
+dd382cdd5b21   redis                           3.24%     66.14MiB / 7.556GiB   0.85%     16.1MB / 7.53MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   38.43%    62.91MiB / 7.556GiB   0.81%     103MB / 523MB     0B / 0B     14
+
+20_Mar_2024_19_39_20:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           9.17%     20.04MiB / 7.556GiB   0.26%     16.2MB / 28.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     146kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      43.21%    61.61MiB / 7.556GiB   0.80%     587MB / 534MB     0B / 0B     14
+dd382cdd5b21   redis                           3.56%     66.27MiB / 7.556GiB   0.86%     16.3MB / 7.62MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   42.53%    63.08MiB / 7.556GiB   0.82%     104MB / 530MB     0B / 0B     14
+
+20_Mar_2024_19_39_23:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           9.99%     20.04MiB / 7.556GiB   0.26%     16.3MB / 28.9MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     146kB / 135kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      51.93%    55.91MiB / 7.556GiB   0.72%     593MB / 540MB     0B / 0B     14
+dd382cdd5b21   redis                           4.33%     66.37MiB / 7.556GiB   0.86%     16.5MB / 7.69MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   42.06%    63.54MiB / 7.556GiB   0.82%     105MB / 538MB     0B / 0B     14
+
+20_Mar_2024_19_39_26:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           8.34%     20.04MiB / 7.556GiB   0.26%     16.5MB / 29.2MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     146kB / 136kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      46.66%    64.39MiB / 7.556GiB   0.83%     602MB / 548MB     0B / 0B     14
+dd382cdd5b21   redis                           3.09%     66.45MiB / 7.556GiB   0.86%     16.6MB / 7.75MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   45.08%    63.29MiB / 7.556GiB   0.82%     106MB / 544MB     0B / 0B     14
+
+20_Mar_2024_19_39_30:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           8.87%     20.05MiB / 7.556GiB   0.26%     16.6MB / 29.4MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     146kB / 136kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      46.45%    62.96MiB / 7.556GiB   0.81%     613MB / 558MB     0B / 0B     14
+dd382cdd5b21   redis                           3.68%     66.59MiB / 7.556GiB   0.86%     16.8MB / 7.84MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   43.40%    63.55MiB / 7.556GiB   0.82%     108MB / 554MB     0B / 0B     14
+
+20_Mar_2024_19_39_33:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           10.16%    20.05MiB / 7.556GiB   0.26%     16.8MB / 29.8MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.01%     17.98MiB / 7.556GiB   0.23%     146kB / 136kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      55.85%    57.53MiB / 7.556GiB   0.74%     620MB / 564MB     0B / 0B     14
+dd382cdd5b21   redis                           69.45%    68.82MiB / 7.556GiB   0.89%     17MB / 7.92MB     0B / 0B     8
+da403a36a8e5   spark-chat-websocket-server-1   43.97%    64.24MiB / 7.556GiB   0.83%     109MB / 563MB     0B / 0B     14
+
+20_Mar_2024_19_39_37:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           10.45%    20.04MiB / 7.556GiB   0.26%     16.9MB / 30MB     0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     146kB / 136kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      51.38%    56.39MiB / 7.556GiB   0.73%     632MB / 575MB     0B / 0B     14
+dd382cdd5b21   redis                           3.79%     66.86MiB / 7.556GiB   0.86%     17.1MB / 7.99MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   42.42%    63.82MiB / 7.556GiB   0.82%     111MB / 571MB     0B / 0B     14
+
+20_Mar_2024_19_39_40:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           8.93%     20.04MiB / 7.556GiB   0.26%     17.1MB / 30.3MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     146kB / 136kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      44.09%    63.4MiB / 7.556GiB    0.82%     640MB / 581MB     0B / 0B     14
+dd382cdd5b21   redis                           3.74%     66.95MiB / 7.556GiB   0.87%     17.3MB / 8.06MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   39.86%    64MiB / 7.556GiB      0.83%     112MB / 578MB     0B / 0B     14
+
+20_Mar_2024_19_39_43:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           8.13%     20.04MiB / 7.556GiB   0.26%     17.2MB / 30.6MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     146kB / 136kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      52.26%    56.83MiB / 7.556GiB   0.73%     646MB / 587MB     0B / 0B     14
+dd382cdd5b21   redis                           3.04%     67.06MiB / 7.556GiB   0.87%     17.4MB / 8.13MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   39.77%    64.5MiB / 7.556GiB    0.83%     113MB / 584MB     0B / 0B     14
+
+20_Mar_2024_19_39_47:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           7.54%     20.04MiB / 7.556GiB   0.26%     17.4MB / 30.8MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     146kB / 136kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      44.60%    65.71MiB / 7.556GiB   0.85%     655MB / 595MB     0B / 0B     14
+dd382cdd5b21   redis                           3.31%     67.18MiB / 7.556GiB   0.87%     17.6MB / 8.21MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   37.43%    64.41MiB / 7.556GiB   0.83%     114MB / 595MB     0B / 0B     14
+
+20_Mar_2024_19_39_50:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           8.98%     20.04MiB / 7.556GiB   0.26%     17.5MB / 31.1MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     146kB / 136kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      44.75%    63.2MiB / 7.556GiB    0.82%     665MB / 604MB     0B / 0B     14
+dd382cdd5b21   redis                           3.10%     67.27MiB / 7.556GiB   0.87%     17.7MB / 8.27MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   40.24%    64.53MiB / 7.556GiB   0.83%     115MB / 602MB     0B / 0B     14
+
+20_Mar_2024_19_39_53:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           8.43%     21.67MiB / 7.556GiB   0.28%     17.7MB / 31.4MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     146kB / 136kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      48.63%    60.88MiB / 7.556GiB   0.79%     674MB / 613MB     0B / 0B     14
+dd382cdd5b21   redis                           3.03%     67.38MiB / 7.556GiB   0.87%     17.9MB / 8.35MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   43.61%    64.87MiB / 7.556GiB   0.84%     116MB / 608MB     0B / 0B     14
+
+20_Mar_2024_19_39_57:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           8.92%     21.7MiB / 7.556GiB    0.28%     17.9MB / 31.7MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     146kB / 136kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      48.27%    59.74MiB / 7.556GiB   0.77%     684MB / 621MB     0B / 0B     14
+dd382cdd5b21   redis                           4.24%     67.5MiB / 7.556GiB    0.87%     18MB / 8.43MB     0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   43.31%    65.31MiB / 7.556GiB   0.84%     118MB / 619MB     0B / 0B     14
+
+20_Mar_2024_19_40_01:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           9.48%     21.96MiB / 7.556GiB   0.28%     18MB / 31.9MB    0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.00%     17.98MiB / 7.556GiB   0.23%     147kB / 136kB    0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      46.38%    67.61MiB / 7.556GiB   0.87%     692MB / 628MB    0B / 0B     14
+dd382cdd5b21   redis                           3.11%     67.59MiB / 7.556GiB   0.87%     18.2MB / 8.5MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   40.76%    65.84MiB / 7.556GiB   0.85%     119MB / 627MB    0B / 0B     14
+
+20_Mar_2024_19_40_04:
+CONTAINER ID   NAME                            CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+6e80fe65ca58   spark-chat-sessions-1           9.65%     21.93MiB / 7.556GiB   0.28%     18.1MB / 32.1MB   0B / 0B     14
+0ced87e8dd18   spark-chat-last-seen-1          0.05%     17.99MiB / 7.556GiB   0.23%     147kB / 136kB     0B / 0B     14
+83afb6cca1ba   spark-chat-load-balancer-1      45.77%    64.51MiB / 7.556GiB   0.83%     701MB / 637MB     0B / 0B     14
+dd382cdd5b21   redis                           4.51%     67.67MiB / 7.556GiB   0.87%     18.3MB / 8.55MB   0B / 0B     7
+da403a36a8e5   spark-chat-websocket-server-1   48.27%    63.48MiB / 7.556GiB   0.82%     121MB / 635MB     0B / 0B     14

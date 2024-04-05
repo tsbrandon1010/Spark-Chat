@@ -5,4 +5,4 @@ COPY index.js package.json package-lock.json /app/
 RUN npm install
 EXPOSE 80
 EXPOSE 3030
-CMD ["node", "index.js"]
+CMD ["node", "--prof", "index.js"]

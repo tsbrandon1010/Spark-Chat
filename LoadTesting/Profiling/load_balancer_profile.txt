@@ -1,0 +1,746 @@
+Testing v8 version different from logging version
+Statistical profiling result from isolate-0x7867bc665040-1-v8.log, (37088 ticks, 96 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+  26892   72.5%          /lib/ld-musl-x86_64.so.1
+   5418   14.6%          /usr/local/bin/node
+    149    0.4%          /usr/lib/libstdc++.so.6.0.30
+      2    0.0%          [vdso]
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+    473    1.3%   10.2%  Builtin: LoadIC_Megamorphic
+    464    1.3%   10.0%  Builtin: KeyedLoadIC_Megamorphic
+    308    0.8%    6.7%  Builtin: LoadIC
+    304    0.8%    6.6%  JS: *onStreamRead node:internal/stream_base_commons:167:22
+    180    0.5%    3.9%  Builtin: CallFunction_ReceiverIsAny
+    173    0.5%    3.7%  Builtin: StoreIC
+    160    0.4%    3.5%  JS: *Socket._write node:net:963:35
+    137    0.4%    3.0%  Builtin: CallFunction_ReceiverIsNotNullOrUndefined
+    111    0.3%    2.4%  JS: *emit node:events:466:44
+    105    0.3%    2.3%  JS: *Readable.push node:internal/streams/readable:385:35
+    103    0.3%    2.2%  JS: *Writable.write node:internal/streams/writable:496:36
+     86    0.2%    1.9%  Builtin: LoadICTrampoline_Megamorphic
+     80    0.2%    1.7%  JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+     76    0.2%    1.6%  JS: *ondata node:internal/streams/readable:1005:18
+     74    0.2%    1.6%  Builtin: CreateTypedArray
+     67    0.2%    1.4%  JS: *nextTick node:internal/process/task_queues:103:18
+     58    0.2%    1.3%  Builtin: CallFunction_ReceiverIsNullOrUndefined
+     57    0.2%    1.2%  Builtin: CallBoundFunction
+     57    0.2%    1.2%  Builtin: BaselineOutOfLinePrologue
+     47    0.1%    1.0%  Builtin: JSBuiltinsConstructStub
+     46    0.1%    1.0%  Builtin: KeyedStoreIC_Megamorphic
+     45    0.1%    1.0%  Builtin: Call_ReceiverIsNotNullOrUndefined
+     44    0.1%    1.0%  Builtin: Call_ReceiverIsAny
+     43    0.1%    0.9%  JS: *maybeReadMore_ node:internal/streams/readable:862:24
+     42    0.1%    0.9%  JS: *onwrite node:internal/streams/writable:607:17
+     37    0.1%    0.8%  Builtin: CallApiCallbackOptimizedNoProfiling
+     35    0.1%    0.8%  Builtin: KeyedLoadIC_PolymorphicName
+     35    0.1%    0.8%  Builtin: KeyedLoadIC
+     33    0.1%    0.7%  Builtin: RecordWriteSaveFP
+     28    0.1%    0.6%  Builtin: KeyedStoreIC
+     27    0.1%    0.6%  JS: *Socket._read node:net:705:34
+     24    0.1%    0.5%  JS: *Readable.read node:internal/streams/readable:645:35
+     23    0.1%    0.5%  Builtin: LoadICTrampoline
+     21    0.1%    0.5%  Builtin: RegExpPrototypeExec
+     20    0.1%    0.4%  Builtin: JSEntry
+     19    0.1%    0.4%  Builtin: KeyedLoadICTrampoline_Megamorphic
+     18    0.0%    0.4%  Builtin: ToBooleanForBaselineJump
+     18    0.0%    0.4%  Builtin: StrictEqual_Baseline
+     18    0.0%    0.4%  Builtin: Call_ReceiverIsNullOrUndefined
+     17    0.0%    0.4%  Builtin: CompileLazy
+     17    0.0%    0.4%  Builtin: BaselineLeaveFrame
+     16    0.0%    0.3%  Builtin: JSEntryTrampoline
+     14    0.0%    0.3%  JS: *parse node:url:169:37
+     14    0.0%    0.3%  JS: *get node:net:2306:6
+     14    0.0%    0.3%  Builtin: GetProperty
+     14    0.0%    0.3%  Builtin: Call_ReceiverIsNullOrUndefined_Baseline_Compact
+     14    0.0%    0.3%  Builtin: CallFunctionTemplate_Generic
+     13    0.0%    0.3%  Builtin: NewRestArgumentsElements
+     12    0.0%    0.3%  Builtin: ToBoolean
+     12    0.0%    0.3%  Builtin: SetDataProperties
+     12    0.0%    0.3%  Builtin: JSConstructStubGeneric
+     11    0.0%    0.2%  JS: *Readable.on node:internal/streams/readable:1125:33
+     11    0.0%    0.2%  Builtin: StringAdd_CheckNone
+      9    0.0%    0.2%  Builtin: LoadICBaseline
+      9    0.0%    0.2%  Builtin: CreateShallowObjectLiteral
+      9    0.0%    0.2%  Builtin: Call_ReceiverIsNotNullOrUndefined_Baseline_Compact
+      9    0.0%    0.2%  Builtin: CEntry_Return1_ArgvOnStack_NoBuiltinExit
+      8    0.0%    0.2%  JS: *Readable.removeListener node:internal/streams/readable:1157:45
+      8    0.0%    0.2%  Builtin: HandleApiConstruct
+      8    0.0%    0.2%  Builtin: HandleApiCallOrConstruct
+      7    0.0%    0.2%  Builtin: StringToLowerCaseIntl
+      7    0.0%    0.2%  Builtin: CreateDataProperty
+      7    0.0%    0.2%  Builtin: CallWithArrayLike
+      7    0.0%    0.2%  Builtin: CallVarargs
+      6    0.0%    0.1%  JS: ^ClientRequest node:_http_client:130:23
+      6    0.0%    0.1%  JS: *matchKnownFields node:_http_incoming:279:26
+      6    0.0%    0.1%  JS: *get node:internal/bootstrap/node:100:8
+      6    0.0%    0.1%  Builtin: FastNewClosure
+      6    0.0%    0.1%  Builtin: Construct
+      5    0.0%    0.1%  RegExp: ^(?:(?:(?:[0-9a-fA-F]{1,4}):){7}(?:(?:[0-9a-fA-F]{1,4})|:)|(?:(?:[0-9a-fA-F]{1,4}):){6}(?:(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])|:(?:[0-9a-fA-F]{1,4})|:)|(?:(?:[0-9a-fA-F]{1,4}):){5}(?::(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])|(?::(?:[0-9a-fA-F]{1,4})){1,2}|:)|(?:(?:[0-9a-fA-F]{1,4}):){4}(?:(?::(?:[0-9a-fA-F]{1,4})){0,1}:(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])|(?::(?:[0-9a-fA-F]{1,4})){1,3}|:)|(?:(?:[0-9a-fA-F]{1,4}):){3}(?:(?::(?:[0-9a-fA-F]{1,4})){0,2}:(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])|(?::(?:[0-9a-fA-F]{1,4})){1,4}|:)|(?:(?:[0-9a-fA-F]{1,4}):){2}(?:(?::(?:[0-9a-fA-F]{1,4})){0,3}:(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])|(?::(?:[0-9a-fA-F]{1,4})){1,5}|:)|(?:(?:[0-9a-fA-F]{1,4}):){1}(?:(?::(?:[0-9a-fA-F]{1,4})){0,4}:(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])|(?::(?:[0-9a-fA-F]{1,4})){1,6}|:)|(?::(?:(?::(?:[0-9a-fA-F]{1,4})){0,5}:(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])|(?::(?:[0-9a-fA-F]{1,4})){1,7}|:)))(?:%[0-9a-zA-Z-.:]{1,})?$
+      5    0.0%    0.1%  JS: *wrappedFn node:internal/errors:508:21
+      5    0.0%    0.1%  JS: *resume_ node:internal/streams/readable:1252:17
+      5    0.0%    0.1%  JS: *processPromiseRejections node:internal/process/promises:221:34
+      5    0.0%    0.1%  JS: *end node:_http_outgoing:1058:45
+      5    0.0%    0.1%  JS: *ReadableState node:internal/streams/readable:260:23
+      5    0.0%    0.1%  Builtin: InstanceOf_Baseline
+      5    0.0%    0.1%  Builtin: Increment_Baseline
+      5    0.0%    0.1%  Builtin: FastNewObject
+      5    0.0%    0.1%  Builtin: FastNewFunctionContextFunction
+      5    0.0%    0.1%  Builtin: BitwiseAnd_Baseline
+      4    0.0%    0.1%  JS: *set node:internal/streams/readable:131:8
+      4    0.0%    0.1%  JS: *parserOnHeadersComplete node:_http_common:72:33
+      4    0.0%    0.1%  JS: *module.exports /app/node_modules/qs/lib/parse.js:239:27
+      4    0.0%    0.1%  JS: *get node:internal/streams/duplex:159:8
+      4    0.0%    0.1%  JS: *_storeHeader node:_http_outgoing:458:22
+      4    0.0%    0.1%  JS: *Readable.resume node:internal/streams/readable:1225:37
+      4    0.0%    0.1%  JS: *Readable.pipe node:internal/streams/readable:907:35
+      4    0.0%    0.1%  Builtin: StringSubstring
+      4    0.0%    0.1%  Builtin: StringEqual
+      4    0.0%    0.1%  Builtin: StoreICBaseline
+      4    0.0%    0.1%  Builtin: StoreFastElementIC_Standard
+      4    0.0%    0.1%  Builtin: LoadIC_FunctionPrototype
+      4    0.0%    0.1%  Builtin: FindOrderedHashMapEntry
+      4    0.0%    0.1%  Builtin: DefineNamedOwnIC
+      4    0.0%    0.1%  Builtin: CreateEmptyArrayLiteral
+      4    0.0%    0.1%  Builtin: BitwiseOr_Baseline
+      4    0.0%    0.1%  Builtin: ArrayForEach
+      4    0.0%    0.1%  Builtin: Add_Baseline
+      3    0.0%    0.1%  RegExp: [^\t\x20-\x7e\x80-\xff]
+      3    0.0%    0.1%  JS: ^writeHeaders /app/node_modules/http-proxy/lib/http-proxy/passes/web-outgoing.js:85:38
+      3    0.0%    0.1%  JS: ^writeHead node:_http_server:342:19
+      3    0.0%    0.1%  JS: ^onwrite node:internal/streams/writable:607:17
+      3    0.0%    0.1%  JS: ^connectionListenerInternal node:_http_server:650:36
+      3    0.0%    0.1%  JS: ^clearBuffer node:internal/streams/writable:735:21
+      3    0.0%    0.1%  JS: ^Writable.uncork node:internal/streams/writable:512:37
+      3    0.0%    0.1%  JS: ^Socket node:net:353:16
+      3    0.0%    0.1%  JS: ^Readable.pipe node:internal/streams/readable:907:35
+      3    0.0%    0.1%  JS: ^<anonymous> node:internal/console/constructor:358:10
+      3    0.0%    0.1%  JS: *set node:internal/streams/readable:184:8
+      3    0.0%    0.1%  JS: *removeListener node:events:681:28
+      3    0.0%    0.1%  JS: *parseQueryStringValues /app/node_modules/qs/lib/parse.js:51:50
+      3    0.0%    0.1%  JS: *noop node:internal/util/debuglog:46:14
+      3    0.0%    0.1%  JS: *listenerCount node:events:853:23
+      3    0.0%    0.1%  JS: *get node:_http_incoming:112:16
+      3    0.0%    0.1%  JS: *freeParser node:_http_common:182:20
+      3    0.0%    0.1%  JS: *emitReadable_ node:internal/streams/readable:828:23
+      3    0.0%    0.1%  JS: *afterConnect node:net:1548:22
+      3    0.0%    0.1%  JS: *addListener node:events:610:58
+      3    0.0%    0.1%  JS: *Socket node:net:353:16
+      3    0.0%    0.1%  JS: *Duplex node:internal/streams/duplex:62:16
+      3    0.0%    0.1%  Builtin: TypedArrayPrototypeLength
+      3    0.0%    0.1%  Builtin: ToString
+      3    0.0%    0.1%  Builtin: RegExpReplace
+      3    0.0%    0.1%  Builtin: RegExpPrototypeTest
+      3    0.0%    0.1%  Builtin: ObjectPrototypeHasOwnProperty
+      3    0.0%    0.1%  Builtin: LessThan_Baseline
+      3    0.0%    0.1%  Builtin: KeyedStoreICTrampoline
+      3    0.0%    0.1%  Builtin: GreaterThanOrEqual_Baseline
+      3    0.0%    0.1%  Builtin: FunctionPrototypeHasInstance
+      3    0.0%    0.1%  Builtin: FulfillPromise
+      3    0.0%    0.1%  Builtin: FastNewStrictArguments
+      3    0.0%    0.1%  Builtin: ConstructFunction
+      3    0.0%    0.1%  Builtin: CEntry_Return1_ArgvOnStack_BuiltinExit
+      3    0.0%    0.1%  Builtin: AsyncFunctionEnter
+      3    0.0%    0.1%  Builtin: ArrayPrototypeSlice
+      3    0.0%    0.1%  Builtin: ArrayPrototypeJoin
+      2    0.0%    0.0%  RegExp: ^[\^_`a-zA-Z\-0-9!#$%&'*+.|~]+$
+      2    0.0%    0.0%  RegExp: (^|,)\s*upgrade\s*($|,)
+      2    0.0%    0.0%  RegExp: (?:^|\W)close(?:$|\W)
+      2    0.0%    0.0%  JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:100:26
+      2    0.0%    0.0%  JS: ^socketOnData node:_http_client:528:22
+      2    0.0%    0.0%  JS: ^onStreamRead node:internal/stream_base_commons:167:22
+      2    0.0%    0.0%  JS: ^module.exports /app/node_modules/qs/lib/parse.js:239:27
+      2    0.0%    0.0%  JS: ^lookupAndConnect node:net:1271:26
+      2    0.0%    0.0%  JS: ^internalConnect node:net:1032:25
+      2    0.0%    0.0%  JS: ^getOrSetAsyncId node:internal/async_hooks:421:25
+      2    0.0%    0.0%  JS: ^getInfo /app/node_modules/ws/lib/receiver.js:166:10
+      2    0.0%    0.0%  JS: ^expressInit /app/node_modules/express/lib/middleware/init.js:29:30
+      2    0.0%    0.0%  JS: ^emit /app/node_modules/eventemitter3/index.js:166:44
+      2    0.0%    0.0%  JS: ^compareTimersLists node:internal/timers:412:28
+      2    0.0%    0.0%  JS: ^common.setupOutgoing /app/node_modules/http-proxy/lib/http-proxy/common.js:33:32
+      2    0.0%    0.0%  JS: ^addRequest node:_http_agent:240:49
+      2    0.0%    0.0%  JS: ^Socket.connect node:net:1189:36
+      2    0.0%    0.0%  JS: ^Socket._writeGeneric node:net:921:42
+      2    0.0%    0.0%  JS: ^Event /app/node_modules/ws/lib/event-target.js:24:14
+      2    0.0%    0.0%  JS: ^<anonymous> node:internal/validators:175:40
+      2    0.0%    0.0%  JS: *set node:net:2307:6
+      2    0.0%    0.0%  JS: *process_params /app/node_modules/express/lib/router/index.js:338:47
+      2    0.0%    0.0%  JS: *parserOnMessageComplete node:_http_common:137:33
+      2    0.0%    0.0%  JS: *onfinish node:internal/streams/readable:1040:20
+      2    0.0%    0.0%  JS: *onceWrapper node:events:628:21
+      2    0.0%    0.0%  JS: *normalizeServerName node:_http_agent:345:29
+      2    0.0%    0.0%  JS: *next /app/node_modules/express/lib/router/index.js:177:16
+      2    0.0%    0.0%  JS: *getName node:_http_agent:218:43
+      2    0.0%    0.0%  JS: *endReadableNT node:internal/streams/readable:1690:23
+      2    0.0%    0.0%  JS: *clearBuffer node:internal/streams/writable:735:21
+      2    0.0%    0.0%  JS: *checkError node:internal/streams/destroy:32:20
+      2    0.0%    0.0%  JS: *afterWriteTick node:internal/streams/writable:684:24
+      2    0.0%    0.0%  JS: *afterShutdown node:net:539:23
+      2    0.0%    0.0%  JS: *_send node:_http_outgoing:402:49
+      2    0.0%    0.0%  JS: *_addListener node:events:547:22
+      2    0.0%    0.0%  JS: *<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+      2    0.0%    0.0%  Builtin: SubtractSmi_Baseline
+      2    0.0%    0.0%  Builtin: SubString
+      2    0.0%    0.0%  Builtin: StringPrototypeSplit
+      2    0.0%    0.0%  Builtin: StringPrototypeReplace
+      2    0.0%    0.0%  Builtin: StringIndexOf
+      2    0.0%    0.0%  Builtin: StoreInArrayLiteralIC
+      2    0.0%    0.0%  Builtin: StoreICTrampoline
+      2    0.0%    0.0%  Builtin: ResumeGeneratorTrampoline
+      2    0.0%    0.0%  Builtin: ResolvePromise
+      2    0.0%    0.0%  Builtin: ObjectKeys
+      2    0.0%    0.0%  Builtin: LoadIC_NoFeedback
+      2    0.0%    0.0%  Builtin: LoadGlobalIC
+      2    0.0%    0.0%  Builtin: KeyedStoreICBaseline
+      2    0.0%    0.0%  Builtin: GreaterThan_Baseline
+      2    0.0%    0.0%  Builtin: ForInFilter
+      2    0.0%    0.0%  Builtin: ForInEnumerate
+      2    0.0%    0.0%  Builtin: FindOrderedHashSetEntry
+      2    0.0%    0.0%  Builtin: FastFunctionPrototypeBind
+      2    0.0%    0.0%  Builtin: CreateShallowArrayLiteral
+      2    0.0%    0.0%  Builtin: CreateEmptyLiteralObject
+      2    0.0%    0.0%  Builtin: CopyDataProperties
+      2    0.0%    0.0%  Builtin: Construct_Baseline
+      2    0.0%    0.0%  Builtin: CallIteratorWithFeedback
+      2    0.0%    0.0%  Builtin: CallApiCallbackGeneric
+      2    0.0%    0.0%  Builtin: ArraySingleArgumentConstructor_Holey_DisableAllocationSites
+      2    0.0%    0.0%  Builtin: ArrayPrototypeSplice
+      2    0.0%    0.0%  Builtin: ArrayPrototypeShift
+      2    0.0%    0.0%  Builtin: ArrayPrototypePush
+      2    0.0%    0.0%  Builtin: ArrayPrototypePop
+      2    0.0%    0.0%  Builtin: ArrayIteratorPrototypeNext
+      2    0.0%    0.0%  Builtin: AdaptorWithBuiltinExitFrame
+      1    0.0%    0.0%  RegExp: ^https|wss
+      1    0.0%    0.0%  RegExp: ^[a-z0-9.+-]+:
+      1    0.0%    0.0%  RegExp: ^(\/\/?(?!\/)[^?\s]*)(\?[^\s]*)?$
+      1    0.0%    0.0%  RegExp: [^\u0021-\u00ff]
+      1    0.0%    0.0%  RegExp: (\\).|([@?!+*]\(.*\))
+      1    0.0%    0.0%  RegExp: (\[[^[\]]*])
+      1    0.0%    0.0%  JS: ~getWritablePackets /app/node_modules/engine.io-client/build/cjs/socket.js:451:23
+      1    0.0%    0.0%  JS: ~ClientRequest node:_http_client:130:23
+      1    0.0%    0.0%  JS: ~<anonymous> /app/node_modules/http-proxy/lib/http-proxy/passes/ws-incoming.js:124:38
+      1    0.0%    0.0%  JS: ~<anonymous> /app/index.js:54:17
+      1    0.0%    0.0%  JS: ^write_ node:_http_outgoing:916:16
+      1    0.0%    0.0%  JS: ^trim_prefix /app/node_modules/express/lib/router/index.js:293:23
+      1    0.0%    0.0%  JS: ^socketListenerWrap node:_http_server:1193:37
+      1    0.0%    0.0%  JS: ^socketCloseListener node:_http_client:441:29
+      1    0.0%    0.0%  JS: ^setHasTickScheduled node:internal/process/task_queues:51:29
+      1    0.0%    0.0%  JS: ^restore /app/node_modules/express/lib/router/index.js:631:17
+      1    0.0%    0.0%  JS: ^resOnFinish node:_http_server:972:21
+      1    0.0%    0.0%  JS: ^removeSocket node:_http_agent:428:53
+      1    0.0%    0.0%  JS: ^removeListener node:events:681:28
+      1    0.0%    0.0%  JS: ^removeAllListeners node:events:745:32
+      1    0.0%    0.0%  JS: ^randomFillSync node:internal/crypto/random:117:24
+      1    0.0%    0.0%  JS: ^prefinish node:internal/streams/writable:896:19
+      1    0.0%    0.0%  JS: ^parserOnIncoming node:_http_server:1030:26
+      1    0.0%    0.0%  JS: ^parseQueryStringValues /app/node_modules/qs/lib/parse.js:51:50
+      1    0.0%    0.0%  JS: ^parseExtendedQueryString /app/node_modules/express/lib/utils.js:289:34
+      1    0.0%    0.0%  JS: ^parse node:url:169:37
+      1    0.0%    0.0%  JS: ^onconnection node:net:2104:22
+      1    0.0%    0.0%  JS: ^onParserExecuteCommon node:_http_server:909:31
+      1    0.0%    0.0%  JS: ^onDestroy node:internal/streams/destroy:92:21
+      1    0.0%    0.0%  JS: ^onData /app/node_modules/engine.io-client/build/cjs/transport.js:98:11
+      1    0.0%    0.0%  JS: ^normalizeServerName node:_http_agent:345:29
+      1    0.0%    0.0%  JS: ^normalizeArgs node:net:272:23
+      1    0.0%    0.0%  JS: ^merge /app/node_modules/qs/lib/utils.js:47:27
+      1    0.0%    0.0%  JS: ^match /app/node_modules/express/lib/router/layer.js:110:39
+      1    0.0%    0.0%  JS: ^log node:internal/console/constructor:378:6
+      1    0.0%    0.0%  JS: ^isTraceHTTPEnabled node:internal/http:40:28
+      1    0.0%    0.0%  JS: ^isStringPath /app/node_modules/http-proxy-middleware/dist/context-matcher.js:76:22
+      1    0.0%    0.0%  JS: ^isContentDispositionField node:_http_outgoing:105:35
+      1    0.0%    0.0%  JS: ^insert node:internal/timers:361:16
+      1    0.0%    0.0%  JS: ^info /app/node_modules/http-proxy-middleware/dist/logger.js:45:9
+      1    0.0%    0.0%  JS: ^handleWriteReq node:internal/stream_base_commons:45:24
+      1    0.0%    0.0%  JS: ^get node:net:689:16
+      1    0.0%    0.0%  JS: ^formatRaw node:internal/util/inspect:843:19
+      1    0.0%    0.0%  JS: ^formatPrimitive node:internal/util/inspect:1620:25
+      1    0.0%    0.0%  JS: ^format node:url:631:39
+      1    0.0%    0.0%  JS: ^end node:_http_outgoing:1058:45
+      1    0.0%    0.0%  JS: ^encodePacket /app/node_modules/engine.io-parser/build/cjs/encodePacket.js:5:22
+      1    0.0%    0.0%  JS: ^emitAfterScript node:internal/async_hooks:517:25
+      1    0.0%    0.0%  JS: ^detachSocket node:_http_server:293:62
+      1    0.0%    0.0%  JS: ^destroy node:internal/streams/destroy:48:17
+      1    0.0%    0.0%  JS: ^createSocket node:_http_agent:310:53
+      1    0.0%    0.0%  JS: ^connectionListener node:_http_server:644:28
+      1    0.0%    0.0%  JS: ^compact /app/node_modules/qs/lib/utils.js:190:31
+      1    0.0%    0.0%  JS: ^cleanParser node:_http_common:227:21
+      1    0.0%    0.0%  JS: ^checkError node:internal/streams/destroy:32:20
+      1    0.0%    0.0%  JS: ^assignSocket node:_http_server:282:62
+      1    0.0%    0.0%  JS: ^arrayClone node:events:894:20
+      1    0.0%    0.0%  JS: ^alloc node:internal/freelist:15:8
+      1    0.0%    0.0%  JS: ^afterShutdown node:net:539:23
+      1    0.0%    0.0%  JS: ^afterConnect node:net:1548:22
+      1    0.0%    0.0%  JS: ^adjustOffset node:buffer:1131:22
+      1    0.0%    0.0%  JS: ^_writeRaw node:_http_outgoing:428:19
+      1    0.0%    0.0%  JS: ^_storeHeader node:_http_outgoing:458:22
+      1    0.0%    0.0%  JS: ^_flushOutput node:_http_outgoing:1183:63
+      1    0.0%    0.0%  JS: ^_finish node:_http_server:232:52
+      1    0.0%    0.0%  JS: ^_encode /app/node_modules/notepack.io/lib/encode.js:49:17
+      1    0.0%    0.0%  JS: ^_destroy node:internal/streams/destroy:89:18
+      1    0.0%    0.0%  JS: ^_destroy node:_http_incoming:221:55
+      1    0.0%    0.0%  JS: ^_addListener node:events:547:22
+      1    0.0%    0.0%  JS: ^_addHeaderLines node:_http_incoming:247:25
+      1    0.0%    0.0%  JS: ^Socket.setNoDelay node:net:593:39
+      1    0.0%    0.0%  JS: ^Socket.destroySoon node:net:783:40
+      1    0.0%    0.0%  JS: ^ServerResponse node:_http_server:195:24
+      1    0.0%    0.0%  JS: ^ReadableState node:internal/streams/readable:260:23
+      1    0.0%    0.0%  JS: ^Readable.unpipe node:internal/streams/readable:1090:37
+      1    0.0%    0.0%  JS: ^Readable.removeListener node:internal/streams/readable:1157:45
+      1    0.0%    0.0%  JS: ^Readable.pause node:internal/streams/readable:1265:36
+      1    0.0%    0.0%  JS: ^OutgoingMessage.uncork node:_http_outgoing:326:44
+      1    0.0%    0.0%  JS: ^FastBuffer node:internal/buffer:960:14
+      1    0.0%    0.0%  JS: ^<anonymous> node:internal/util:519:18
+      1    0.0%    0.0%  JS: ^<anonymous> /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:183:37
+      1    0.0%    0.0%  JS: ^<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+      1    0.0%    0.0%  JS: *utf8Length /app/node_modules/notepack.io/lib/encode.js:31:20
+      1    0.0%    0.0%  JS: *urlParse node:url:126:18
+      1    0.0%    0.0%  JS: *strictCheck /app/node_modules/is-glob/index.js:10:27
+      1    0.0%    0.0%  JS: *set node:internal/streams/writable:124:8
+      1    0.0%    0.0%  JS: *resolve node:path:1095:10
+      1    0.0%    0.0%  JS: *parseurl /app/node_modules/parseurl/index.js:35:19
+      1    0.0%    0.0%  JS: *parseQueryStringKeys /app/node_modules/qs/lib/parse.js:150:46
+      1    0.0%    0.0%  JS: *onend node:internal/streams/readable:944:17
+      1    0.0%    0.0%  JS: *onconnection node:net:2104:22
+      1    0.0%    0.0%  JS: *onParserExecute node:_http_server:829:25
+      1    0.0%    0.0%  JS: *onError node:_http_incoming:442:17
+      1    0.0%    0.0%  JS: *onDestroy node:internal/streams/destroy:92:21
+      1    0.0%    0.0%  JS: *normalizeString node:path:66:25
+      1    0.0%    0.0%  JS: *nop node:internal/streams/writable:87:13
+      1    0.0%    0.0%  JS: *isURL node:internal/url:765:15
+      1    0.0%    0.0%  JS: *initSocketHandle node:net:309:26
+      1    0.0%    0.0%  JS: *hasHooks node:internal/async_hooks:470:18
+      1    0.0%    0.0%  JS: *getOptionValue node:internal/options:44:24
+      1    0.0%    0.0%  JS: *getHighWaterMark node:internal/streams/state:32:26
+      1    0.0%    0.0%  JS: *get node:internal/streams/writable:1000:8
+      1    0.0%    0.0%  JS: *get node:internal/streams/readable:1540:8
+      1    0.0%    0.0%  JS: *get node:internal/streams/readable:1413:8
+      1    0.0%    0.0%  JS: *get node:_http_outgoing:860:16
+      1    0.0%    0.0%  JS: *emitAfterScript node:internal/async_hooks:517:25
+      1    0.0%    0.0%  JS: *defaultTriggerAsyncIdScope node:internal/async_hooks:455:36
+      1    0.0%    0.0%  JS: *customRouter /app/index.js:102:22
+      1    0.0%    0.0%  JS: *connectionCorkNT node:_http_outgoing:1004:26
+      1    0.0%    0.0%  JS: *callback node:internal/streams/writable:754:63
+      1    0.0%    0.0%  JS: *alloc node:internal/freelist:15:8
+      1    0.0%    0.0%  JS: *afterWriteDispatched node:internal/stream_base_commons:155:30
+      1    0.0%    0.0%  JS: *_destroy node:internal/streams/destroy:89:18
+      1    0.0%    0.0%  JS: *_destroy node:_http_incoming:221:55
+      1    0.0%    0.0%  JS: *Writable.cork node:internal/streams/writable:505:35
+      1    0.0%    0.0%  JS: *Socket.destroySoon node:net:783:40
+      1    0.0%    0.0%  JS: *Socket._destroy node:net:794:37
+      1    0.0%    0.0%  JS: *ClientRequest node:_http_client:130:23
+      1    0.0%    0.0%  JS: *<anonymous> node:internal/validators:453:42
+      1    0.0%    0.0%  JS: *<anonymous> /app/node_modules/http-proxy/lib/http-proxy/passes/web-outgoing.js:119:51
+      1    0.0%    0.0%  JS: *<anonymous> /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:172:37
+      1    0.0%    0.0%  Builtin: TypedArrayPrototypeToStringTag
+      1    0.0%    0.0%  Builtin: ToNumber_Baseline
+      1    0.0%    0.0%  Builtin: StringPrototypeSlice
+      1    0.0%    0.0%  Builtin: StringPrototypeCharCodeAt
+      1    0.0%    0.0%  Builtin: StringAddConvertRight
+      1    0.0%    0.0%  Builtin: StoreIC_NoFeedback
+      1    0.0%    0.0%  Builtin: StoreFastElementIC_GrowNoTransitionHandleCOW
+      1    0.0%    0.0%  Builtin: RunMicrotasks
+      1    0.0%    0.0%  Builtin: ObjectIs
+      1    0.0%    0.0%  Builtin: ObjectEntries
+      1    0.0%    0.0%  Builtin: MultiplySmi_Baseline
+      1    0.0%    0.0%  Builtin: LoadIC_StringLength
+      1    0.0%    0.0%  Builtin: KeyedLoadICTrampoline
+      1    0.0%    0.0%  Builtin: KeyedLoadICBaseline
+      1    0.0%    0.0%  Builtin: GrowFastSmiOrObjectElements
+      1    0.0%    0.0%  Builtin: FunctionPrototypeCall
+      1    0.0%    0.0%  Builtin: FunctionPrototypeApply
+      1    0.0%    0.0%  Builtin: ForInNext
+      1    0.0%    0.0%  Builtin: FastNewRestArguments
+      1    0.0%    0.0%  Builtin: DoubleToI
+      1    0.0%    0.0%  Builtin: CreateRegExpLiteral
+      1    0.0%    0.0%  Builtin: CloneObjectIC_Slow
+      1    0.0%    0.0%  Builtin: CloneObjectIC
+      1    0.0%    0.0%  Builtin: CloneFastJSArray
+      1    0.0%    0.0%  Builtin: CallWithSpread_Baseline
+      1    0.0%    0.0%  Builtin: BitwiseNot_Baseline
+      1    0.0%    0.0%  Builtin: AsyncFunctionResolve
+      1    0.0%    0.0%  Builtin: ArrayIndexOf
+      1    0.0%    0.0%  Builtin: ArrayIncludesSmiOrObject
+      1    0.0%    0.0%  Builtin: ArrayFilter
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+   4531   12.2%   97.9%  JavaScript
+      0    0.0%    0.0%  C++
+    111    0.3%    2.4%  GC
+  32461   87.5%          Shared libraries
+     96    0.3%          Unaccounted
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+  26892   72.5%  /lib/ld-musl-x86_64.so.1
+   7258   27.0%    /usr/local/bin/node
+   6819   94.0%      JS: *Socket._write node:net:963:35
+   6819  100.0%        JS: *Writable.write node:internal/streams/writable:496:36
+   6799   99.7%          JS: *ondata node:internal/streams/readable:1005:18
+   6799  100.0%            JS: *emit node:events:466:44
+     87    1.2%      JS: *Socket._writeGeneric node:net:921:42
+     42   48.3%        JS: ^connect node:net:928:42
+     42  100.0%          JS: *onceWrapper node:events:628:21
+     28   66.7%            JS: *emit node:events:466:44
+     14   33.3%            JS: *afterConnect node:net:1548:22
+     35   40.2%        JS: ^Socket._writev node:net:958:36
+     33   94.3%          JS: *clearBuffer node:internal/streams/writable:735:21
+     32   97.0%            JS: *end node:_http_outgoing:1058:45
+      1    3.0%            JS: *Writable.uncork node:internal/streams/writable:512:37
+      2    5.7%          JS: ^doWrite node:internal/streams/writable:579:17
+      2  100.0%            JS: ^clearBuffer node:internal/streams/writable:735:21
+      8    9.2%        JS: *Socket._writev node:net:958:36
+      8  100.0%          JS: *clearBuffer node:internal/streams/writable:735:21
+      8  100.0%            JS: *end node:_http_outgoing:1058:45
+      1    1.1%        JS: ^Socket._write node:net:963:35
+      1  100.0%          JS: *Writable.write node:internal/streams/writable:496:36
+      1  100.0%            JS: ^ondata node:internal/streams/readable:1005:18
+      1    1.1%        JS: *doWrite node:internal/streams/writable:579:17
+      1  100.0%          JS: ^clearBuffer node:internal/streams/writable:735:21
+      1  100.0%            JS: *Writable.uncork node:internal/streams/writable:512:37
+    288    1.1%    JS: ^internalConnect node:net:1032:25
+    272   94.4%      JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+     14    4.9%      JS: ^defaultTriggerAsyncIdScope node:internal/async_hooks:455:36
+     14  100.0%        JS: ^<anonymous> node:net:1313:73
+     14  100.0%          JS: ^processTicksAndRejections node:internal/process/task_queues:67:35
+
+   5418   14.6%  /usr/local/bin/node
+   2686   49.6%    /usr/local/bin/node
+    961   35.8%      JS: *nextTick node:internal/process/task_queues:103:18
+    843   87.7%        JS: *Readable.push node:internal/streams/readable:385:35
+    842   99.9%          JS: *onStreamRead node:internal/stream_base_commons:167:22
+     18    1.9%        JS: *Readable.resume node:internal/streams/readable:1225:37
+     13   72.2%          JS: *Readable.on node:internal/streams/readable:1125:33
+      7   53.8%            JS: ^Readable.pipe node:internal/streams/readable:907:35
+      6   46.2%            JS: *Readable.pipe node:internal/streams/readable:907:35
+      3   16.7%          JS: ^Socket.resume node:net:757:35
+      3  100.0%            JS: *Readable.on node:internal/streams/readable:1125:33
+      2   11.1%          JS: ^_dump node:_http_incoming:432:49
+      2  100.0%            JS: ^resOnFinish node:_http_server:972:21
+     15    1.6%        JS: *Socket.resume node:net:757:35
+     15  100.0%          JS: *Readable.on node:internal/streams/readable:1125:33
+      7   46.7%            JS: ^connectionListenerInternal node:_http_server:650:36
+      3   20.0%            JS: ^tickOnSocket node:_http_client:798:22
+      3   20.0%            JS: *connectionListenerInternal node:_http_server:650:36
+      1    6.7%            JS: ^Readable.pipe node:internal/streams/readable:907:35
+      1    6.7%            JS: *Readable.pipe node:internal/streams/readable:907:35
+     12    1.2%        JS: *Readable.read node:internal/streams/readable:645:35
+      6   50.0%          JS: *resume_ node:internal/streams/readable:1252:17
+      6  100.0%            JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      3   25.0%          JS: *Socket.read node:net:766:33
+      2   66.7%            JS: *emitReadable_ node:internal/streams/readable:828:23
+      1   33.3%            JS: *flow node:internal/streams/readable:1278:14
+      2   16.7%          JS: ^resume_ node:internal/streams/readable:1252:17
+      2  100.0%            JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      1    8.3%          JS: *flow node:internal/streams/readable:1278:14
+      1  100.0%            JS: ^emitReadable_ node:internal/streams/readable:828:23
+    678   25.2%      JS: *Socket._write node:net:963:35
+    678  100.0%        JS: *Writable.write node:internal/streams/writable:496:36
+    673   99.3%          JS: *ondata node:internal/streams/readable:1005:18
+    673  100.0%            JS: *emit node:events:466:44
+    114    4.2%      JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+     50    1.9%      JS: ^addRequest node:_http_agent:240:49
+     41   82.0%        JS: ^ClientRequest node:_http_client:130:23
+     33   80.5%          JS: ^request node:http:102:17
+     29   87.9%            JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:100:26
+      4   12.1%            JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/ws-incoming.js:79:27
+      7   17.1%          JS: *request node:http:102:17
+      6   85.7%            JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:100:26
+      1   14.3%            JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/ws-incoming.js:79:27
+      1    2.4%          JS: *stream /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:100:26
+      1  100.0%            JS: *<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+      9   18.0%        JS: *ClientRequest node:_http_client:130:23
+      7   77.8%          JS: ^request node:http:102:17
+      6   85.7%            JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:100:26
+      1   14.3%            JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/ws-incoming.js:79:27
+      2   22.2%          JS: *request node:http:102:17
+      2  100.0%            JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:100:26
+     44    1.6%      JS: ^createSocket node:_http_agent:310:53
+     44  100.0%        JS: ^addRequest node:_http_agent:240:49
+     40   90.9%          JS: ^ClientRequest node:_http_client:130:23
+     31   77.5%            JS: ^request node:http:102:17
+      9   22.5%            JS: *request node:http:102:17
+      4    9.1%          JS: *ClientRequest node:_http_client:130:23
+      4  100.0%            JS: ^request node:http:102:17
+     44    1.6%      JS: *Readable.on node:internal/streams/readable:1125:33
+     24   54.5%        JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:100:26
+     14   58.3%          JS: ^<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+     14  100.0%            JS: ^HttpProxyMiddleware.middleware /app/node_modules/http-proxy-middleware/dist/http-proxy-middleware.js:17:27
+     10   41.7%          JS: *<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+     10  100.0%            JS: ^HttpProxyMiddleware.middleware /app/node_modules/http-proxy-middleware/dist/http-proxy-middleware.js:17:27
+      4    9.1%        JS: *stream /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:100:26
+      3   75.0%          JS: *<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+      3  100.0%            JS: ^HttpProxyMiddleware.middleware /app/node_modules/http-proxy-middleware/dist/http-proxy-middleware.js:17:27
+      1   25.0%          JS: *HttpProxyMiddleware.middleware /app/node_modules/http-proxy-middleware/dist/http-proxy-middleware.js:17:27
+      1  100.0%            Builtin: AsyncFunctionAwaitResolveClosure
+      4    9.1%        JS: *Readable.pipe node:internal/streams/readable:907:35
+      4  100.0%          JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:100:26
+      3   75.0%            JS: *<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+      1   25.0%            JS: ^<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+      3    6.8%        JS: ^connectionListenerInternal node:_http_server:650:36
+      2   66.7%          JS: *defaultTriggerAsyncIdScope node:internal/async_hooks:455:36
+      2  100.0%            JS: ^connectionListener node:_http_server:644:28
+      1   33.3%          JS: *connectionListener node:_http_server:644:28
+      1  100.0%            JS: *onconnection node:net:2104:22
+      3    6.8%        JS: ^Readable.pipe node:internal/streams/readable:907:35
+      2   66.7%          JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:100:26
+      2  100.0%            JS: ^<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+      1   33.3%          JS: ^<anonymous> /app/node_modules/http-proxy/lib/http-proxy/passes/ws-incoming.js:120:36
+      1  100.0%            JS: *emit node:events:466:44
+      2    4.5%        JS: ^tickOnSocket node:_http_client:798:22
+      2  100.0%          JS: ^onSocketNT node:_http_client:866:20
+      2  100.0%            JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      2    4.5%        JS: ^parserOnIncomingClient node:_http_client:606:32
+      1   50.0%          JS: ^parserOnHeadersComplete node:_http_common:72:33
+      1  100.0%            Builtin: CallApiCallbackGeneric
+      1   50.0%          JS: *parserOnHeadersComplete node:_http_common:72:33
+      1  100.0%            Builtin: CallApiCallbackGeneric
+      1    2.3%        JS: ^socketListenerWrap node:_http_server:1193:37
+      1  100.0%          JS: ^assignSocket node:_http_server:282:62
+      1  100.0%            JS: ^parserOnIncoming node:_http_server:1030:26
+      1    2.3%        JS: ^Socket node:net:353:16
+      1  100.0%          JS: ^connect node:net:221:17
+      1  100.0%            JS: ^createSocket node:_http_agent:310:53
+     32    1.2%      JS: ^writeStatusCode /app/node_modules/http-proxy/lib/http-proxy/passes/web-outgoing.js:137:44
+     17   53.1%        JS: *<anonymous> /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:172:37
+     17  100.0%          JS: *emit node:events:466:44
+     17  100.0%            JS: ^parserOnIncomingClient node:_http_client:606:32
+     15   46.9%        JS: ^<anonymous> /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:172:37
+     13   86.7%          JS: *emit node:events:466:44
+     13  100.0%            JS: ^parserOnIncomingClient node:_http_client:606:32
+      2   13.3%          JS: ^emit node:events:466:44
+      2  100.0%            JS: ^parserOnIncomingClient node:_http_client:606:32
+
+    473    1.3%  Builtin: LoadIC_Megamorphic
+     96   20.3%    JS: *emit node:events:466:44
+     91   94.8%      JS: *Readable.push node:internal/streams/readable:385:35
+     91  100.0%        JS: *onStreamRead node:internal/stream_base_commons:167:22
+      1    1.0%      JS: ^tickOnSocket node:_http_client:798:22
+      1  100.0%        JS: ^onSocketNT node:_http_client:866:20
+      1  100.0%          JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      1    1.0%      JS: ^finish node:internal/streams/writable:939:16
+      1  100.0%        JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      1    1.0%      JS: ^addChunk node:internal/streams/readable:548:18
+      1  100.0%        JS: ^readableAddChunkPushByteMode node:internal/streams/readable:461:38
+      1  100.0%          JS: ^Readable.push node:internal/streams/readable:385:35
+      1  100.0%            JS: ^onStreamRead node:internal/stream_base_commons:167:22
+      1    1.0%      JS: *onfinish node:internal/streams/readable:1040:20
+      1  100.0%        JS: *onceWrapper node:events:628:21
+      1  100.0%          JS: *onFinish node:_http_outgoing:1053:18
+      1  100.0%            JS: *callback node:internal/streams/writable:754:63
+      1    1.0%      JS: *Readable.read node:internal/streams/readable:645:35
+      1  100.0%        JS: *resume_ node:internal/streams/readable:1252:17
+      1  100.0%          JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+     87   18.4%    JS: *ondata node:internal/streams/readable:1005:18
+     87  100.0%      JS: *emit node:events:466:44
+     87  100.0%        JS: *Readable.push node:internal/streams/readable:385:35
+     87  100.0%          JS: *onStreamRead node:internal/stream_base_commons:167:22
+     57   12.1%    JS: *Writable.write node:internal/streams/writable:496:36
+     55   96.5%      JS: *ondata node:internal/streams/readable:1005:18
+     55  100.0%        JS: *emit node:events:466:44
+     55  100.0%          JS: *Readable.push node:internal/streams/readable:385:35
+     54   98.2%            JS: *onStreamRead node:internal/stream_base_commons:167:22
+      1    1.8%            JS: ^onStreamRead node:internal/stream_base_commons:167:22
+      1    1.8%      JS: ^<anonymous> /app/node_modules/http-proxy/lib/http-proxy/passes/ws-incoming.js:120:36
+      1  100.0%        JS: *emit node:events:466:44
+      1  100.0%          JS: ^socketOnData node:_http_client:528:22
+      1  100.0%            JS: *emit node:events:466:44
+      1    1.8%      JS: *_send node:_http_outgoing:402:49
+      1  100.0%        JS: ^write_ node:_http_outgoing:916:16
+      1  100.0%          JS: ^write node:_http_outgoing:876:49
+      1  100.0%            JS: *ondata node:internal/streams/readable:1005:18
+     31    6.6%    JS: *Readable.read node:internal/streams/readable:645:35
+     31  100.0%      JS: *maybeReadMore_ node:internal/streams/readable:862:24
+     31  100.0%        JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+     30    6.3%    JS: *Socket._write node:net:963:35
+     30  100.0%      JS: *Writable.write node:internal/streams/writable:496:36
+     30  100.0%        JS: *ondata node:internal/streams/readable:1005:18
+     30  100.0%          JS: *emit node:events:466:44
+     30  100.0%            JS: *Readable.push node:internal/streams/readable:385:35
+     21    4.4%    JS: *Readable.push node:internal/streams/readable:385:35
+     21  100.0%      JS: *onStreamRead node:internal/stream_base_commons:167:22
+     20    4.2%    JS: *Socket._read node:net:705:34
+     19   95.0%      JS: *Readable.read node:internal/streams/readable:645:35
+     18   94.7%        JS: *maybeReadMore_ node:internal/streams/readable:862:24
+     18  100.0%          JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      1    5.3%        JS: *Socket.read node:net:766:33
+      1  100.0%          JS: *resume_ node:internal/streams/readable:1252:17
+      1  100.0%            JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      1    5.0%      JS: ^<anonymous> node:net:714:26
+      1  100.0%        JS: *onceWrapper node:events:628:21
+      1  100.0%          JS: *emit node:events:466:44
+      1  100.0%            JS: ^afterConnect node:net:1548:22
+     18    3.8%    JS: *maybeReadMore_ node:internal/streams/readable:862:24
+     18  100.0%      JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+     12    2.5%    JS: *onStreamRead node:internal/stream_base_commons:167:22
+      5    1.1%    JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      5    1.1%    JS: *endReadableNT node:internal/streams/readable:1690:23
+      5  100.0%      JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      5    1.1%    JS: *Readable.on node:internal/streams/readable:1125:33
+      1   20.0%      JS: ^tickOnSocket node:_http_client:798:22
+      1  100.0%        JS: ^onSocketNT node:_http_client:866:20
+      1  100.0%          JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      1   20.0%      JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:100:26
+      1  100.0%        JS: *<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+      1  100.0%          JS: ^HttpProxyMiddleware.middleware /app/node_modules/http-proxy-middleware/dist/http-proxy-middleware.js:17:27
+      1  100.0%            Builtin: AsyncFunctionAwaitResolveClosure
+      1   20.0%      JS: ^installListeners node:_http_agent:378:26
+      1  100.0%        JS: ^<anonymous> node:_http_agent:323:25
+      1  100.0%          JS: ^<anonymous> node:internal/util:519:18
+      1  100.0%            JS: ^createSocket node:_http_agent:310:53
+      1   20.0%      JS: ^<anonymous> /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:172:37
+      1  100.0%        JS: *emit node:events:466:44
+      1  100.0%          JS: ^parserOnIncomingClient node:_http_client:606:32
+      1  100.0%            JS: ^parserOnHeadersComplete node:_http_common:72:33
+      1   20.0%      JS: *onSocketNT node:_http_client:866:20
+      1  100.0%        JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+
+    464    1.3%  Builtin: KeyedLoadIC_Megamorphic
+    109   23.5%    JS: *emit node:events:466:44
+     94   86.2%      JS: *Readable.push node:internal/streams/readable:385:35
+     94  100.0%        JS: *onStreamRead node:internal/stream_base_commons:167:22
+      2    1.8%      JS: ^onconnection node:net:2104:22
+      2    1.8%      JS: ^onFinish node:_http_outgoing:1053:18
+      1   50.0%        JS: ^callback node:internal/streams/writable:754:63
+      1  100.0%          JS: ^afterWrite node:internal/streams/writable:690:20
+      1  100.0%            JS: ^afterWriteTick node:internal/streams/writable:684:24
+      1   50.0%        JS: ^afterWrite node:internal/streams/writable:690:20
+      1  100.0%          JS: *onwrite node:internal/streams/writable:607:17
+      1  100.0%            JS: *Socket._writeGeneric node:net:921:42
+      2    1.8%      JS: ^Readable.pause node:internal/streams/readable:1265:36
+      1   50.0%        JS: ~Socket.pause node:net:743:34
+      1  100.0%          JS: ^Readable.unpipe node:internal/streams/readable:1090:37
+      1  100.0%            JS: ^unpipe node:internal/streams/readable:1047:18
+      1   50.0%        JS: ^Readable.unpipe node:internal/streams/readable:1090:37
+      1  100.0%          JS: ^unpipe node:internal/streams/readable:1047:18
+      1  100.0%            JS: ^onfinish node:internal/streams/readable:1040:20
+     99   21.3%    JS: *onStreamRead node:internal/stream_base_commons:167:22
+     98   21.1%    JS: *get node:net:2306:6
+     59   60.2%      JS: *Socket._read node:net:705:34
+     59  100.0%        JS: *Readable.read node:internal/streams/readable:645:35
+     58   98.3%          JS: *maybeReadMore_ node:internal/streams/readable:862:24
+     58  100.0%            JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      1    1.7%          JS: *Socket.read node:net:766:33
+      1  100.0%            JS: ^maybeReadMore_ node:internal/streams/readable:862:24
+     33   33.7%      JS: *Socket._write node:net:963:35
+     33  100.0%        JS: *Writable.write node:internal/streams/writable:496:36
+     32   97.0%          JS: *ondata node:internal/streams/readable:1005:18
+     32  100.0%            JS: *emit node:events:466:44
+      1    3.0%          JS: ^<anonymous> /app/node_modules/http-proxy/lib/http-proxy/passes/ws-incoming.js:120:36
+      1  100.0%            JS: *emit node:events:466:44
+      3    3.1%      JS: ^connectionListenerInternal node:_http_server:650:36
+      2   66.7%        JS: ^defaultTriggerAsyncIdScope node:internal/async_hooks:455:36
+      2  100.0%          JS: ^connectionListener node:_http_server:644:28
+      2  100.0%            JS: *emit node:events:466:44
+      1   33.3%        JS: *defaultTriggerAsyncIdScope node:internal/async_hooks:455:36
+      1  100.0%          JS: ^connectionListener node:_http_server:644:28
+      1  100.0%            JS: *emit node:events:466:44
+      1    1.0%      JS: ^Socket._writeGeneric node:net:921:42
+      1  100.0%        JS: ^Socket._write node:net:963:35
+      1  100.0%          JS: ^writeOrBuffer node:internal/streams/writable:540:23
+      1  100.0%            JS: ^_write node:internal/streams/writable:445:16
+      1    1.0%      JS: ^Socket._final node:net:515:35
+      1  100.0%        JS: ^prefinish node:internal/streams/writable:896:19
+      1  100.0%          JS: ^finishMaybe node:internal/streams/writable:918:21
+      1  100.0%            JS: ^Writable.end node:internal/streams/writable:798:34
+      1    1.0%      JS: ^Socket._destroy node:net:794:37
+      1  100.0%        JS: ^_destroy node:internal/streams/destroy:89:18
+      1  100.0%          JS: ^destroy node:internal/streams/destroy:48:17
+      1  100.0%            JS: *onceWrapper node:events:628:21
+     47   10.1%    JS: *Socket._write node:net:963:35
+     47  100.0%      JS: *Writable.write node:internal/streams/writable:496:36
+     47  100.0%        JS: *ondata node:internal/streams/readable:1005:18
+     47  100.0%          JS: *emit node:events:466:44
+     47  100.0%            JS: *Readable.push node:internal/streams/readable:385:35
+     45    9.7%    JS: *maybeReadMore_ node:internal/streams/readable:862:24
+     45  100.0%      JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      6    1.3%    JS: *removeListener node:events:681:28
+      3   50.0%      JS: *onunpipe node:internal/streams/readable:934:20
+      2   66.7%        JS: *emit node:events:466:44
+      2  100.0%          JS: *onfinish node:internal/streams/readable:1040:20
+      2  100.0%            JS: *onceWrapper node:events:628:21
+      1   33.3%        JS: *Readable.unpipe node:internal/streams/readable:1090:37
+      1  100.0%          JS: *onfinish node:internal/streams/readable:1040:20
+      1  100.0%            JS: *onceWrapper node:events:628:21
+      2   33.3%      JS: ^cleanup node:internal/streams/readable:952:19
+      2  100.0%        JS: ^onunpipe node:internal/streams/readable:934:20
+      2  100.0%          JS: *emit node:events:466:44
+      1   50.0%            JS: ^Readable.unpipe node:internal/streams/readable:1090:37
+      1   50.0%            JS: *onfinish node:internal/streams/readable:1040:20
+      1   16.7%      JS: *onceWrapper node:events:628:21
+      1  100.0%        JS: *onFinish node:_http_outgoing:1053:18
+      1  100.0%          JS: *afterWrite node:internal/streams/writable:690:20
+      1  100.0%            JS: *onwrite node:internal/streams/writable:607:17
+      5    1.1%    JS: *_unrefTimer node:net:505:52
+      4   80.0%      JS: ^Socket._writeGeneric node:net:921:42
+      3   75.0%        JS: ^Socket._write node:net:963:35
+      3  100.0%          JS: *Writable.write node:internal/streams/writable:496:36
+      3  100.0%            JS: *ondata node:internal/streams/readable:1005:18
+      1   25.0%        JS: ^Socket._writev node:net:958:36
+      1  100.0%          JS: ^doWrite node:internal/streams/writable:579:17
+      1  100.0%            JS: ^clearBuffer node:internal/streams/writable:735:21
+      1   20.0%      JS: ^Socket.connect node:net:1189:36
+      1  100.0%        JS: ^connect node:net:221:17
+      1  100.0%          JS: ^createSocket node:_http_agent:310:53
+      1  100.0%            JS: ^addRequest node:_http_agent:240:49
+      5    1.1%    JS: *Readable.removeListener node:internal/streams/readable:1157:45
+      1   20.0%      JS: ^socketOnData node:_http_client:528:22
+      1  100.0%        JS: *emit node:events:466:44
+      1  100.0%          JS: *Readable.push node:internal/streams/readable:385:35
+      1  100.0%            JS: *onStreamRead node:internal/stream_base_commons:167:22
+      1   20.0%      JS: ^onceWrapper node:events:628:21
+      1  100.0%        JS: *emit node:events:466:44
+      1  100.0%          JS: ^finish node:internal/streams/writable:939:16
+      1  100.0%            JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      1   20.0%      JS: ^onRemove node:_http_agent:409:20
+      1  100.0%        JS: *emit node:events:466:44
+      1  100.0%          JS: ^socketOnData node:_http_client:528:22
+      1  100.0%            JS: *emit node:events:466:44
+      1   20.0%      JS: ^cleanup node:internal/streams/readable:952:19
+      1  100.0%        JS: ^onunpipe node:internal/streams/readable:934:20
+      1  100.0%          JS: *unpipe node:internal/streams/readable:1047:18
+      1  100.0%            JS: ^onfinish node:internal/streams/readable:1040:20
+      1   20.0%      JS: *onceWrapper node:events:628:21
+      1  100.0%        JS: *endReadableNT node:internal/streams/readable:1690:23
+      1  100.0%          JS: *processTicksAndRejections node:internal/process/task_queues:67:35
+      5    1.1%    JS: *Readable.on node:internal/streams/readable:1125:33
+      2   40.0%      JS: ^installListeners node:_http_agent:378:26
+      2  100.0%        JS: ^<anonymous> node:_http_agent:323:25
+      1   50.0%          JS: ^<anonymous> node:internal/util:519:18
+      1  100.0%            JS: ^createSocket node:_http_agent:310:53
+      1   50.0%          JS: *<anonymous> node:internal/util:519:18
+      1  100.0%            JS: ^createSocket node:_http_agent:310:53
+      1   20.0%      JS: ^socketListenerWrap node:_http_server:1193:37
+      1  100.0%        JS: *once node:events:652:44
+      1  100.0%          JS: ^Socket.destroySoon node:net:783:40
+      1  100.0%            JS: ^resOnFinish node:_http_server:972:21
+      1   20.0%      JS: ^connectionListenerInternal node:_http_server:650:36
+      1  100.0%        JS: ^defaultTriggerAsyncIdScope node:internal/async_hooks:455:36
+      1  100.0%          JS: ^connectionListener node:_http_server:644:28
+      1  100.0%            JS: *emit node:events:466:44
+      1   20.0%      JS: *<anonymous> node:_http_agent:323:25
+      1  100.0%        JS: *createSocket node:_http_agent:310:53
+      1  100.0%          JS: ^addRequest node:_http_agent:240:49
+      1  100.0%            JS: *ClientRequest node:_http_client:130:23
+      5    1.1%    JS: *<anonymous> /app/node_modules/http-proxy/lib/http-proxy/common.js:39:13
+      5  100.0%      Builtin: ArrayForEach
+      5  100.0%        JS: ^common.setupOutgoing /app/node_modules/http-proxy/lib/http-proxy/common.js:33:32
+      4   80.0%          JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js:100:26
+      2   50.0%            JS: ^<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+      2   50.0%            JS: *<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+      1   20.0%          JS: ^stream /app/node_modules/http-proxy/lib/http-proxy/passes/ws-incoming.js:79:27
+      1  100.0%            JS: ^<anonymous> /app/node_modules/http-proxy/lib/http-proxy/index.js:31:20
+

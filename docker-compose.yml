@@ -21,7 +21,7 @@ services:
     networks:
       spark-chat:
         ipv4_address: 172.20.0.6
-    command: ["node", "index.js", "3000"]
+    command: ["node", "--prof", "index.js", "3000"]
     
   load-balancer:
     build: ./LoadBalancer
