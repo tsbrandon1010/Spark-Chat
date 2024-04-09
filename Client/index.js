@@ -12,9 +12,9 @@ readline.question("What is your user id? ", input => {
     const socketUrl = "http://localhost:3000";
     console.log(socketUrl);
     const socket = io(socketUrl, {parser: customParse});
-    const sessionsSocket = io(`${socketUrl}/sessions`, {parser: customParse});
-    const lastSeenSocket = io(`${socketUrl}/last-seen`, {parser: customParse});
-    const userNamespace = io(`${socketUrl}/user`, {parser: customParse});
+    const sessionsSocket = io(`${socketUrl}/sessions`, {parser: customParse, transports: ["websocket"]});
+    const lastSeenSocket = io(`${socketUrl}/last-seen`, {parser: customParse, transports: ["websocket"]});
+    const userNamespace = io(`${socketUrl}/user`, {parser: customParse, transports: ["websocket"]});
 
 
     socket.on("connect", () => {

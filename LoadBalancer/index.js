@@ -22,7 +22,7 @@ const MAX_USERS = 9;
 var sockets = {
     "http://172.20.0.6:3000" : {
         URL: "http://172.20.0.6:3000",
-        socket: io("http://172.20.0.6:3000", { autoConnect: false, parser: customParse }),
+        socket: io("http://172.20.0.6:3000", { autoConnect: false, parser: customParse, transports: ["websocket"]}),
         userCount: 0 
     }
 }
@@ -110,6 +110,7 @@ const customRouter = (req) => {
             minAddress = key;
         }
     }
+    console.log("routing");
     return minAddress;
 }
 

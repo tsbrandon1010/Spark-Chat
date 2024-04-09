@@ -29,10 +29,10 @@ const createClient = (id) => {
 
     const socketUrl = "http://localhost:3030";
     console.log(socketUrl);
-    const socket = io(socketUrl, {parser: customParse});
-    const sessionsSocket = io(`${socketUrl}/sessions`, {autoConnect: false, parser: customParse});
-    const lastSeenSocket = io(`${socketUrl}/last-seen`, {autoConnect: false, parser: customParse});
-    const userNamespace = io(`${socketUrl}/user`, {autoConnect: false, parser: customParse});
+    const socket = io(socketUrl, {parser: customParse, transports: ["websocket"]});
+    const sessionsSocket = io(`${socketUrl}/sessions`, {autoConnect: false, parser: customParse, transports: ["websocket"]});
+    const lastSeenSocket = io(`${socketUrl}/last-seen`, {autoConnect: false, parser: customParse, transports: ["websocket"]});
+    const userNamespace = io(`${socketUrl}/user`, {autoConnect: false, parser: customParse, transports: ["websocket"]});
 
  
     const userId = `user_${id}`

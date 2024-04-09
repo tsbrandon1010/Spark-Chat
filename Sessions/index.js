@@ -6,8 +6,8 @@ const customParse = require("socket.io-msgpack-parser");
 
 var sockets = {
     "http://172.20.0.6:3000": {
-        socket: io("http://172.20.0.6:3000", { autoConnect: false,parser: customParse }),
-        sessionSocket: io("http://172.20.0.6:3000/sessions", {autoConnect: false, parser: customParse})
+        socket: io("http://172.20.0.6:3000", { autoConnect: false,parser: customParse, transports: ["websocket"]}),
+        sessionSocket: io("http://172.20.0.6:3000/sessions", {autoConnect: false, parser: customParse, transports: ["websocket"]})
     }
 };
 
