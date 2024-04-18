@@ -57,6 +57,17 @@ services:
     networks:
       spark-chat:
         ipv4_address: 172.20.0.5
+  
+  socket-to-queue:
+    build: ./SocketToQueue
+    depends_on:
+      - websocket-server
+      - redis
+    links:
+      - "redis:db"
+    networks:
+      spark-chat:
+        ipv4_address: 172.20.0.7
 
 networks:
   spark-chat:

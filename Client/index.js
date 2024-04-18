@@ -1,21 +1,16 @@
 const { io } = require("socket.io-client");
 const customParse = require("socket.io-msgpack-parser");
-const readline = require("readline").createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
 
+// socketUrl will eventually be assigned to the user by the load balancer
+const socketUrl = "http://localhost:3030";
+console.log(socketUrl);
+const socket = io(socketUrl, {parser: customParse});
+const sessionsSocket = io(`${socketUrl}/sessions`, {parser: customParse});
+const lastSeenSocket = io(`${socketUrl}/last-seen`, {parser: customParse});
+const userNamespace = io(`${socketUrl}/user`, {parser: customParse});
+const messageQueueNamespace = io(`${socketUrl}/message-queue`, {parser: customParse});
 
-readline.question("What is your user id? ", input => {
-
-    userId = input;
-    const socketUrl = "http://localhost:3000";
-    console.log(socketUrl);
-    const socket = io(socketUrl, {parser: customParse});
-    const sessionsSocket = io(`${socketUrl}/sessions`, {parser: customParse, transports: ["websocket"]});
-    const lastSeenSocket = io(`${socketUrl}/last-seen`, {parser: customParse, transports: ["websocket"]});
-    const userNamespace = io(`${socketUrl}/user`, {parser: customParse, transports: ["websocket"]});
-
+const userId = "tsbrandon1010";
 
     socket.on("connect", () => {
     });
@@ -50,9 +45,9 @@ readline.question("What is your user id? ", input => {
             "RTT" : [["client:message-in", Date.now()]]
             };
 
-        // good idea to eventually add callbacks to confirm message reception
-        sessionsSocket.emit("message-in", payload);
-    }
+    // good idea to eventually add callbacks to confirm message reception
+    messageQueueNamespace.emit("message-in", payload);
+}
 
 
     readline.question("would you like to send a message? [Y/n]: ", (response) => {

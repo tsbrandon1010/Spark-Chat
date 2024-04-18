@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "node": "^21.0.0",
+    "redis": "^4.6.10",
+    "socket.io-client": "^4.7.2",
+    "socket.io-msgpack-parser": "^3.0.2",
+    "uuid": "^9.0.1"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.8",
+    "utf-8-validate": "^5.0.10"
+  }
+}
