@@ -4,23 +4,29 @@ const { v4: uuidv4 } = require("uuid");
 const customParse = require("socket.io-msgpack-parser");
 
 const redisClient = createClient({
-    url: 'redis://:ydvzSWmuDNPy@redis:6379'
+    url: 'redis://:@redis:6379'
 });
 redisClient.on('error', err => console.log('Redis Client Error', err));
 
 var sockets = {
     "http://172.20.0.6:3000" : {
-        socket: io("http://172.20.0.6:3000", { autoConnect: false, parser: customParse}), 
-        messageQueueSocket: io("http://172.20.0.6:3000/message-queue", { autoConnect: false, parser: customParse})
+        socket: io("http://172.20.0.6:3000", { autoConnect: false, parser: customParse, transports: ["websocket"]}), 
+        messageQueueSocket: io("http://172.20.0.6:3000/message-queue", { autoConnect: false, parser: customParse, transports: ["websocket"]})
     }
 };
 
 async function writeToQueue(payload) {
 
-    const key = `message-cache:id${uuidv4()}`;
+    const streamKey = `message-cache:id${uuidv4()}`;
     const value = JSON.stringify(payload);
 
-    await redisClient.set(key, value);
+    try {
+        await redisClient.xAdd("message-queue", "*", {
+            streamKey: value
+        });
+    } catch (err) {
+        console.log("failed to publish to stream", err);
+    }
 }
 
 async function createConnection(socketURL) {

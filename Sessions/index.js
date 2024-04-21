@@ -1,6 +1,6 @@
 // sessions service will determine where a user is and route a message to the user
 const { io } = require("socket.io-client");
-const { createClient } = require("redis");
+const { createClient, commandOptions } = require("redis");
 const { v4: uuidv4 } = require("uuid");
 const customParse = require("socket.io-msgpack-parser");
 
@@ -13,7 +13,7 @@ var sockets = {
 
 
 const redisClient = createClient({
-    url: 'redis://:ydvzSWmuDNPy@redis:6379'
+    url: 'redis://:@redis:6379'
 });
 redisClient.on('error', err => console.log('Redis Client Error', err));
 
@@ -80,8 +80,40 @@ async function createConnection(socketId) {
         await sendMessage(payload, sockets);
     });
 
-    const listener = (message, channel) => console.log(message, channel);
-    await subscriber.subscribe("test", listener);
+    try {
+        await redisClient.xGroupCreate("message-queue", "subs", "0", {
+            MKSTREAM: true
+        });
+    } catch (e) {}
+
+    while (true) {
+        try {
+            let response = await redisClient.xReadGroup(
+                commandOptions({
+                    isolated: true
+                }),
+                "subs",
+                "consumer-1", [
+                    {
+                        key: "message-queue",
+                        id: ">"
+                    }
+                ], {
+                    COUNT: 1,
+                    BLOCK: 0
+                }
+            );
+
+            if (response) {
+                let message = JSON.parse(response[0].messages[0]["message"]["streamKey"]);
+                await redisClient.xAck("message-queue", "subs", response[0].messages[0].id)
+
+                await sendMessage(message);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 for (const [key, value] of Object.entries(sockets)) {

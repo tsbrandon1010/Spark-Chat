@@ -3,11 +3,9 @@ services:
     image: redis:7.2
     container_name: redis
     restart: "no"
-    command: /bin/sh -c "redis-server --appendonly yes --requirepass $$REDIS_PASSWORD"
+    command: /bin/sh -c "redis-server --appendonly yes"
     volumes:
       - ./Redis/redis-volume:/data
-    env_file:
-      - ./Redis/redis.env
     ports:
       - 6379:6379
     networks:

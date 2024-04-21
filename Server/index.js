@@ -86,23 +86,11 @@ io.of("/sessions").on("connection", (socket) => {
 
 io.of("/message-queue").on("connection", (socket) => {
 
-    console.log("MESSAGE QUEUE CONNECTION" + socket.id);
+    console.log("MESSAGE QUEUE CONNECTION " + socket.id);
 
     // user -> socket -> message queue. 
     socket.on("message-in", (payload) => {
-        payload['content'].push(["server:message-in", Date.now()]);
-        socket.broadcast.emit("message-subscribe", payload);
-    });
-
-});
-
-io.of("/message-queue").on("connection", (socket) => {
-
-    console.log("MESSAGE QUEUE CONNECTION" + socket.id);
-
-    // user -> socket -> message queue. 
-    socket.on("message-in", (payload) => {
-        payload['content'].push(["server:message-in", Date.now()]);
+        payload['RTT'].push(["server:message-in", Date.now()]);
         socket.broadcast.emit("message-subscribe", payload);
     });
 
