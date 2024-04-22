@@ -11,40 +11,36 @@ const CLIENT_CREATION_INTERVAL_IN_MS = 500;
 const EMIT_INTERVAL_IN_MS = 1000;
 
 let clientCount = 0;
-let disconnectCount = 0;
-
 let messages = [];
 
-function sendMessage(userId, recipientUserId, sessionsSocket) {
+function sendMessage(userId, recipientUserId, messageQueueNamespace) {
     const payload = {
         "sender-user-id" : userId,
         "recipient-user-id" : recipientUserId,
         "content" : "",
-        "RTT": [['client:message-in', Date.now()]]
-    };
-    sessionsSocket.emit("message-in", payload);
-}
+        "RTT" : [["client:message-in", Date.now()]]
+        };
+
+    messageQueueNamespace.emit("message-in", payload);
+};
 
 const createClient = (id) => {
 
     const socketUrl = "http://localhost:3030";
-    console.log(socketUrl);
-    const socket = io(socketUrl, {parser: customParse, transports: ["websocket"]});
-    const sessionsSocket = io(`${socketUrl}/sessions`, {autoConnect: false, parser: customParse, transports: ["websocket"]});
-    const lastSeenSocket = io(`${socketUrl}/last-seen`, {autoConnect: false, parser: customParse, transports: ["websocket"]});
-    const userNamespace = io(`${socketUrl}/user`, {autoConnect: false, parser: customParse, transports: ["websocket"]});
+    const socket = io(socketUrl, {transports: ["websocket"]});
+    const sessionsSocket = io(`${socketUrl}/sessions`, {autoConnect: false, transports: ["websocket"]});
+    const lastSeenSocket = io(`${socketUrl}/last-seen`, {autoConnect: false, transports: ["websocket"]});
+    const userNamespace = io(`${socketUrl}/user`, {autoConnect: false, transports: ["websocket"]});
+    const messageQueueNamespace = io(`${socketUrl}/message-queue`, {autoConnect: false,transports: ["websocket"]});
 
- 
+
     const userId = `user_${id}`
     console.log(userId);
     socket.connect();
     userNamespace.connect();
     sessionsSocket.connect();
     lastSeenSocket.connect();
-
-    userNamespace.on("connect", () => {
-    console.log(userNamespace.id);
-    });
+    messageQueueNamespace.connect();
 
     lastSeenSocket.on("connect", () => {
         const payload = {
@@ -61,13 +57,11 @@ const createClient = (id) => {
         
         messages.push(`${message['RTT']}, ${userId}\n`);
         
-        console.log(messages.length);
         if (messages.length >= 5000) {
             writeStream.write(messages.join(''));
             process.exit();
         }
     });
-
 
     setInterval(() => {
         if (clientCount >= MAX_CLIENTS) {
@@ -75,18 +69,6 @@ const createClient = (id) => {
             sendMessage(userId, userId, sessionsSocket);  
         }
     }, EMIT_INTERVAL_IN_MS );
-    
-    socket.on("disconnect", (reason) => {
-        console.log("disconnected", reason);
-        disconnectCount++;
-
-        setTimeout(() => {
-            socket.connect();
-            userNamespace.connect();
-            sessionsSocket.connect();
-            lastSeenSocket.connect();
-        }, 2000);
-    });
 
     if (++clientCount < MAX_CLIENTS) {
         setTimeout(createClient, CLIENT_CREATION_INTERVAL_IN_MS, clientCount);

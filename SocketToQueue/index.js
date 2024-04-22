@@ -49,8 +49,8 @@ async function createConnection(socketURL) {
 
     socket.on("new-socket-broadcast", (payload) => {
         sockets[payload['socket-url']] = {
-            socket: io(payload['socket-url'], { autoConnect: false, parser: customParse}),
-            messageQueueSocket: io(`${payload['socket-url']}/last-seen`, { autoConnect: false, parser: customParse})
+            socket: io(payload['socket-url'], { autoConnect: false }),
+            messageQueueSocket: io(`${payload['socket-url']}/last-seen`, { autoConnect: false })
         };
 
         createConnection(payload['socket-url']);

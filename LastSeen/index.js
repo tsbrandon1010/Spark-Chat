@@ -10,8 +10,8 @@ redisClient.on('error', err => console.log('Redis Client Error', err));
 
 var sockets = {
     "http://172.20.0.6:3000" : {
-        socket: io("http://172.20.0.6:3000", { autoConnect: false, parser: customParse, transports: ["websocket"]}), 
-        lastSeenSocket: io("http://172.20.0.6:3000/last-seen", {autoConnect: false, parser: customParse, transports: ["websocket"]})
+        socket: io("http://172.20.0.6:3000", { autoConnect: false, transports: ["websocket"]}), 
+        lastSeenSocket: io("http://172.20.0.6:3000/last-seen", {autoConnect: false, transports: ["websocket"]})
     }
 };
 

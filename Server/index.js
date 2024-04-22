@@ -6,9 +6,13 @@ const serverAddress = os.networkInterfaces()['eth0'][0]['address'];
 
 
 const io = new Server(httpServer, {
-    parser: customParse,
+    // parser: customParse,
     transports: ["websocket"]
 });
+
+io.engine.on("connection", (rawSocket) => {
+    rawSocket.request = null;
+})
 
 const socketPort = process.argv.slice(2)[0];
 if (socketPort == null) {
